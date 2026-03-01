@@ -13,14 +13,19 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
   const p = PLANS.find((x) => x.id === planId) || PLANS[1];
   const baseAlunos = diag.baseAlunos || 100;
   const mensalidade = diag.mensalidade || diag.ticket || 800;
+  // margemPct here represents o percentual de custo operacional estimado (ex.: 75).
+  // o LOA é a receita menos esses custos, ou seja, o lucro restante.
+  // para cálculo usamos profitPct = 1 - margemPct/100.
   const margemPct = diag.margem || 30;
+  const profitPct = 1 - margemPct / 100;
   const [novosAlunos, setNovosAlunos] = useState(20);
   const recAtual = baseAlunos * mensalidade;
   const recAdicional = novosAlunos * mensalidade;
   const recTotal = recAtual + recAdicional;
-  const lucroAtual = recAtual * (margemPct / 100);
-  const lucroTotal = recTotal * (margemPct / 100);
-  const lucroAdicional = lucroTotal - lucroAtual;
+  const lucroAtual = recAtual * profitPct; // LOA atual
+  const lucroTotal = recTotal * profitPct; // LOA após novos alunos
+  const lucroAdicional = lucroTotal - lucroAtual; // crescimento de LOA
+  // participação Wayzen calculada sobre o aumento de LOA
   const taxaMedia = (p.taxaMin + p.taxaMax) / 2;
   const loaWayzen = lucroAdicional > 0 ? lucroAdicional * (p.loa / 100) : 0;
   const custoTotalWayzen = taxaMedia + loaWayzen;
@@ -187,7 +192,8 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               {[
                 { l: 'Alunos ativos hoje', v: baseAlunos.toLocaleString('pt-BR') },
                 { l: 'Mensalidade media', v: fmtBRL(mensalidade) },
-                { l: 'Margem operacional', v: `${margemPct}%` },
+                { l: 'Custo operacional (%)', v: `${margemPct}%` },
+                { l: 'Lucro estimado (LOA %)', v: `${Math.round(profitPct*100)}%` },
               ].map((x) => (
                 <div key={x.l} style={{ textAlign: 'center' }}>
                   <div

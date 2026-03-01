@@ -3,12 +3,22 @@
    =================================================================== */
 
 import Orbs from './Orbs';
+import { useRef, useEffect } from 'react';
 
 export default function SlideShell({ badge, title, subtitle, children }) {
+  const contentRef = useRef(null);
+  useEffect(() => {
+    // quando o slide é montado, garanta que o scroll começa no topo
+    if (contentRef.current) {
+      contentRef.current.scrollTop = 0;
+    }
+  }, []);
+
   return (
     <div className="slide">
       <Orbs />
       <div
+        ref={contentRef}
         className="slide-content"
         style={{
           justifyContent: 'center',
