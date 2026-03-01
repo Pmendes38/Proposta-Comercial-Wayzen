@@ -186,6 +186,102 @@ export function calcularGargalos(d) {
   return g;
 }
 
+// -------------------------------------------------------------
+// Taxa operacional: pontuação e cálculo automático
+// -------------------------------------------------------------
+
+/**
+ * Calcula pontuação de taxa operacional com base nos blocos do documento
+ * @param {object} d - dados do diagnóstico
+ * @returns {number} pontuação total (8–30)
+ */
+export function calcularPontuacaoTaxa(d) {
+  const norm = (v) =>
+    String(v || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim();
+  let s = 0;
+
+  // 1. Tamanho da operação
+  const f = d.faturamento || 0;
+  if (f <= 30000) s += 1;
+  else if (f <= 80000) s += 2;
+  else if (f <= 200000) s += 3;
+  else s += 4;
+
+  const eq = d.equipe || 0;
+  if (eq <= 1) s += 1;
+  else if (eq <= 3) s += 2;
+  else if (eq <= 6) s += 3;
+  else s += 4;
+
+  // 2. Complexidade comercial
+  switch (d.tipoProcesso) {
+    case 'simples': s += 1; break;
+    case 'consultivo-leve': s += 2; break;
+    case 'consultivo-medio': s += 3; break;
+    case 'longo': s += 4; break;
+    default: s += 2; // neutro
+  }
+
+  const tkt = d.ticket || 0;
+  if (tkt <= 1000) s += 1;
+  else if (tkt <= 3000) s += 2;
+  else if (tkt <= 10000) s += 3;
+  else s += 4;
+
+  // 3. Organização atual
+  const crmNorm = norm(d.crm);
+  if (['estruturado', 'sim, crm dedicado', 'sim crm dedicado', 'crm dedicado'].includes(crmNorm)) s += 1;
+  else if (['basico', 'sim, planilha organizada', 'sim planilha organizada'].includes(crmNorm)) s += 2;
+  else if (['planilha', 'informalmente, no whatsapp', 'informalmente no whatsapp'].includes(crmNorm)) s += 3;
+  else if (['nenhum', 'nao temos controle', 'nao temos controle de leads'].includes(crmNorm)) s += 4;
+  else s += 2;
+
+  const followUpNorm = norm(d.followUp);
+  if (['padrao', 'sim com padrao'].includes(followUpNorm)) s += 1;
+  else if (followUpNorm === 'parcial') s += 2;
+  else if (['fraco', 'muito fraco'].includes(followUpNorm)) s += 3;
+  else if (['nenhum', 'nao existe'].includes(followUpNorm)) s += 4;
+  else s += 2;
+
+  // 4. Envolvimento Wayzen
+  switch (d.modalidade) {
+    case 'remoto': s += 1; break;
+    case 'hibrido': s += 2; break;
+    case 'presencial': s += 3; break;
+    default: s += 1;
+  }
+
+  switch (d.urgencia) {
+    case 'baixa': s += 1; break;
+    case 'moderada': s += 2; break;
+    case 'alta': s += 3; break;
+    default: s += 1;
+  }
+
+  return s;
+}
+
+/**
+ * Calcula a taxa operacional para um plano usando pontuação e parâmetros
+ * @param {object} d - dados do diagnóstico
+ * @param {object} plano - objeto de plano do PLANS
+ * @returns {number} valor calculado em R$
+ */
+export function calcularTaxaOperacional(d, plano) {
+  if (!plano || !plano.feeBase) return 0;
+  const pontos = calcularPontuacaoTaxa(d);
+  let taxa = plano.feeBase + pontos * plano.feeFactor;
+  // limitar entre base e máximo
+  if (plano.feeMax) taxa = Math.min(taxa, plano.feeMax);
+  if (plano.feeBase) taxa = Math.max(taxa, plano.feeBase);
+  return taxa;
+}
+
+
 /**
  * Calcula métricas financeiras do diagnóstico
  * @param {object} d - Dados do diagnóstico

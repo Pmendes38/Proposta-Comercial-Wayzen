@@ -5,7 +5,7 @@
 import { useState } from 'react';
 import SlideShell from './SlideShell';
 import Ic from './Icon';
-import { fmtBRL } from '../utils';
+import { fmtBRL, calcularTaxaOperacional } from '../utils';
 import { PLANS, SPRINTS, TEAM } from '../data';
 
 export default function Slide10({ selectedPlan, onSelect, diag }) {
@@ -16,8 +16,10 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
   // margemPct here represents o percentual de custo operacional estimado (ex.: 75).
   // o LOA é a receita menos esses custos, ou seja, o lucro restante.
   // para cálculo usamos profitPct = 1 - margemPct/100.
-  const margemPct = diag.margem || 30;
+  const margemPct = diag.margem || 70;
   const profitPct = 1 - margemPct / 100;
+  // sugestão de taxa operacional automática baseada no diagnóstico e plano
+  const taxaSugestao = calcularTaxaOperacional(diag, p);
   const [novosAlunos, setNovosAlunos] = useState(20);
   const recAtual = baseAlunos * mensalidade;
   const recAdicional = novosAlunos * mensalidade;
@@ -27,8 +29,9 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
   const lucroAdicional = lucroTotal - lucroAtual; // crescimento de LOA
   // participação Wayzen calculada sobre o aumento de LOA
   const taxaMedia = (p.taxaMin + p.taxaMax) / 2;
+  const taxaOperacionalCalculada = taxaSugestao || taxaMedia;
   const loaWayzen = lucroAdicional > 0 ? lucroAdicional * (p.loa / 100) : 0;
-  const custoTotalWayzen = taxaMedia + loaWayzen;
+  const custoTotalWayzen = taxaOperacionalCalculada + loaWayzen;
   const retornoLiquidoEscola = lucroAdicional - custoTotalWayzen;
   const propWayzen =
     lucroAdicional > 0 ? Math.min(100, (custoTotalWayzen / lucroAdicional) * 100) : 0;
@@ -117,6 +120,11 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     }}
                   >
                     {pl.taxa}
+                    {pl.id === planId && taxaSugestao ? (
+                      <div style={{ fontSize: 10, color: 'var(--accent2)', marginTop: 4 }}>
+                        sugerida: {fmtBRL(taxaSugestao)}
+                      </div>
+                    ) : null}
                   </div>
                   <div
                     style={{
@@ -389,7 +397,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   Wayzen ({p.label})
                 </div>
                 {[
-                  { l: 'Taxa operacional (media)', v: fmtBRL(taxaMedia) },
+                  { l: 'Taxa operacional sugerida', v: fmtBRL(taxaOperacionalCalculada), accent: true },
                   { l: `Participacao no lucro adicional (${p.loa}%)`, v: fmtBRL(loaWayzen) },
                   { l: 'Custo total Wayzen', v: fmtBRL(custoTotalWayzen), big: true },
                 ].map((x) => (
