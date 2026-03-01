@@ -93,15 +93,6 @@ export function calcularGargalos(d) {
       acao: 'Revisão de canais pagos e ativação de canais orgânicos.',
     });
 
-  if ((d.desistencia || 0) > 15)
-    g.push({
-      t: 'Desistência Alta',
-      c: 'danger',
-      area: 'Base Ativa',
-      desc: `Taxa de ${d.desistencia || 0}% indica problemas de entrega ou experiência.`,
-      acao: 'Diagnóstico de causa raiz: onboarding, qualidade, suporte.',
-    });
-
   if ((d.inadimplencia || 0) > 10)
     g.push({
       t: 'Inadimplência Crítica',
@@ -292,7 +283,7 @@ export function calcularMetricas(d) {
   const perdaFollowup = d.contatos * 4.3 * (d.semRetorno / 100) * d.ticket * 0.12;
   const baseAtiva = d.baseAlunos || 0;
   const recBase = baseAtiva * (d.mensalidade || d.ticket || 0);
-  const perdaDesist = baseAtiva * (d.desistencia || 0) / 100 * (d.mensalidade || d.ticket || 0);
+  const perdaChurn = baseAtiva * (d.churn || 0) / 100 * (d.mensalidade || d.ticket || 0);
   const perdaInadin = recBase * (d.inadimplencia || 0) / 100;
   const ltv = (d.mensalidade || d.ticket || 0) * Math.max(1, 12 - (d.churn || 0) / 100 * 12);
 
@@ -301,7 +292,7 @@ export function calcularMetricas(d) {
     perdaFollowup,
     baseAtiva,
     recBase,
-    perdaDesist,
+    perdaChurn,
     perdaInadin,
     ltv,
   };
@@ -326,11 +317,11 @@ export function calcularScore(d) {
     {
       nome: 'Retenção',
       val:
-        (d.desistencia || 0) <= 5
+        (d.churn || 0) <= 5
           ? 100
-          : (d.desistencia || 0) <= 10
+          : (d.churn || 0) <= 10
             ? 70
-            : (d.desistencia || 0) <= 20
+            : (d.churn || 0) <= 20
               ? 40
               : 15,
     },

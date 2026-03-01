@@ -12,6 +12,10 @@ export const PLANS = [
     taxaMax: 1000,
     loa: 20,
     rec: 'Indicado para primeiro ciclo de validação (60 dias).',
+    // parâmetros para cálculo de taxa operacional (modelo contínuo)
+    feeBase: 600,
+    feeFactor: 20,
+    feeMax: 1000,
   },
   {
     id: 'padrao',
@@ -23,6 +27,9 @@ export const PLANS = [
     loa: 15,
     rec: 'Maior alinhamento com retorno e menor fricção.',
     destaque: true,
+    feeBase: 1000,
+    feeFactor: 40,
+    feeMax: 1800,
   },
   {
     id: 'agressivo',
@@ -33,6 +40,9 @@ export const PLANS = [
     taxaMax: 2500,
     loa: 10,
     rec: 'Quando há urgência real e potencial alto.',
+    feeBase: 1800,
+    feeFactor: 30,
+    feeMax: 2500,
   },
 ];
 
@@ -142,10 +152,6 @@ export const DEFAULT_CLIENT = {
   cargo: '',
   whatsapp: '',
   email: '',
-  produto: '',
-  meta: '',
-  data: '',
-  obs: '',
 };
 
 export const DEFAULT_DIAG = {
@@ -161,7 +167,6 @@ export const DEFAULT_DIAG = {
   motivoPerda: '',
   baseAlunos: 0,
   mensalidade: 0,
-  desistencia: 0,
   inadimplencia: 0,
   churn: 0,
   motivoCancel: '',
@@ -188,8 +193,12 @@ export const DEFAULT_DIAG = {
   onboarding: '',
   suporte: '',
   acompCliente: '',
-  percResultado: '',
   obsGeral: '',
+  // campos para cálculo da taxa operacional
+  tipoProcesso: '',        // simples, consultivo-leve, consultivo-medio, longo
+  followUp: '',            // padrao, parcial, fraco, nenhum
+  modalidade: '',          // remoto, hibrido, presencial
+  urgencia: '',            // baixa, moderada, alta
   planEscolhido: 'padrao',
 };
 

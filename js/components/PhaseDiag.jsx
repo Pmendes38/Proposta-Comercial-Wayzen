@@ -367,15 +367,6 @@ export default function PhaseDiag({ d, sd }) {
                   />
                 </Field>
                 <Slider
-                  label="Taxa de desistência mensal (%)"
-                  min={0}
-                  max={50}
-                  value={d.desistencia || 0}
-                  onChange={(v) => u('desistencia', v)}
-                  unit="%"
-                  hint="Percentual que cancela ou abandona por mês."
-                />
-                <Slider
                   label="Taxa de inadimplência (%)"
                   min={0}
                   max={60}
@@ -391,7 +382,7 @@ export default function PhaseDiag({ d, sd }) {
                   value={d.churn || 0}
                   onChange={(v) => u('churn', v)}
                   unit="%"
-                  hint="Cancelamentos definitivos por mês."
+                  hint="Percentual mensal de cancelamento/abandono da base."
                 />
               </div>
 
@@ -463,7 +454,7 @@ export default function PhaseDiag({ d, sd }) {
                   </div>
                   {[
                     { l: 'Receita recorrente/mês', v: fmtBRL(recBase) },
-                    { l: 'Perda por desistência/mês', v: fmtBRL(metricas.perdaDesist), danger: true },
+                    { l: 'Perda por churn/mês', v: fmtBRL(metricas.perdaChurn), danger: true },
                     { l: 'Perda por inadimplência/mês', v: fmtBRL(metricas.perdaInadin), danger: true },
                     {
                       l: 'Alunos cancelando/mês',
@@ -1031,7 +1022,7 @@ export default function PhaseDiag({ d, sd }) {
               {[
                 { l: 'Receita Mensal', v: fmtBRL(metricas.recAtual + metricas.recBase), ok: true },
                 { l: 'Perda por Follow-up', v: fmtBRL(metricas.perdaFollowup), danger: true },
-                { l: 'Perda por Desistência', v: fmtBRL(metricas.perdaDesist), danger: true },
+                { l: 'Perda por Churn', v: fmtBRL(metricas.perdaChurn), danger: true },
                 { l: 'Perda por Inadimplência', v: fmtBRL(metricas.perdaInadin), danger: true },
               ].map((x) => (
                 <div
