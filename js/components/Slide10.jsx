@@ -41,6 +41,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
 
   return (
     <SlideShell
+      alignTop
       badge="Investimento"
       title={
         <>

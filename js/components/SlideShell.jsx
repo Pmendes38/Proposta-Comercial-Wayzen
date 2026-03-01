@@ -5,7 +5,7 @@
 import Orbs from './Orbs';
 import { useRef, useEffect } from 'react';
 
-export default function SlideShell({ badge, title, subtitle, children }) {
+export default function SlideShell({ badge, title, subtitle, children, alignTop }) {
   const contentRef = useRef(null);
   useEffect(() => {
     // quando o slide é montado, garanta que o scroll começa no topo
@@ -21,13 +21,14 @@ export default function SlideShell({ badge, title, subtitle, children }) {
         ref={contentRef}
         className="slide-content"
         style={{
-          justifyContent: 'center',
+          justifyContent: alignTop ? 'flex-start' : 'center',
           alignItems: 'center',
           padding: 'clamp(20px, 5vw, 80px)',
           maxWidth: 1200,
           margin: '0 auto',
           width: '100%',
           minHeight: '100%',
+          overflowY: alignTop ? 'hidden' : 'auto',
         }}
       >
         <div style={{ textAlign: 'center', width: '100%' }}>
