@@ -247,6 +247,29 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
         />
       </div>
 
+      <div className="presentation-side-nav no-print">
+        <button
+          type="button"
+          className="presentation-side-btn presentation-side-btn-left"
+          onClick={handlePrev}
+          disabled={slide === 0}
+          aria-label="Slide anterior"
+          title="Slide anterior"
+        >
+          <Icon name="ChevronLeft" size={18} />
+        </button>
+        <button
+          type="button"
+          className="presentation-side-btn presentation-side-btn-right"
+          onClick={handleNext}
+          disabled={slide === SLIDES.length - 1}
+          aria-label="Proximo slide"
+          title="Proximo slide"
+        >
+          <Icon name="ChevronRight" size={18} />
+        </button>
+      </div>
+
       {!showControls && (
         <button
           type="button"
@@ -853,6 +876,51 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
           flex-wrap: nowrap;
         }
 
+        .presentation-side-nav {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          z-index: 110;
+          display: none;
+        }
+
+        .presentation-side-btn {
+          pointer-events: auto;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 255, 255, 0.22);
+          background: rgba(0, 0, 0, 0.38);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          backdrop-filter: blur(8px);
+          transition: all .15s ease;
+        }
+
+        .presentation-side-btn:hover:not(:disabled) {
+          background: rgba(255, 255, 255, 0.16);
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .presentation-side-btn:disabled {
+          opacity: .35;
+          cursor: not-allowed;
+        }
+
+        .presentation-side-btn-left {
+          left: 14px;
+        }
+
+        .presentation-side-btn-right {
+          right: 14px;
+        }
+
         .presentation-nav-center {
           min-width: 260px;
         }
@@ -867,6 +935,10 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
         }
 
         @media (max-width: 1200px) {
+          .presentation-side-nav {
+            display: block;
+          }
+
           .presentation-nav {
             padding: 12px 16px !important;
             flex-wrap: wrap;
@@ -924,6 +996,11 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
         }
 
         @media (max-width: 680px) {
+          .presentation-side-btn {
+            width: 40px;
+            height: 40px;
+          }
+
           .slide-wrapper.controls-visible {
             bottom: 84px !important;
           }

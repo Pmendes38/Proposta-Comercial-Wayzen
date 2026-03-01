@@ -53,14 +53,14 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
       }
       subtitle="Uma taxa fixa para viabilizar a presenca da equipe e uma participacao no lucro adicional gerado. Se a escola nao crescer, a Wayzen nao cobra LOA."
     >
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16, alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 22, alignItems: 'start' }}>
         <div>
           <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
               gap: 10,
-              marginBottom: 16,
+              marginBottom: 22,
             }}
           >
             {PLANS.map((pl) => {
@@ -164,7 +164,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               );
             })}
           </div>
-          <div className="card" style={{ borderRadius: 16 }}>
+          <div className="card" style={{ borderRadius: 16, padding: '22px' }}>
             <div
               style={{
                 fontFamily: 'var(--font-h)',

@@ -29,18 +29,16 @@ h1 {
   overflow: hidden;
 }
 
-/* SCROLLBAR */
-::-webkit-scrollbar {
-  width: 4px;
+/* SCROLLBAR (oculta a barra, mantém rolagem por mouse/trackpad/teclado) */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--accent-border);
-  border-radius: 2px;
+*::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
 }
 
 /* SELEÇÃO DE TEXTO */

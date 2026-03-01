@@ -121,7 +121,7 @@
   background: var(--surface);
   border: 1px solid var(--divider);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: clamp(18px, 2vw, 24px);
 }
 
 .card:hover {

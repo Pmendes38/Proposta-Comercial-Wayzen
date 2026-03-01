@@ -23,8 +23,8 @@ export default function SlideShell({ badge, title, subtitle, children, alignTop 
         style={{
           justifyContent: alignTop ? 'flex-start' : 'center',
           alignItems: 'center',
-          padding: 'clamp(20px, 5vw, 80px)',
-          maxWidth: 1200,
+          padding: 'clamp(26px, 6vw, 96px)',
+          maxWidth: 1280,
           margin: '0 auto',
           width: '100%',
           minHeight: '100%',
@@ -44,7 +44,7 @@ export default function SlideShell({ badge, title, subtitle, children, alignTop 
               fontFamily: 'var(--font-h)',
               fontSize: 'clamp(1.6rem, 4vw, 2.8rem)',
               fontWeight: 800,
-              marginBottom: 12,
+              marginBottom: 16,
               letterSpacing: '-.02em',
               lineHeight: 1.1,
             }}
@@ -57,10 +57,10 @@ export default function SlideShell({ badge, title, subtitle, children, alignTop 
               style={{
                 color: 'var(--muted)',
                 fontSize: 'clamp(13px, 2vw, 16px)',
-                marginBottom: 'clamp(20px, 4vw, 32px)',
+                marginBottom: 'clamp(24px, 5vw, 40px)',
                 lineHeight: 1.7,
                 maxWidth: 900,
-                margin: '0 auto clamp(20px, 4vw, 32px)',
+                margin: '0 auto clamp(24px, 5vw, 40px)',
               }}
             >
               {subtitle}

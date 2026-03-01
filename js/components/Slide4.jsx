@@ -8,8 +8,8 @@ import SlideShell from './SlideShell';
 import { TEAM } from '../data';
 
 export default function Slide4() {
-  const [openCard, setOpenCard] = useState(0);
-  const activeMember = useMemo(() => TEAM[openCard] || TEAM[0], [openCard]);
+  const [openCard, setOpenCard] = useState(null);
+  const activeMember = useMemo(() => (openCard === null ? null : TEAM[openCard]), [openCard]);
 
   return (
     <SlideShell
@@ -32,7 +32,7 @@ export default function Slide4() {
               key={m.nome}
               type="button"
               className="card"
-              onClick={() => setOpenCard(i)}
+              onClick={() => setOpenCard((prev) => (prev === i ? null : i))}
               style={{
                 borderRadius: 16,
                 textAlign: 'left',
