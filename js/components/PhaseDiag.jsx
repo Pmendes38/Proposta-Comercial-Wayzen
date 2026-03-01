@@ -17,6 +17,7 @@ export default function PhaseDiag({ d, sd }) {
       d.canais.includes(c) ? d.canais.filter((x) => x !== c) : [...d.canais, c]
     );
   const [tab, setTab] = useState('aquisicao');
+  const [previewAlunos, setPreviewAlunos] = useState(0);
 
   const gargalos = useMemo(() => calcularGargalos(d), [d]);
   const metricas = useMemo(() => calcularMetricas(d), [d]);
@@ -1057,6 +1058,75 @@ export default function PhaseDiag({ d, sd }) {
                   );
                 })}
               </div>
+
+              {/* visualização financeira por plano */}
+              <div
+                style={{
+                  marginTop: 24,
+                  padding: 16,
+                  background: 'var(--surface)',
+                  border: '1px solid var(--divider)',
+                  borderRadius: 12,
+                }}
+              >
+                <div style={{ fontSize: 12, fontWeight: 700, marginBottom: 8 }}>
+                  Previsão de ganho adicional por plano
+                </div>
+                <div style={{ marginBottom: 12 }}>
+                  <label style={{ fontSize: 11, color: 'var(--muted)' }}>
+                    Novos alunos por mês:{' '}
+                    <input
+                      type="number"
+                      value={previewAlunos}
+                      onChange={(e) => setPreviewAlunos(Number(e.target.value))}
+                      style={{ width: 60, padding: '2px 4px', fontSize: 11 }}
+                    />
+                  </label>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 8 }}>
+                  {PLANS.map((pl) => {
+                    const custoOperacionalPct = d.margem || 30;
+                    const profitPct = 1 - custoOperacionalPct / 100;
+                    const mensalidade = d.mensalidade || d.ticket || 800;
+                    const recAdicional = previewAlunos * mensalidade;
+                    const lucroAdicional = recAdicional * profitPct;
+                    const taxaMedia = (pl.taxaMin + pl.taxaMax) / 2;
+                    const loaWayzen = lucroAdicional > 0 ? lucroAdicional * (pl.loa / 100) : 0;
+                    const custoTotal = taxaMedia + loaWayzen;
+                    const retorno = Math.max(0, lucroAdicional - custoTotal);
+                    const percentBar = lucroAdicional
+                      ? Math.min(100, (retorno / lucroAdicional) * 100)
+                      : 0;
+                    return (
+                      <div key={pl.id}>
+                        <div style={{ fontSize: 11, fontWeight: 600 }}>{pl.label}</div>
+                        <div
+                          style={{
+                            height: 8,
+                            background: 'var(--divider)',
+                            borderRadius: 4,
+                            overflow: 'hidden',
+                            margin: '4px 0',
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: `${percentBar}%`,
+                              height: '100%',
+                              background: 'var(--accent2)',
+                              transition: 'width .3s',
+                            }}
+                          />
+                        </div>
+                        <div style={{ fontSize: 10, color: 'var(--muted)' }}>
+                          {retorno > 0 ? fmtBRL(retorno) : '-'}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
             </div>
           </div>
         )}
