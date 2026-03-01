@@ -1,6 +1,8 @@
 /* ===================================================================
-   VARIÁVEIS DE TEMA - Design System
-   =================================================================== */
+  VARIÁVEIS DE TEMA - Design System
+  =================================================================== */
+
+@import './fonts.css';
 
 :root {
   /* CORES */
@@ -16,8 +18,8 @@
   --divider: rgba(100, 60, 140, 0.25);
 
   /* TIPOGRAFIA */
-  --font-h: 'Syne', sans-serif;
-  --font-b: 'DM Sans', sans-serif;
+  --font-h: 'WayzenDisplay', WayzenAlt, 'Syne', sans-serif;
+  --font-b: 'WayzenText', 'DM Sans', system-ui, sans-serif;
 
   /* ESPAÇAMENTO */
   --spacing-xs: 4px;
@@ -25,6 +27,8 @@
   --spacing-md: 12px;
   --spacing-lg: 16px;
   --spacing-xl: 20px;
+  /* load custom fonts */
+  /* fonts.css registers WayzenDisplay and WayzenText using files in /assets */
   --spacing-2xl: 24px;
   --spacing-3xl: 32px;
 
