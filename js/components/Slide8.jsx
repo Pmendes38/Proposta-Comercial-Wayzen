@@ -1,174 +1,112 @@
 /* ===================================================================
+  COMPONENTS / SLIDE8.JSX - PROCESSO EM 4 SPRINTS
+  =================================================================== */
+/* ===================================================================
    COMPONENTS / SLIDE8.JSX - Sprint 1 (Aquisição)
    =================================================================== */
 
+import { useState } from 'react';
 import SlideShell from './SlideShell';
-import Icon from './Icon';
+import Ic from './Icon';
+import { PLANS, SPRINTS, TEAM } from '../data';
 
 export default function Slide8() {
-  const tasks = [
-    {
-      week: 'Semana 1-2',
-      title: 'Diagnóstico & Setup',
-      items: ['Configuração do CRM', 'Integração de canais', 'Treinamento inicial'],
-      done: false,
-    },
-    {
-      week: 'Semana 3-4',
-      title: 'Otimização de Lead',
-      items: ['Scripts de atendimento', 'Funil de email', 'Automações WhatsApp'],
-      done: false,
-    },
-    {
-      week: 'Semana 5-6',
-      title: 'Conversão',
-      items: ['Propostas automáticas', 'Follow-up melhorado', 'Testes de preço'],
-      done: false,
-    },
-    {
-      week: 'Semana 7-8',
-      title: 'Análise & Ajuste',
-      items: ['Relatório de impacto', 'Otimizações', 'Planejamento Sprint 2'],
-      done: false,
-    },
-  ];
-
+  const [act, setAct] = useState(0);
   return (
-    <SlideShell>
-      <div style={{ maxWidth: 1000 }}>
-        <h2
-          style={{
-            fontSize: '2.4rem',
-            fontFamily: 'var(--font-h)',
-            fontWeight: 800,
-            marginBottom: 12,
-            color: 'white',
-          }}
-        >
-          Sprint 1: Aquisição
-        </h2>
-        <div
-          style={{
-            fontSize: '1rem',
-            color: 'rgba(255, 255, 255, .7)',
-            marginBottom: 40,
-          }}
-        >
-          Primeira 8 semanas focadas em leads e conversão
-        </div>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr',
-            gap: 16,
-          }}
-        >
-          {tasks.map((task) => (
+    <SlideShell
+      badge="Processo em 4 sprints"
+      title={<>Quatro semanas para <span className="glow-text">instalar o processo</span>.</>}
+      subtitle="Cada sprint tem entregáveis claros. A operação sai documentada, com rotinas e equipe treinada."
+    >
+      <div className="tl" style={{ marginBottom: 18 }}>
+        {SPRINTS.map((s, i) => (
+          <div key={s.n} className="tl-item" onClick={() => setAct(i)} style={{ cursor: 'pointer' }}>
+            <div className={`tl-dot ${act === i ? 'act' : ''}`}>{s.n}</div>
             <div
-              key={task.week}
               style={{
-                padding: 20,
-                background: 'rgba(255, 255, 255, .05)',
-                border: '1px solid rgba(255, 255, 255, .1)',
-                borderRadius: 12,
-                borderLeft: '4px solid var(--accent)',
-                display: 'grid',
-                gridTemplateColumns: '140px 1fr',
-                gap: 24,
+                marginTop: 10,
+                fontSize: 11,
+                color: act === i ? 'var(--text)' : 'var(--muted)',
+                fontWeight: 700,
+                textAlign: 'center',
+                maxWidth: 150,
               }}
             >
-              <div>
-                <div
-                  style={{
-                    fontSize: '0.8rem',
-                    fontWeight: 700,
-                    color: 'var(--accent)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '.08em',
-                    marginBottom: 6,
-                  }}
-                >
-                  {task.week}
-                </div>
-                <h3
-                  style={{
-                    fontSize: '1.05rem',
-                    fontFamily: 'var(--font-h)',
-                    fontWeight: 700,
-                    color: 'white',
-                  }}
-                >
-                  {task.title}
-                </h3>
+              {s.titulo}
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+        <div className="card" style={{ borderRadius: 16 }}>
+          <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 18, marginBottom: 8 }}>
+            {SPRINTS[act].titulo}
+          </div>
+          <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>
+            {SPRINTS[act].texto}
+          </div>
+          <div className="divider" style={{ margin: '14px 0' }} />
+          <div
+            style={{
+              fontSize: 11,
+              letterSpacing: '.1em',
+              textTransform: 'uppercase',
+              color: 'var(--muted)',
+              marginBottom: 10,
+              fontWeight: 700,
+            }}
+          >
+            Entregáveis
+          </div>
+          {SPRINTS[act].entregaveis.map((t, i) => (
+            <div key={i} className="ci">
+              <div className="ci-icon">
+                <Ic n="ck" s={11} c="var(--accent2)" />
               </div>
-              <div
-                style={{
-                  display: 'flex',
-                  gap: 12,
-                  flexWrap: 'wrap',
-                  alignContent: 'center',
-                }}
-              >
-                {task.items.map((item) => (
-                  <div
-                    key={item}
-                    style={{
-                      padding: '6px 14px',
-                      background: 'rgba(148, 0, 211, .15)',
-                      border: '1px solid rgba(148, 0, 211, .3)',
-                      borderRadius: 6,
-                      fontSize: '0.85rem',
-                      color: 'rgba(255, 255, 255, .8)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: 6,
-                    }}
-                  >
-                    <Icon name="CheckCircle" size={14} color="var(--accent2)" />
-                    {item}
-                  </div>
-                ))}
-              </div>
+              <div style={{ fontSize: 12, color: 'var(--text)', lineHeight: 1.6 }}>{t}</div>
             </div>
           ))}
         </div>
-
-        {/* Resultado esperado */}
-        <div
-          style={{
-            marginTop: 32,
-            padding: '20px 24px',
-            background: 'linear-gradient(135deg, rgba(0, 200, 100, .1), rgba(0, 168, 131, .08))',
-            border: '1px solid rgba(0, 200, 100, .3)',
-            borderRadius: 12,
-            textAlign: 'center',
-          }}
-        >
+        <div style={{ display: 'grid', gap: 12 }}>
+          {[
+            {
+              t: 'Ritual diário (15 min)',
+              d: 'Metas do dia, revisão rápida do funil e priorização dos follow-ups mais quentes.',
+            },
+            {
+              t: 'Ritual semanal (30–45 min)',
+              d: 'Números da semana, gargalos identificados, testes e plano da próxima semana.',
+            },
+            {
+              t: 'Ritual mensal (60 min)',
+              d: 'Fechamento do mês, LOA, decisões estratégicas e metas do próximo ciclo.',
+            },
+          ].map((x, i) => (
+            <div key={i} className="card" style={{ borderRadius: 14 }}>
+              <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 4 }}>
+                {x.t}
+              </div>
+              <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>{x.d}</div>
+            </div>
+          ))}
           <div
+            className="card"
             style={{
-              fontSize: '0.9rem',
-              fontWeight: 700,
-              color: '#00c864',
-              textTransform: 'uppercase',
-              letterSpacing: '.08em',
-              marginBottom: 8,
+              borderRadius: 14,
+              borderColor: 'var(--accent-border)',
+              background: 'linear-gradient(135deg,rgba(148,0,211,.06),transparent)',
             }}
           >
-            Resultado Esperado
-          </div>
-          <div
-            style={{
-              fontSize: '1.1rem',
-              fontFamily: 'var(--font-h)',
-              fontWeight: 700,
-              color: 'white',
-            }}
-          >
-            +25-40% na conversão de leads em 8 semanas
+            <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 4 }}>
+              Governança e transferência
+            </div>
+            <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>
+              No fim do ciclo, tudo vira playbook: scripts, funil, metas e regras. Você decide se continua com Wayzen ou internaliza com treinamento.
+            </div>
           </div>
         </div>
       </div>
     </SlideShell>
   );
+
 }

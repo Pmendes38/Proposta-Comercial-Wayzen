@@ -1,0 +1,1511 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wayzen: Proposta Comercial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+:root{
+  --bg:#050008;
+  --surface:#120020;
+  --surface2:#0d0018;
+  --accent:#9400d3;
+  --accent2:#cc00ff;
+  --accent-soft:rgba(148,0,211,0.12);
+  --accent-border:rgba(148,0,211,0.5);
+  --text:#f0e8ff;
+  --muted:#8070a0;
+  --divider:rgba(100,60,140,0.25);
+  --font-h:'Syne',sans-serif;
+  --font-b:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);}
+#root{height:100%;overflow:hidden;}
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--accent-border);border-radius:2px;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideLeft{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(148,0,211,.4)}50%{box-shadow:0 0 0 8px rgba(148,0,211,0)}}
+@keyframes flowRight{0%{transform:translateX(-100%)}100%{transform:translateX(400%)}}
+
+.au{animation:fadeUp .55s cubic-bezier(.16,1,.3,1) both}
+.au1{animation:fadeUp .55s .1s cubic-bezier(.16,1,.3,1) both}
+.au2{animation:fadeUp .55s .2s cubic-bezier(.16,1,.3,1) both}
+.au3{animation:fadeUp .55s .3s cubic-bezier(.16,1,.3,1) both}
+.au4{animation:fadeUp .55s .4s cubic-bezier(.16,1,.3,1) both}
+.ai{animation:fadeIn .4s ease both}
+.al{animation:slideLeft .5s cubic-bezier(.16,1,.3,1) both}
+
+/* LAYOUT */
+.shell{display:flex;height:100vh;overflow:hidden;}
+.sidebar{width:260px;min-width:260px;background:var(--surface2);border-right:1px solid var(--divider);display:flex;flex-direction:column;overflow:hidden;}
+.main{flex:1;overflow:hidden;display:flex;flex-direction:column;}
+.scroll{overflow-y:auto;overflow-x:hidden;}
+
+/* FORM ELEMENTS */
+.fg{margin-bottom:18px;}
+.fl{display:block;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px;}
+.fi{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--divider);border-radius:8px;color:var(--text);padding:11px 15px;font-family:var(--font-b);font-size:13px;outline:none;transition:border-color .2s,box-shadow .2s;}
+.fi:focus{border-color:var(--accent-border);box-shadow:0 0 0 3px rgba(148,0,211,.08);}
+.fi::placeholder{color:rgba(255,255,255,.18);}
+textarea.fi{resize:vertical;min-height:72px;}
+select.fi option{background:#120020;}
+
+input[type=range]{-webkit-appearance:none;width:100%;height:2px;background:rgba(148,0,211,.2);border-radius:1px;outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 10px rgba(148,0,211,.6);transition:transform .2s;}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.25);}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 22px;border-radius:8px;border:none;cursor:pointer;font-family:var(--font-b);font-size:13px;font-weight:600;transition:all .2s;text-decoration:none;}
+.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 0 24px rgba(148,0,211,.35);}
+.btn-p:hover{box-shadow:0 0 40px rgba(148,0,211,.5);transform:translateY(-1px);}
+.btn-s{background:transparent;color:var(--text);border:1px solid var(--divider);}
+.btn-s:hover{border-color:var(--accent-border);background:var(--accent-soft);}
+.btn-g{background:transparent;color:var(--muted);border:none;padding:8px 12px;}
+.btn-g:hover{color:var(--text);background:rgba(255,255,255,.05);}
+.btn-sm{padding:7px 16px;font-size:12px;}
+.btn-lg{padding:15px 36px;font-size:15px;font-weight:700;}
+.btn-full{width:100%;}
+
+/* MISC */
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:100px;font-size:10px;font-weight:600;letter-spacing:.05em;}
+.ba{background:rgba(148,0,211,.15);color:var(--accent2);border:1px solid var(--accent-border);}
+.bn{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--divider);}
+.bok{background:rgba(0,200,100,.1);color:#00c864;border:1px solid rgba(0,200,100,.2);}
+.bw{background:rgba(220,140,0,.1);color:#dc8c00;border:1px solid rgba(220,140,0,.2);}
+.br{background:rgba(220,0,60,.1);color:#dc003c;border:1px solid rgba(220,0,60,.2);}
+.bcom{background:rgba(0,180,255,.1);color:#00b4ff;border:1px solid rgba(0,180,255,.2);}
+.divider{height:1px;background:var(--divider);margin:18px 0;}
+.card{background:var(--surface);border:1px solid var(--divider);border-radius:12px;padding:20px;}
+.glow-text{background:linear-gradient(135deg,#cc00ff,#9400d3,#cc00ff);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite;}
+
+/* SLIDE PRESENTATION */
+.slide{position:absolute;inset:0;overflow:hidden;display:flex;flex-direction:column;}
+.slide-bg{position:absolute;inset:0;pointer-events:none;z-index:0;}
+.slide-content{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;}
+
+/* NAV */
+.top-bar{padding:12px 28px;border-bottom:1px solid var(--divider);display:flex;align-items:center;justify-content:space-between;background:rgba(5,0,8,.85);backdrop-filter:blur(12px);}
+
+/* LOGO */
+.wz-logo{display:flex;align-items:center;gap:10px;}
+.wz-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:7px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 14px rgba(148,0,211,.4);}
+
+/* STEP INDICATOR */
+.step-dot{width:7px;height:7px;border-radius:50%;background:var(--divider);cursor:pointer;transition:all .25s;}
+.step-dot.done{background:rgba(148,0,211,.4);}
+.step-dot.active{background:var(--accent);width:22px;border-radius:4px;box-shadow:0 0 8px var(--accent);}
+
+/* FORM PHASE */
+.form-section{padding:32px;}
+.form-title{font-family:var(--font-h);font-size:clamp(1.4rem,2.5vw,2rem);font-weight:800;margin-bottom:6px;}
+.form-sub{color:var(--muted);font-size:14px;margin-bottom:28px;}
+
+/* SIDEBAR NAV */
+.sn-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;cursor:pointer;margin-bottom:2px;transition:background .15s;}
+.sn-item:hover{background:rgba(148,0,211,.08);}
+.sn-item.active{background:var(--accent-soft);}
+.sn-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+
+/* DIAGNOSIS */
+.diag-card{background:var(--surface);border:1px solid var(--divider);border-radius:10px;padding:16px;margin-bottom:10px;}
+.diag-card.danger{border-left:3px solid #dc003c;}
+.diag-card.warn{border-left:3px solid #dc8c00;}
+.diag-card.ok{border-left:3px solid #00c864;}
+
+/* PRESENTATION SLIDES */
+.pres-nav{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:100;background:rgba(5,0,8,.7);backdrop-filter:blur(10px);padding:8px 16px;border-radius:100px;border:1px solid var(--divider);}
+.prev-btn,.next-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--divider);background:transparent;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.prev-btn:hover,.next-btn:hover{border-color:var(--accent-border);background:var(--accent-soft);}
+.slide-counter{font-size:11px;color:var(--muted);font-family:var(--font-h);font-weight:600;min-width:40px;text-align:center;}
+
+/* PLAN CARDS */
+.plan{background:var(--surface);border:2px solid var(--divider);border-radius:14px;padding:24px;cursor:pointer;transition:all .25s;position:relative;}
+.plan:hover{border-color:var(--accent-border);transform:translateY(-3px);}
+.plan.sel{border-color:var(--accent);box-shadow:0 0 30px rgba(148,0,211,.2);}
+.plan.sel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:14px 14px 0 0;}
+
+/* CHECKLIST */
+.ci{display:flex;align-items:flex-start;gap:9px;padding:5px 0;}
+.ci-icon{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;background:rgba(148,0,211,.15);border:1px solid var(--accent-border);}
+
+/* HERO BG EFFECTS */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;}
+
+/* FORM GRID */
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+
+/* RANGE GROUP */
+.rg{margin-bottom:22px;}
+.rg-header{display:flex;justify-content:space-between;margin-bottom:8px;}
+.rg-label{font-size:12px;color:var(--muted);font-weight:500;}
+.rg-val{font-family:var(--font-h);font-weight:700;font-size:16px;color:var(--accent2);}
+.rg-hint{font-size:11px;color:var(--muted);margin-top:5px;}
+
+/* DIAG TABS */
+.diag-tab-bar{display:flex;overflow-x:auto;border-bottom:1px solid var(--divider);}
+.diag-tab-bar::-webkit-scrollbar{height:3px;}
+
+/* TAG SELECTOR */
+.tag{padding:5px 12px;border-radius:6px;font-size:11px;background:rgba(255,255,255,.04);border:1px solid var(--divider);color:var(--muted);cursor:pointer;transition:all .15s;font-weight:500;}
+.tag.on{background:rgba(148,0,211,.15);border-color:var(--accent-border);color:var(--text);}
+
+/* TIMELINE */
+.tl{display:flex;position:relative;gap:0;}
+.tl::before{content:'';position:absolute;top:24px;left:24px;right:24px;height:2px;background:var(--divider);z-index:0;}
+.tl-item{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;}
+.tl-dot{width:48px;height:48px;border-radius:50%;background:var(--surface);border:2px solid var(--divider);display:flex;align-items:center;justify-content:center;font-family:var(--font-h);font-weight:700;font-size:13px;color:var(--muted);transition:all .3s;}
+.tl-dot.act{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);box-shadow:0 0 16px rgba(148,0,211,.3);}
+
+/* TEAM MEMBER CARD WITH HOVER */
+.team-member-card{position:relative;cursor:pointer;}
+.team-member-card .team-hover-card{
+  position:absolute;
+  bottom:calc(100% + 12px);
+  left:50%;
+  transform:translateX(-50%) translateY(8px);
+  width:300px;
+  background:linear-gradient(135deg,#1a0030,#0d001a);
+  border:1px solid var(--accent-border);
+  border-radius:16px;
+  padding:20px;
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .2s ease,transform .25s cubic-bezier(.16,1,.3,1);
+  box-shadow:0 20px 60px rgba(0,0,0,.7),0 0 40px rgba(148,0,211,.2);
+}
+.team-member-card:hover .team-hover-card,
+.team-member-card.open .team-hover-card{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+  pointer-events:auto;
+}
+.team-hover-card::after{
+  content:'';
+  position:absolute;
+  top:100%;
+  left:50%;
+  transform:translateX(-50%);
+  border:8px solid transparent;
+  border-top-color:var(--accent-border);
+}
+.team-photo-placeholder{
+  width:100%;
+  aspect-ratio:4/3;
+  border-radius:10px;
+  background:linear-gradient(135deg,rgba(148,0,211,.2),rgba(204,0,255,.08));
+  border:1px dashed var(--accent-border);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  font-size:11px;
+  margin-bottom:14px;
+  overflow:hidden;
+  position:relative;
+}
+.team-photo-placeholder img{
+  width:100%;height:100%;object-fit:cover;position:absolute;inset:0;border-radius:10px;
+}
+
+/* JOURNEY FLOW */
+.journey-stage{
+  position:relative;
+  padding:20px;
+  border-radius:14px;
+  border:1px solid var(--divider);
+  background:var(--surface);
+  transition:border-color .2s,transform .2s;
+  cursor:default;
+}
+.journey-stage:hover{border-color:var(--accent-border);transform:translateY(-2px);}
+.journey-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 4px;
+  color:var(--accent-border);
+  flex-shrink:0;
+}
+
+/* PRESENCE HIGHLIGHT */
+.presence-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border-radius:100px;
+  background:rgba(0,200,100,.08);
+  border:1px solid rgba(0,200,100,.2);
+  color:#00c864;font-size:12px;font-weight:600;
+}
+.presence-dot{width:7px;height:7px;border-radius:50%;background:#00c864;animation:pulse 2s infinite;}
+
+@media print{
+  .no-print{display:none!important;}
+  .print-show{display:block!important;}
+  body{background:#fff;color:#000;overflow:auto;}
+  #root{overflow:auto;height:auto;}
+}
+@media not print{.print-show{display:none!important;}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useEffect,useCallback,useMemo,useRef}=React;
+
+// ─── DATA ──────────────────────────────────────────────────────────────────
+const PLANS=[
+  {id:'entrada',label:'Entrada Fácil',sub:'Para começar com baixa fricção.',taxa:'R$ 600 – R$ 1.000/mês',taxaMin:600,taxaMax:1000,loa:20,rec:'Indicado para primeiro ciclo de validação (60 dias).'},
+  {id:'padrao',label:'Modelo Padrão',sub:'Equilíbrio entre execução e retorno.',taxa:'R$ 1.000 – R$ 1.800/mês',taxaMin:1000,taxaMax:1800,loa:15,rec:'Maior alinhamento com retorno e menor fricção.',destaque:true},
+  {id:'agressivo',label:'Agressivo',sub:'Para quem quer acelerar com força.',taxa:'R$ 1.800 – R$ 2.500/mês',taxaMin:1800,taxaMax:2500,loa:10,rec:'Quando há urgência real e potencial alto.'},
+];
+
+const SPRINTS=[
+  {n:'01',titulo:'Diagnóstico e Blueprint',texto:'Mapeamos toda a operação atual: funil, canais, scripts, SLA e KPIs. O playbook sai pronto no fim da semana.',entregaveis:['Playbook comercial completo','Scripts de abordagem e objeções','Funil com etapas e campos obrigatórios','KPIs e metas diárias/semanais','Mapeamento de canais e SLA de resposta']},
+  {n:'02',titulo:'Execução Guiada',texto:'Operação ativa dentro da empresa com rotina e ajustes diários. Presença real, não relatório.',entregaveis:['Operação com registro obrigatório no CRM','Testes A/B de abordagem','Correções diárias de linguagem e oferta','SLA de resposta implantado e monitorado','Relatório semanal com indicadores reais']},
+  {n:'03',titulo:'Estabilização',texto:'O que funciona vira padrão. A conversão sobe e a equipe internaliza a rotina.',entregaveis:['Script campeão consolidado e treinado','Metas por etapa do funil com cobrança','Organização para previsibilidade de receita','Ajustes em proposta e pacotes de oferta','Relatório semanal com aprendizados']},
+  {n:'04',titulo:'Consolidação',texto:'Playbook final, governança entregue. A operação roda com ou sem a Wayzen do lado.',entregaveis:['Playbook final revisado e atualizado','Treinamento prático com simulações reais','Documento de governança e rituais','Relatório comparativo antes/depois','Plano de continuidade para os próximos 60 dias']},
+];
+
+// TIME COM DADOS COMPLETOS PARA HOVER
+const TEAM=[
+  {
+    nome:'Pedro Mendes',
+    cargo:'Estrategista e Fundador da Wayzen',
+    bio:'Pedro lidera a estratégia, define o playbook comercial e garante que a operação aconteça de dentro da empresa do cliente.',
+    expanded:'8 anos de experiência com marketing e vendas para o ramo educacional. Especialista em estruturação de funil, scripts e cadência de atendimento. Conhece profundamente a jornada do aluno: da captação do lead à retenção de longo prazo. É ele quem conduz o diagnóstico inicial e define o modelo de operação para cada cliente.',
+    icon:'🧠',
+    fotoAlt:'Pedro Mendes',
+    foto:null,
+  },
+  {
+    nome:'Matheus',
+    cargo:'Especialista em Construção de Comerciais',
+    bio:'Constrói e opera o processo comercial dentro da empresa do cliente durante os 4 sprints de implementação.',
+    expanded:'Especialista na construção de processos comerciais do zero. Atua diretamente dentro da empresa parceira: instala o funil, treina a equipe, define metas por etapa e garante que o playbook seja seguido no dia a dia. Ao final dos 4 sprints, a Wayzen contrata e aloca um profissional dedicado exclusivamente ao cliente, que passa a ser funcionário da Wayzen, eliminando custo de contratação, treinamento e encargos trabalhistas para a escola.',
+    icon:'🎯',
+    fotoAlt:'Matheus',
+    foto:null,
+  },
+  {
+    nome:'Danielle Moraes',
+    cargo:'Especialista em Marketing e Funis',
+    bio:'Responsável pela criação de demanda qualificada: tráfego, funis e posicionamento de oferta para gerar o lead certo para o comercial.',
+    expanded:'Especialista em marketing de performance e construção de funis para o setor educacional. Atua na configuração de campanhas, segmentação de público, criação de páginas de captura e otimização do custo por lead. Focada em entregar leads com intenção real de matrícula, com o menor custo de aquisição possível.',
+    icon:'📣',
+    fotoAlt:'Danielle Moraes',
+    foto:null,
+  },
+];
+
+const CANAIS=['WhatsApp','Instagram','Telefone','Site','Presencial','E-mail','Indicação','Facebook'];
+
+const defClient={empresa:'',segmento:'',cidade:'',decisor:'',cargo:'',whatsapp:'',email:'',produto:'',meta:'',data:'',obs:''};
+const defDiag={contatos:80,canais:[],tempo:120,semRetorno:60,conversao:15,ticket:1500,ciclo:7,cac:0,propostas:0,motivoPerda:"",baseAlunos:0,mensalidade:0,desistencia:0,inadimplencia:0,churn:0,motivoCancel:"",retencaoAtiva:"",cobracaAtiva:"",tempoMedio:0,recompra:0,indicacao:0,qtdProdutos:"",programaIndicacao:"",comunicacaoBase:"",fidelizacao:"",equipe:0,crm:"",playbook:"",metas:"",tempoFechamento:0,faturamento:0,margem:30,relatorio:"",nps:0,coletaNps:"",reclamacao:"",onboarding:"",suporte:"",acompCliente:"",percResultado:"",obsGeral:"",planEscolhido:"padrao"};
+const defSim={convMelhora:5,followMelhora:40,margem:30,cenario:'moderado'};
+
+const fmtBRL=v=>'R$ '+Math.round(v||0).toLocaleString('pt-BR');
+
+function useLS(key,init){
+  const [v,sv]=useState(()=>{try{const s=localStorage.getItem(key);return s?JSON.parse(s):init;}catch{return init;}});
+  const set=useCallback(val=>{sv(val);try{localStorage.setItem(key,JSON.stringify(val));}catch{};},[key]);
+  return [v,set];
+}
+
+// ─── SVG ICONS ─────────────────────────────────────────────────────────────
+function Ic({n,s=16,c='currentColor'}){
+  const d={
+    ar:<polyline points="9 18 15 12 9 6"/>,
+    al:<polyline points="15 18 9 12 15 6"/>,
+    ck:<polyline points="20 6 9 17 4 12"/>,
+    x:<><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></>,
+    pl:<><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></>,
+    pr:<><rect x="2" y="3" width="20" height="13" rx="2"/><path d="M8 21l4-4 4 4"/><path d="M12 17v-4"/></>,
+    dn:<><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></>,
+    ed:<><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></>,
+    cp:<><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></>,
+    usr:<><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></>,
+    img:<><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></>,
+  };
+  return <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">{d[n]||null}</svg>;
+}
+
+function WzLogo({size=24}){
+  return(
+    <div className="wz-logo">
+      <div className="wz-icon" style={{width:size,height:size,borderRadius:Math.round(size*.25)}}>
+        <svg width={size*.6} height={size*.6} viewBox="0 0 14 14" fill="none">
+          <path d="M2 4L5.5 10L7 7L8.5 10L12 4" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+        </svg>
+      </div>
+      <span style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:size*.7,color:'var(--text)',letterSpacing:'-.03em'}}>Wayzen</span>
+    </div>
+  );
+}
+
+function Field({label,hint,children}){
+  return(
+    <div className="fg">
+      {label&&<label className="fl">{label}</label>}
+      {children}
+      {hint&&<div style={{fontSize:11,color:'var(--muted)',marginTop:4}}>{hint}</div>}
+    </div>
+  );
+}
+
+function Slider({label,min,max,value,onChange,unit='',hint}){
+  return(
+    <div className="rg">
+      <div className="rg-header">
+        <span className="rg-label">{label}</span>
+        <span className="rg-val">{value}{unit}</span>
+      </div>
+      <input type="range" min={min} max={max} value={value} onChange={e=>onChange(Number(e.target.value))}/>
+      {hint&&<div className="rg-hint">{hint}</div>}
+    </div>
+  );
+}
+
+// ─── SIDEBAR ────────────────────────────────────────────────────────────────
+function Sidebar({client,diag,plan,phase,onPhase}){
+  const pl=PLANS.find(p=>p.id===plan);
+  const sections=[
+    {id:'ident',label:'Identificação',done:!!(client.empresa&&client.decisor)},
+    {id:'foco',label:'Foco e Contexto',done:!!(client.produto)},
+    {id:'diag',label:'Diagnóstico',done:!!(diag.ticket)},
+  ];
+  return(
+    <div className="sidebar no-print" style={{padding:0}}>
+      <div style={{padding:'20px 18px',borderBottom:'1px solid var(--divider)'}}>
+        <WzLogo size={22}/>
+      </div>
+      {client.empresa&&(
+        <div style={{padding:'16px 18px',borderBottom:'1px solid var(--divider)'}}>
+          <div style={{fontSize:10,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:6,fontWeight:600}}>Proposta para</div>
+          <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:15,marginBottom:2}}>{client.empresa}</div>
+          {client.decisor&&<div style={{fontSize:12,color:'var(--muted)'}}>{client.decisor}{client.cargo?` · ${client.cargo}`:''}</div>}
+          {client.produto&&(
+            <div style={{marginTop:8,padding:'7px 10px',background:'var(--accent-soft)',borderRadius:6,fontSize:11,lineHeight:1.5}}>
+              <span style={{color:'var(--accent2)',fontWeight:600}}>Foco:</span> {client.produto}
+            </div>
+          )}
+        </div>
+      )}
+      <div style={{padding:'16px 18px',flex:1}}>
+        <div style={{fontSize:10,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:10,fontWeight:600}}>Formulário</div>
+        {sections.map((s,i)=>(
+          <div key={s.id} className={`sn-item ${phase===s.id?'active':''}`} onClick={()=>onPhase(s.id)}>
+            <div className="sn-num" style={{background:s.done?'rgba(0,200,100,.15)':phase===s.id?'var(--accent-soft)':'rgba(255,255,255,.05)',border:`1px solid ${s.done?'#00c864':phase===s.id?'var(--accent-border)':'var(--divider)'}`,color:s.done?'#00c864':phase===s.id?'var(--accent2)':'var(--muted)'}}>
+              {s.done&&phase!==s.id?<Ic n="ck" s={9} c="#00c864"/>:<span>{i+1}</span>}
+            </div>
+            <span style={{fontSize:12,fontWeight:500,color:phase===s.id?'var(--text)':'var(--muted)'}}>{s.label}</span>
+          </div>
+        ))}
+      </div>
+      {plan&&(
+        <div style={{padding:'12px 18px',borderTop:'1px solid var(--divider)'}}>
+          <div style={{fontSize:10,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:6,fontWeight:600}}>Plano</div>
+          <div style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:13,color:'var(--accent2)'}}>{pl?.label}</div>
+          <div style={{fontSize:12,color:'var(--muted)'}}>{pl?.taxa} + {pl?.loa}% LOA</div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── FORM PHASES ─────────────────────────────────────────────────────────────
+function PhaseIdent({c,sc}){
+  const u=(k,v)=>sc(p=>({...p,[k]:v}));
+  return(
+    <div>
+      <div className="form-section" style={{paddingBottom:0}}>
+        <div className="au"><span className="badge ba" style={{marginBottom:12}}>Passo 1 de 3</span></div>
+        <h2 className="form-title au1">Quem é o cliente?</h2>
+        <p className="form-sub au2">Preencha enquanto conversa. A proposta monta em tempo real.</p>
+      </div>
+      <div style={{padding:'0 32px 32px'}}>
+        <div className="fg2">
+          <div>
+            <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:14,fontWeight:600}}>Empresa</div>
+            <Field label="Nome da Empresa"><input className="fi" placeholder="Nome da empresa" value={c.empresa} onChange={e=>u('empresa',e.target.value)}/></Field>
+            <Field label="Segmento"><input className="fi" placeholder="Ex.: educação, saúde, varejo, serviços" value={c.segmento} onChange={e=>u('segmento',e.target.value)}/></Field>
+            <Field label="Cidade"><input className="fi" placeholder="Cidade / UF" value={c.cidade} onChange={e=>u('cidade',e.target.value)}/></Field>
+          </div>
+          <div>
+            <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:14,fontWeight:600}}>Decisor</div>
+            <Field label="Nome do Decisor"><input className="fi" placeholder="Dono, diretor, gestor" value={c.decisor} onChange={e=>u('decisor',e.target.value)}/></Field>
+            <Field label="Cargo"><input className="fi" placeholder="Cargo ou função" value={c.cargo} onChange={e=>u('cargo',e.target.value)}/></Field>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+              <Field label="WhatsApp"><input className="fi" placeholder="(00) 00000-0000" value={c.whatsapp} onChange={e=>u('whatsapp',e.target.value)}/></Field>
+              <Field label="E-mail"><input className="fi" placeholder="email@empresa.com" value={c.email} onChange={e=>u('email',e.target.value)}/></Field>
+            </div>
+          </div>
+        </div>
+        {c.empresa&&c.decisor&&(
+          <div className="au card" style={{background:'linear-gradient(135deg,rgba(148,0,211,.08),rgba(204,0,255,.04))',borderColor:'var(--accent-border)',marginTop:8}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:18}}>Proposta Wayzen para <span className="glow-text">{c.empresa}</span></div>
+            <div style={{fontSize:13,color:'var(--muted)',marginTop:4}}>{c.decisor}{c.cargo?` · ${c.cargo}`:''}{c.cidade?` · ${c.cidade}`:''}</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function PhaseFoco({c,sc}){
+  const u=(k,v)=>sc(p=>({...p,[k]:v}));
+  return(
+    <div>
+      <div className="form-section" style={{paddingBottom:0}}>
+        <div className="au"><span className="badge ba" style={{marginBottom:12}}>Passo 2 de 3</span></div>
+        <h2 className="form-title au1">Qual é o foco?</h2>
+        <p className="form-sub au2">O que mais importa vender ou converter agora.</p>
+      </div>
+      <div style={{padding:'0 32px 32px'}}>
+        <div className="fg2">
+          <div>
+            <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:14,fontWeight:600}}>Foco do Ciclo</div>
+            <Field label="Produto / Serviço Principal" hint="O que mais importa vender ou converter agora">
+              <input className="fi" placeholder="Ex.: matrículas, plano anual, cirurgia" value={c.produto} onChange={e=>u('produto',e.target.value)}/>
+            </Field>
+            <Field label="Meta para o Semestre" hint="Objetivo concreto deste ciclo de operação">
+              <input className="fi" placeholder="Ex.: dobrar matrículas, bater R$ 200k, 100 alunos novos" value={c.meta} onChange={e=>u('meta',e.target.value)}/>
+            </Field>
+          </div>
+          <div>
+            <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:14,fontWeight:600}}>Contexto</div>
+            <Field label="Data da Reunião">
+              <input className="fi" type="date" value={c.data} onChange={e=>u('data',e.target.value)}/>
+            </Field>
+            <Field label="Observações" hint="Sazonalidade, momento da empresa, contexto relevante">
+              <textarea className="fi" placeholder="Qualquer contexto importante sobre o momento do negócio..." value={c.obs} onChange={e=>u('obs',e.target.value)}/>
+            </Field>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PhaseDiag({d,sd}){
+  const u=(k,v)=>sd(p=>({...p,[k]:v}));
+  const toggle=c=>u('canais',d.canais.includes(c)?d.canais.filter(x=>x!==c):[...d.canais,c]);
+  const [tab,setTab]=useState('aquisicao');
+
+  const gargalos=useMemo(()=>{
+    const g=[];
+    if(d.tempo>30) g.push({t:'Demora na Resposta',c:'danger',area:'Aquisição',desc:'Quando a resposta demora, a decisão vai para o concorrente.',acao:'SLA obrigatório + rotina de priorização. Meta: <5 min no comercial.'});
+    if(d.semRetorno>40) g.push({t:'Follow-up Inexistente',c:'danger',area:'Aquisição',desc:'O contato não diz "não". Ele some. E o dinheiro vai junto.',acao:'Cadência obrigatória com no mínimo 5 touchpoints antes de arquivar.'});
+    if(d.conversao<20) g.push({t:'Conversão Baixa',c:'warn',area:'Aquisição',desc:'Sem funil e scripts, a taxa tende a estagnar ou cair.',acao:'Playbook completo, scripts de objeções e metas por etapa do funil.'});
+    if(!d.canais.length||d.canais.length===1) g.push({t:'Canal Único de Demanda',c:'warn',area:'Aquisição',desc:'Concentração de risco. Um canal parado interrompe toda a entrada.',acao:'Mapeamento e diversificação em pelo menos 3 canais.'});
+    if(d.cac>0&&d.ticket>0&&d.cac>(d.ticket*0.3)) g.push({t:'CAC Elevado',c:'warn',area:'Aquisição',desc:'Custo de aquisição representa mais de 30% do ticket.',acao:'Revisão de canais pagos e ativação de canais orgânicos.'});
+    if((d.desistencia||0)>15) g.push({t:'Desistência Alta',c:'danger',area:'Base Ativa',desc:`Taxa de ${d.desistencia||0}% indica problemas de entrega ou experiência.`,acao:'Diagnóstico de causa raiz: onboarding, qualidade, suporte.'});
+    if((d.inadimplencia||0)>10) g.push({t:'Inadimplência Crítica',c:'danger',area:'Base Ativa',desc:`${d.inadimplencia||0}% compromete o fluxo de caixa.`,acao:'Régua de cobrança automática e revisão de política de crédito.'});
+    if((d.churn||0)>5) g.push({t:'Churn Mensal Alto',c:'warn',area:'Base Ativa',desc:`Churn de ${d.churn||0}%: perde +${Math.round((d.churn||0)*12)}% da base em 1 ano.`,acao:'Programa de retenção ativa, pesquisa de saída e sucesso do cliente.'});
+    if((d.recompra||0)<20) g.push({t:'Recompra Baixa',c:'warn',area:'LTV',desc:'Pouca receita recorrente da base. Aquisição é o único motor.',acao:'Esteira de produtos, upsell ativo e relacionamento pós-venda.'});
+    if((d.indicacao||0)<15) g.push({t:'Indicação Quase Zero',c:'warn',area:'LTV',desc:'Clientes satisfeitos não estão sendo ativados como canal.',acao:'Programa de indicação estruturado com incentivos claros.'});
+    if((d.nps||0)<30) g.push({t:'NPS Crítico',c:'danger',area:'Experiência',desc:`NPS de ${d.nps||0}: alto risco de saída, sem promotores ativos.`,acao:'Diagnóstico de jornada e plano de recuperação de detratores.'});
+    if((d.nps||0)>=30&&(d.nps||0)<50) g.push({t:'NPS em Zona de Melhoria',c:'warn',area:'Experiência',desc:`NPS de ${d.nps||0}: espaço relevante para melhorar experiência.`,acao:'Mapeamento de pontos de atrito e ações pontuais.'});
+    if((d.tempoFechamento||0)>14) g.push({t:'Ciclo de Fechamento Longo',c:'warn',area:'Operacional',desc:`Ciclo de ${d.tempoFechamento||0} dias: falta urgência ou cadência.`,acao:'Scripts de fechamento e follow-up estruturado pós-proposta.'});
+    if((d.equipe||0)===0) g.push({t:'Sem Time Comercial',c:'warn',area:'Operacional',desc:'Crescimento limitado à capacidade do dono.',acao:'Estruturação do primeiro vendedor com playbook e metas.'});
+    if(g.length===0) g.push({t:'Base com Potencial Real',c:'ok',area:'Geral',desc:'Números indicam base razoável. Foco em conversão e LTV.',acao:'Estabilização e governança. Próximo: LTV e reativação de base.'});
+    return g;
+  },[d]);
+
+  const recAtual=d.contatos*4.3*(d.conversao/100)*d.ticket;
+  const perdaFollowup=d.contatos*4.3*(d.semRetorno/100)*d.ticket*.12;
+  const baseAtiva=d.baseAlunos||0;
+  const recBase=baseAtiva*(d.mensalidade||d.ticket||0);
+  const perdaDesist=baseAtiva*(d.desistencia||0)/100*(d.mensalidade||d.ticket||0);
+  const perdaInadin=recBase*(d.inadimplencia||0)/100;
+  const ltv=(d.mensalidade||d.ticket||0)*Math.max(1,12-(d.churn||0)/100*12);
+
+  const scoreItems=[
+    {nome:'Velocidade de resposta',val:d.tempo<=5?100:d.tempo<=30?70:d.tempo<=120?40:10},
+    {nome:'Follow-up',val:d.semRetorno<=20?100:d.semRetorno<=40?60:d.semRetorno<=60?30:10},
+    {nome:'Conversão',val:d.conversao>=40?100:d.conversao>=25?75:d.conversao>=15?50:25},
+    {nome:'Retenção',val:(d.desistencia||0)<=5?100:(d.desistencia||0)<=10?70:(d.desistencia||0)<=20?40:15},
+    {nome:'Inadimplência',val:(d.inadimplencia||0)<=3?100:(d.inadimplencia||0)<=7?70:(d.inadimplencia||0)<=15?40:15},
+    {nome:'NPS',val:(d.nps||0)>=70?100:(d.nps||0)>=50?75:(d.nps||0)>=30?50:20},
+    {nome:'Indicação',val:(d.indicacao||0)>=30?100:(d.indicacao||0)>=15?70:(d.indicacao||0)>=5?40:10},
+    {nome:'Recompra',val:(d.recompra||0)>=40?100:(d.recompra||0)>=25?70:(d.recompra||0)>=10?40:10},
+  ];
+  const scoreGeral=Math.round(scoreItems.reduce((a,x)=>a+x.val,0)/scoreItems.length);
+  const scoreCor=scoreGeral>=70?'#00c864':scoreGeral>=45?'#dc8c00':'#dc003c';
+
+  const TABS=[
+    {id:'aquisicao',label:'📥 Aquisição'},
+    {id:'base',label:'👥 Base Ativa'},
+    {id:'ltv',label:'♻️ LTV / Recompra'},
+    {id:'operacional',label:'⚙️ Operacional'},
+    {id:'experiencia',label:'⭐ Experiência'},
+    {id:'painel',label:'📊 Painel Geral'},
+  ];
+  const ST=({children})=>(<div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:14,fontWeight:600,paddingBottom:8,borderBottom:'1px solid var(--divider)'}}>{children}</div>);
+
+  return(
+    <div>
+      <div className="form-section" style={{paddingBottom:0}}>
+        <div className="au"><span className="badge ba" style={{marginBottom:12}}>Passo 3 de 3 · Diagnóstico Completo</span></div>
+        <h2 className="form-title au1">Onde está vazando: e onde está o dinheiro parado.</h2>
+        <p className="form-sub au2">Diagnóstico de ponta a ponta: aquisição, base ativa, LTV, operação e experiência.</p>
+      </div>
+      <div style={{padding:'0 32px',borderBottom:'1px solid var(--divider)',display:'flex',gap:0,overflowX:'auto'}}>
+        {TABS.map(t=>(
+          <button key={t.id} onClick={()=>setTab(t.id)} style={{padding:'10px 18px',background:'none',border:'none',borderBottom:`2px solid ${tab===t.id?'var(--accent)':'transparent'}`,color:tab===t.id?'var(--text)':'var(--muted)',fontFamily:'var(--font-b)',fontSize:12,fontWeight:tab===t.id?600:400,cursor:'pointer',transition:'all .15s',whiteSpace:'nowrap',marginBottom:-1}}>{t.label}</button>
+        ))}
+      </div>
+      <div style={{padding:'24px 32px 40px'}}>
+        {tab==='aquisicao'&&(
+          <div key="aq" className="ai"><div className="fg2">
+            <div>
+              <ST>Entrada de Demanda</ST>
+              <Slider label="Contatos por semana" min={5} max={500} value={d.contatos} onChange={v=>u('contatos',v)} hint="Somando todos os canais."/>
+              <div className="fg"><label className="fl">Canais Ativos</label><div style={{display:'flex',flexWrap:'wrap',gap:6}}>{CANAIS.map(c=><span key={c} className={`tag ${d.canais.includes(c)?'on':''}`} onClick={()=>toggle(c)}>{c}</span>)}</div></div>
+              <ST>Velocidade e Atendimento</ST>
+              <Slider label="Tempo médio de 1ª resposta (min)" min={1} max={480} value={d.tempo} onChange={v=>u('tempo',v)} unit="min" hint="1º atendimento ao lead novo."/>
+              <Slider label="Contatos sem retorno (%)" min={0} max={100} value={d.semRetorno} onChange={v=>u('semRetorno',v)} hint="Leads que somem após o 1º atendimento."/>
+              <Field label="CAC: Custo por Cliente Adquirido (R$)"><input className="fi" type="number" placeholder="Ex.: 450" value={d.cac||''} onChange={e=>u('cac',Number(e.target.value))}/></Field>
+            </div>
+            <div>
+              <ST>Conversão e Financeiro</ST>
+              <Slider label="Taxa de conversão (%)" min={1} max={80} value={d.conversao} onChange={v=>u('conversao',v)} unit="%" hint="Use estimativa honesta se não mede."/>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+                <Field label="Ticket Médio (R$)"><input className="fi" type="number" placeholder="1500" value={d.ticket||''} onChange={e=>u('ticket',Number(e.target.value))}/></Field>
+                <Field label="Ciclo de Decisão (dias)"><input className="fi" type="number" placeholder="7" value={d.ciclo||''} onChange={e=>u('ciclo',Number(e.target.value))}/></Field>
+              </div>
+              <Field label="Propostas enviadas por semana"><input className="fi" type="number" placeholder="Ex.: 12" value={d.propostas||''} onChange={e=>u('propostas',Number(e.target.value))}/></Field>
+              <Field label="Principal motivo de perda de leads"><select className="fi" value={d.motivoPerda||''} onChange={e=>u('motivoPerda',e.target.value)}><option value="">Selecione</option><option>Preço / valor percebido</option><option>Demora no atendimento</option><option>Falta de follow-up</option><option>Concorrente mais rápido</option><option>Falta de urgência do lead</option><option>Processo consultivo longo demais</option><option>Produto/oferta não adequada</option><option>Não sei / não rastreamos</option></select></Field>
+              <div style={{background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:10,padding:'14px'}}>
+                <div style={{fontSize:10,color:'var(--muted)',fontWeight:600,letterSpacing:'.08em',textTransform:'uppercase',marginBottom:10}}>Resumo de Aquisição</div>
+                {[{l:'Contatos/mês',v:Math.round(d.contatos*4.3)},{l:'Fechamentos/mês',v:Math.round(d.contatos*4.3*(d.conversao/100))},{l:'Receita mensal estimada',v:fmtBRL(recAtual)},{l:'Perda por follow-up',v:fmtBRL(perdaFollowup),danger:true}].map(x=>(<div key={x.l} style={{display:'flex',justifyContent:'space-between',padding:'5px 0',borderBottom:'1px solid var(--divider)'}}><span style={{fontSize:12,color:'var(--muted)'}}>{x.l}</span><span style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:13,color:x.danger?'#dc003c':'var(--text)'}}>{x.v}</span></div>))}
+              </div>
+            </div>
+          </div></div>
+        )}
+        {tab==='base'&&(
+          <div key="ba" className="ai"><div className="fg2">
+            <div>
+              <ST>Tamanho e Saúde da Base</ST>
+              <Field label="Total de alunos / clientes ativos"><input className="fi" type="number" placeholder="Ex.: 320" value={d.baseAlunos||''} onChange={e=>u('baseAlunos',Number(e.target.value))}/></Field>
+              <Field label="Mensalidade / Receita por cliente (R$)"><input className="fi" type="number" placeholder="Ex.: 890" value={d.mensalidade||''} onChange={e=>u('mensalidade',Number(e.target.value))}/></Field>
+              <Slider label="Taxa de desistência mensal (%)" min={0} max={50} value={d.desistencia||0} onChange={v=>u('desistencia',v)} unit="%" hint="Percentual que cancela ou abandona por mês."/>
+              <Slider label="Taxa de inadimplência (%)" min={0} max={60} value={d.inadimplencia||0} onChange={v=>u('inadimplencia',v)} unit="%" hint="Não pagaram no último mês."/>
+              <Slider label="Churn mensal (%)" min={0} max={30} value={d.churn||0} onChange={v=>u('churn',v)} unit="%" hint="Cancelamentos definitivos por mês."/>
+            </div>
+            <div>
+              <ST>Retenção e Saída</ST>
+              <Field label="Principal motivo de cancelamento"><select className="fi" value={d.motivoCancel||''} onChange={e=>u('motivoCancel',e.target.value)}><option value="">Selecione</option><option>Preço / reajuste</option><option>Não viu resultado</option><option>Falta de tempo / prioridade mudou</option><option>Mudança financeira pessoal</option><option>Concorrente com oferta melhor</option><option>Atendimento ou suporte ruim</option><option>Mudança de cidade ou circunstância</option><option>Não coletamos feedback de saída</option></select></Field>
+              <Field label="Processo de retenção ativo?"><select className="fi" value={d.retencaoAtiva||''} onChange={e=>u('retencaoAtiva',e.target.value)}><option value="">Selecione</option><option>Sim, processo estruturado</option><option>Sim, mas informal</option><option>Às vezes, sem padronização</option><option>Não, deixamos o cliente sair sem acionar</option></select></Field>
+              <Field label="Processo de cobrança de inadimplentes?"><select className="fi" value={d.cobracaAtiva||''} onChange={e=>u('cobracaAtiva',e.target.value)}><option value="">Selecione</option><option>Sim, régua automática</option><option>Sim, mas manual e inconsistente</option><option>Contato só depois de muito tempo</option><option>Não temos processo de cobrança</option></select></Field>
+              <div style={{background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:10,padding:'14px'}}>
+                <div style={{fontSize:10,color:'var(--muted)',fontWeight:600,letterSpacing:'.08em',textTransform:'uppercase',marginBottom:10}}>Impacto Financeiro</div>
+                {[{l:'Receita recorrente/mês',v:fmtBRL(recBase)},{l:'Perda por desistência/mês',v:fmtBRL(perdaDesist),danger:true},{l:'Perda por inadimplência/mês',v:fmtBRL(perdaInadin),danger:true},{l:'Alunos cancelando/mês',v:Math.round(baseAtiva*(d.churn||0)/100)}].map(x=>(<div key={x.l} style={{display:'flex',justifyContent:'space-between',padding:'5px 0',borderBottom:'1px solid var(--divider)'}}><span style={{fontSize:12,color:'var(--muted)'}}>{x.l}</span><span style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:13,color:x.danger?'#dc003c':'var(--text)'}}>{x.v}</span></div>))}
+              </div>
+            </div>
+          </div></div>
+        )}
+        {tab==='ltv'&&(
+          <div key="ltv" className="ai"><div className="fg2">
+            <div>
+              <ST>Ciclo de Vida</ST>
+              <Field label="Tempo médio de permanência (meses)"><input className="fi" type="number" placeholder="Ex.: 14" value={d.tempoMedio||''} onChange={e=>u('tempoMedio',Number(e.target.value))}/></Field>
+              <Slider label="Taxa de recompra / upgrade (%)" min={0} max={100} value={d.recompra||0} onChange={v=>u('recompra',v)} unit="%" hint="Compram 2º produto ou fazem upgrade."/>
+              <Slider label="Taxa de indicação (%)" min={0} max={60} value={d.indicacao||0} onChange={v=>u('indicacao',v)} unit="%" hint="Novos clientes que vêm por indicação."/>
+              <Field label="Quantidade de produtos / planos"><select className="fi" value={d.qtdProdutos||''} onChange={e=>u('qtdProdutos',e.target.value)}><option value="">Selecione</option><option>Apenas 1 produto/plano</option><option>2 a 3 produtos/planos</option><option>4 a 6 produtos/planos</option><option>Mais de 6 produtos/planos</option></select></Field>
+            </div>
+            <div>
+              <ST>Relacionamento e Pós-venda</ST>
+              <Field label="Programa de indicação ativo?"><select className="fi" value={d.programaIndicacao||''} onChange={e=>u('programaIndicacao',e.target.value)}><option value="">Selecione</option><option>Sim, com incentivos e comunicação</option><option>Sim, informal</option><option>Não, mas queremos estruturar</option><option>Não temos</option></select></Field>
+              <Field label="Comunicação regular com a base?"><select className="fi" value={d.comunicacaoBase||''} onChange={e=>u('comunicacaoBase',e.target.value)}><option value="">Selecione</option><option>Sim, frequente e planejada</option><option>Às vezes, sem frequência</option><option>Só quando há algo urgente</option><option>Não temos comunicação regular</option></select></Field>
+              <Field label="Oferta de renovação ou fidelização?"><select className="fi" value={d.fidelizacao||''} onChange={e=>u('fidelizacao',e.target.value)}><option value="">Selecione</option><option>Sim, plano anual ou fidelidade</option><option>Sim, mas só quando o cliente pede</option><option>Não temos</option></select></Field>
+              <div style={{background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:10,padding:'14px'}}>
+                <div style={{fontSize:10,color:'var(--muted)',fontWeight:600,letterSpacing:'.08em',textTransform:'uppercase',marginBottom:10}}>LTV Estimado</div>
+                {[{l:'LTV por cliente',v:fmtBRL(ltv),accent:true},{l:'Receita de indicações/mês',v:fmtBRL(recAtual*(d.indicacao||0)/100)},{l:'Receita de recompra/mês',v:fmtBRL(recBase*(d.recompra||0)/100)},{l:'Tempo médio de base',v:`${d.tempoMedio||'-'} meses`}].map(x=>(<div key={x.l} style={{display:'flex',justifyContent:'space-between',padding:'5px 0',borderBottom:'1px solid var(--divider)'}}><span style={{fontSize:12,color:'var(--muted)'}}>{x.l}</span><span style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:13,color:x.accent?'var(--accent2)':'var(--text)'}}>{x.v}</span></div>))}
+              </div>
+            </div>
+          </div></div>
+        )}
+        {tab==='operacional'&&(
+          <div key="op" className="ai"><div className="fg2">
+            <div>
+              <ST>Time e Estrutura</ST>
+              <Field label="Pessoas no comercial / atendimento"><input className="fi" type="number" placeholder="Ex.: 3" value={d.equipe||''} onChange={e=>u('equipe',Number(e.target.value))}/></Field>
+              <Field label="CRM ou controle de leads?"><select className="fi" value={d.crm||''} onChange={e=>u('crm',e.target.value)}><option value="">Selecione</option><option>Sim, CRM dedicado</option><option>Sim, planilha organizada</option><option>Informalmente, no WhatsApp</option><option>Não temos controle</option></select></Field>
+              <Field label="Script / playbook documentado?"><select className="fi" value={d.playbook||''} onChange={e=>u('playbook',e.target.value)}><option value="">Selecione</option><option>Sim, documentado e treinado</option><option>Sim, mas cada um faz do seu jeito</option><option>Informal, na cabeça do vendedor</option><option>Não temos</option></select></Field>
+              <Field label="Meta de vendas definida?"><select className="fi" value={d.metas||''} onChange={e=>u('metas',e.target.value)}><option value="">Selecione</option><option>Sim, individual e coletiva com acompanhamento</option><option>Sim, mas sem acompanhamento</option><option>Meta geral sem detalhamento</option><option>Não trabalhamos com metas</option></select></Field>
+            </div>
+            <div>
+              <ST>Processo e Ciclo de Vendas</ST>
+              <Field label="Tempo médio de fechamento (dias)"><input className="fi" type="number" placeholder="Ex.: 10" value={d.tempoFechamento||''} onChange={e=>u('tempoFechamento',Number(e.target.value))}/></Field>
+              <Field label="Faturamento médio mensal (R$)"><input className="fi" type="number" placeholder="Ex.: 85000" value={d.faturamento||''} onChange={e=>u('faturamento',Number(e.target.value))}/></Field>
+              <Field label="Margem operacional estimada (%)"><input className="fi" type="number" placeholder="Ex.: 28" value={d.margem||''} onChange={e=>u('margem',Number(e.target.value))}/></Field>
+              <Field label="Acompanhamento de resultados?"><select className="fi" value={d.relatorio||''} onChange={e=>u('relatorio',e.target.value)}><option value="">Selecione</option><option>Sim, relatório mensal formal</option><option>Sim, informal e esporádico</option><option>Só olhamos o saldo bancário</option><option>Não temos acompanhamento</option></select></Field>
+              {(d.faturamento||0)>0&&(<div style={{background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:10,padding:'14px',marginTop:4}}><div style={{fontSize:10,color:'var(--muted)',fontWeight:600,letterSpacing:'.08em',textTransform:'uppercase',marginBottom:10}}>Financeiro</div>{[{l:'Faturamento médio/mês',v:fmtBRL(d.faturamento||0)},{l:'LOA estimado/mês',v:fmtBRL((d.faturamento||0)*(d.margem||30)/100),accent:true},{l:'Receita por vendedor',v:d.equipe?fmtBRL((d.faturamento||0)/d.equipe):'-'}].map(x=>(<div key={x.l} style={{display:'flex',justifyContent:'space-between',padding:'5px 0',borderBottom:'1px solid var(--divider)'}}><span style={{fontSize:12,color:'var(--muted)'}}>{x.l}</span><span style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:13,color:x.accent?'var(--accent2)':'var(--text)'}}>{x.v}</span></div>))}</div>)}
+            </div>
+          </div></div>
+        )}
+        {tab==='experiencia'&&(
+          <div key="exp" className="ai"><div className="fg2">
+            <div>
+              <ST>NPS e Satisfação</ST>
+              <Slider label="NPS estimado" min={-100} max={100} value={d.nps||0} onChange={v=>u('nps',v)} hint="-100 a 100. Estime pela percepção se não mede."/>
+              <div style={{padding:'10px 14px',borderRadius:8,background:((d.nps||0)>=50?'rgba(0,200,100,.08)':(d.nps||0)>=30?'rgba(220,140,0,.08)':'rgba(220,0,60,.08)'),border:`1px solid ${(d.nps||0)>=50?'rgba(0,200,100,.2)':(d.nps||0)>=30?'rgba(220,140,0,.2)':'rgba(220,0,60,.2)'}`,marginBottom:18}}>
+                <div style={{fontSize:12,fontWeight:600,color:(d.nps||0)>=50?'#00c864':(d.nps||0)>=30?'#dc8c00':'#dc003c',marginBottom:3}}>{(d.nps||0)>=50?'Zona de Excelência':(d.nps||0)>=30?'Zona de Melhoria':(d.nps||0)>=0?'Zona de Atenção':'Zona Crítica'}</div>
+                <div style={{fontSize:11,color:'var(--muted)'}}>{(d.nps||0)>=50?'Promotores ativos. Base para programa de indicação.':(d.nps||0)>=30?'Clientes neutros. Experiência pode melhorar.':(d.nps||0)>=0?'Risco de saída. Identificar e resolver pontos de atrito.':'Detratores em maioria. Alta urgência de ação.'}</div>
+              </div>
+              <Field label="Coleta NPS formalmente?"><select className="fi" value={d.coletaNps||''} onChange={e=>u('coletaNps',e.target.value)}><option value="">Selecione</option><option>Sim, NPS periódico com análise</option><option>Sim, pesquisa informal</option><option>Só quando recebe reclamação</option><option>Não coleta feedback</option></select></Field>
+              <Field label="Principal reclamação recorrente"><input className="fi" placeholder="Ex.: demora, falta de comunicação, resultado abaixo" value={d.reclamacao||''} onChange={e=>u('reclamacao',e.target.value)}/></Field>
+            </div>
+            <div>
+              <ST>Onboarding e Jornada</ST>
+              <Field label="Processo de onboarding estruturado?"><select className="fi" value={d.onboarding||''} onChange={e=>u('onboarding',e.target.value)}><option value="">Selecione</option><option>Sim, processo formal com checkpoints</option><option>Sim, mas informal</option><option>Apenas entrega do serviço</option><option>Não temos onboarding</option></select></Field>
+              <Field label="Suporte ou atendimento pós-venda?"><select className="fi" value={d.suporte||''} onChange={e=>u('suporte',e.target.value)}><option value="">Selecione</option><option>Sim, canal dedicado com SLA</option><option>Sim, WhatsApp pessoal</option><option>Informal, sem canal definido</option><option>Não temos suporte estruturado</option></select></Field>
+              <Field label="Acompanhamento de resultado do cliente?"><select className="fi" value={d.acompCliente||''} onChange={e=>u('acompCliente',e.target.value)}><option value="">Selecione</option><option>Sim, check-ins periódicos</option><option>Às vezes, sem frequência</option><option>Só quando o cliente reclama</option><option>Não temos acompanhamento</option></select></Field>
+              <Field label="Cliente percebe evolução / resultado?"><select className="fi" value={d.percResultado||''} onChange={e=>u('percResultado',e.target.value)}><option value="">Selecione</option><option>Sim, com clareza: temos métricas</option><option>Acredito que sim, mas não medimos</option><option>Alguns sim, outros não</option><option>Não sabemos avaliar</option></select></Field>
+            </div>
+          </div></div>
+        )}
+        {tab==='painel'&&(
+          <div key="painel" className="ai">
+            <div style={{display:'grid',gridTemplateColumns:'auto 1fr',gap:24,alignItems:'center',marginBottom:28,padding:'20px 24px',background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:14}}>
+              <div style={{textAlign:'center',minWidth:120}}>
+                <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:'3.5rem',lineHeight:1,color:scoreCor}}>{scoreGeral}</div>
+                <div style={{fontSize:11,color:'var(--muted)',marginTop:4,fontWeight:600}}>{scoreGeral>=70?'Boa Base':'Atenção Necessária'}</div>
+                <div style={{width:80,height:4,background:'var(--divider)',borderRadius:2,margin:'8px auto 0',overflow:'hidden'}}><div style={{height:'100%',width:scoreGeral+'%',background:scoreCor,borderRadius:2}}/></div>
+              </div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8}}>
+                {scoreItems.map(s=>(<div key={s.nome} style={{display:'flex',alignItems:'center',gap:10}}><div style={{flex:1}}><div style={{display:'flex',justifyContent:'space-between',marginBottom:4}}><span style={{fontSize:11,color:'var(--muted)'}}>{s.nome}</span><span style={{fontSize:11,fontWeight:700,color:s.val>=70?'#00c864':s.val>=45?'#dc8c00':'#dc003c'}}>{s.val}</span></div><div style={{height:3,background:'var(--divider)',borderRadius:2,overflow:'hidden'}}><div style={{height:'100%',width:s.val+'%',background:s.val>=70?'#00c864':s.val>=45?'#dc8c00':'#dc003c',borderRadius:2}}/></div></div></div>))}
+              </div>
+            </div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr 1fr',gap:12,marginBottom:24}}>
+              {[{l:'Receita Mensal',v:fmtBRL(recAtual+recBase),ok:true},{l:'Perda por Follow-up',v:fmtBRL(perdaFollowup),danger:true},{l:'Perda por Desistência',v:fmtBRL(perdaDesist),danger:true},{l:'Perda por Inadimplência',v:fmtBRL(perdaInadin),danger:true}].map(x=>(<div key={x.l} style={{padding:'14px',background:x.danger?'rgba(220,0,60,.05)':'var(--surface)',border:`1px solid ${x.danger?'rgba(220,0,60,.2)':'var(--divider)'}`,borderRadius:10}}><div style={{fontSize:10,color:x.danger?'#dc003c':'var(--muted)',fontWeight:600,textTransform:'uppercase',letterSpacing:'.06em',marginBottom:4}}>{x.l}</div><div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:'1.2rem',color:x.danger?'#dc003c':'var(--text)'}}>{x.v}</div></div>))}
+            </div>
+            <div style={{marginBottom:16}}>
+              <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:14,fontWeight:600}}>Gargalos Identificados ({gargalos.length})</div>
+              <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10}}>
+                {gargalos.map((g,i)=>(<div key={i} className={`diag-card ${g.c}`}><div style={{display:'flex',alignItems:'center',justifyContent:'space-between',marginBottom:4}}><div style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:13}}>{g.t}</div><span style={{fontSize:9,padding:'2px 8px',borderRadius:100,fontWeight:600,background:g.c==='danger'?'rgba(220,0,60,.12)':g.c==='warn'?'rgba(220,140,0,.12)':'rgba(0,200,100,.12)',color:g.c==='danger'?'#dc003c':g.c==='warn'?'#dc8c00':'#00c864'}}>{g.area}</span></div><div style={{fontSize:12,color:'var(--muted)',marginBottom:6,lineHeight:1.5}}>{g.desc}</div><div style={{fontSize:11,borderTop:'1px solid var(--divider)',paddingTop:6}}><span style={{color:'var(--accent2)',fontWeight:600}}>Ação Wayzen: </span><span style={{color:'var(--muted)'}}>{g.acao}</span></div></div>))}
+              </div>
+            </div>
+            <Field label="Observações finais do diagnóstico"><textarea className="fi" style={{minHeight:80}} placeholder="Notas do consultor, contexto adicional..." value={d.obsGeral||''} onChange={e=>u('obsGeral',e.target.value)}/></Field>
+
+            {/* SELEÇÃO DO PLANO */}
+            <div style={{marginTop:8,padding:'20px',background:'linear-gradient(135deg,rgba(148,0,211,.08),rgba(204,0,255,.04))',border:'1px solid var(--accent-border)',borderRadius:14}}>
+              <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--accent2)',marginBottom:6,fontWeight:700}}>Plano recomendado para este caso</div>
+              <p style={{fontSize:12,color:'var(--muted)',lineHeight:1.7,marginBottom:16}}>Com base no diagnóstico, escolha o plano que melhor se encaixa no momento e no potencial da escola. Ele será destacado na apresentação.</p>
+              <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10}}>
+                {PLANS.map(pl=>{
+                  const sel=(d.planEscolhido||'padrao')===pl.id;
+                  const quando={
+                    entrada:'A escola está começando a estruturar o processo comercial ou tem volume baixo de leads. Melhor validar o método antes de escalar.',
+                    padrao:'A escola já tem alguma demanda entrando, mas perde na conversão ou no follow-up. Momento certo para instalar processo e crescer.',
+                    agressivo:'A escola tem volume, meta agressiva e quer crescimento acelerado. Disposição para investir mais e exigir resultado mais rápido.',
+                  };
+                  return(
+                    <div key={pl.id} onClick={()=>u('planEscolhido',pl.id)} style={{padding:'14px',borderRadius:12,border:`2px solid ${sel?'var(--accent)':'var(--divider)'}`,background:sel?'rgba(148,0,211,.1)':'rgba(255,255,255,.02)',cursor:'pointer',transition:'all .2s',position:'relative'}}>
+                      {sel&&<div style={{position:'absolute',top:0,left:0,right:0,height:2,background:'linear-gradient(90deg,var(--accent),var(--accent2))',borderRadius:'12px 12px 0 0'}}/>}
+                      <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:13,marginBottom:4,color:sel?'var(--text)':'var(--muted)'}}>{pl.label}</div>
+                      <div style={{fontSize:11,color:sel?'var(--accent2)':'var(--muted)',fontWeight:600,marginBottom:8}}>{pl.taxa} + {pl.loa}% LOA</div>
+                      <div style={{fontSize:11,color:'var(--muted)',lineHeight:1.5}}>{quando[pl.id]}</div>
+                      {sel&&<div style={{marginTop:8,fontSize:10,color:'var(--accent2)',fontWeight:700,letterSpacing:'.06em'}}>SELECIONADO</div>}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ─── SLIDE HELPERS ──────────────────────────────────────────────────────────
+function Orbs(){
+  return(
+    <div style={{position:'absolute',inset:0,overflow:'hidden',pointerEvents:'none'}}>
+      <div className="orb" style={{width:520,height:520,background:'radial-gradient(circle,rgba(148,0,211,.18),transparent 70%)',top:-120,right:-120}}/>
+      <div className="orb" style={{width:320,height:320,background:'radial-gradient(circle,rgba(204,0,255,.10),transparent 70%)',bottom:110,left:-60}}/>
+      <div style={{position:'absolute',inset:0,backgroundImage:'linear-gradient(rgba(100,60,140,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(100,60,140,.05) 1px,transparent 1px)',backgroundSize:'50px 50px'}}/>
+    </div>
+  );
+}
+
+function SlideShell({badge,title,subtitle,children}){
+  return(
+    <div className="slide" style={{overflow:'auto'}}>
+      <Orbs/>
+      <div className="slide-content" style={{justifyContent:'flex-start',padding:'32px 80px 80px',maxWidth:1100,margin:'0 auto',width:'100%'}}>
+        <div className="au" style={{marginBottom:8}}>{badge&&<span className="badge ba">{badge}</span>}</div>
+        <h2 className="au1" style={{fontFamily:'var(--font-h)',fontSize:'clamp(1.8rem,3vw,2.6rem)',fontWeight:800,marginBottom:8,letterSpacing:'-.02em'}}>{title}</h2>
+        {subtitle&&<p className="au2" style={{color:'var(--muted)',fontSize:14,marginBottom:24,lineHeight:1.7}}>{subtitle}</p>}
+        <div className="au3">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+// ─── SLIDE 1: CAPA ─────────────────────────────────────────────────────────
+function Slide1({client}){
+  return(
+    <div className="slide">
+      <Orbs/>
+      <div className="slide-content" style={{justifyContent:'center',padding:'40px 80px'}}>
+        <div className="au" style={{marginBottom:40}}><WzLogo size={34}/></div>
+        <div className="au1" style={{marginBottom:10}}><span className="badge ba">Proposta Comercial</span></div>
+        <div className="au2" style={{marginBottom:8}}>
+          <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(2.6rem,5vw,4.8rem)',fontWeight:800,lineHeight:1.02,letterSpacing:'-.03em'}}>
+            Da captação do lead<br/>
+            ao <span className="glow-text">crescimento</span><br/>
+            do aluno.
+          </h1>
+        </div>
+        <div className="au3" style={{color:'var(--muted)',fontSize:16,lineHeight:1.7,maxWidth:560,marginBottom:34}}>
+          A Wayzen entra dentro da sua operação e constrói: junto com você: o processo de aquisição, conversão e retenção de alunos. Presença real. Resultado mensurável.
+        </div>
+        <div className="au4" style={{padding:'22px 28px',background:'linear-gradient(135deg,rgba(148,0,211,.12),rgba(204,0,255,.05))',border:'1px solid var(--accent-border)',borderRadius:16,display:'inline-block'}}>
+          <div style={{fontSize:12,color:'var(--muted)',marginBottom:6,letterSpacing:'.06em',textTransform:'uppercase',fontWeight:600}}>Proposta preparada para</div>
+          <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:'clamp(1.4rem,2.5vw,2rem)',marginBottom:4}}>{client.empresa||'Sua empresa'}</div>
+          <div style={{fontSize:13,color:'var(--muted)'}}>{client.decisor||'Decisor'}{client.cargo?` · ${client.cargo}`:''}{client.cidade?` · ${client.cidade}`:''}</div>
+          {client.produto&&(
+            <div style={{marginTop:10,padding:'8px 10px',background:'rgba(255,255,255,.03)',border:'1px solid var(--divider)',borderRadius:10,fontSize:12}}>
+              <span style={{color:'var(--accent2)',fontWeight:700}}>Foco:</span> {client.produto}{client.meta?` · Meta: ${client.meta}`:''}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── SLIDE 2: COMO TRABALHAMOS (PRESENÇA) ──────────────────────────────────
+function Slide2(){
+  return(
+    <SlideShell
+      badge="Como trabalhamos"
+      title={<>Não é consultoria. É <span className="glow-text">presença dentro</span> da sua operação.</>}
+      subtitle="A diferença entre a Wayzen e uma consultoria comum é simples: a gente não entrega relatório e vai embora."
+    >
+      <div style={{display:'grid',gridTemplateColumns:'1.2fr 0.8fr',gap:18}}>
+        <div style={{display:'grid',gap:14}}>
+          {/* Presença badge */}
+          <div style={{display:'flex',alignItems:'center',gap:12,padding:'14px 18px',background:'rgba(0,200,100,.06)',border:'1px solid rgba(0,200,100,.15)',borderRadius:12}}>
+            <div className="presence-dot"/>
+            <div>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:15,color:'#00c864',marginBottom:3}}>Operação dentro da empresa</div>
+              <div style={{fontSize:12,color:'var(--muted)',lineHeight:1.6}}>O consultor Wayzen está no dia a dia: alinhando a equipe, ajustando script, cobrando metas, resolvendo gargalo. Não é um e-mail por semana.</div>
+            </div>
+          </div>
+          {[
+            {t:'Diagnóstico real, não formulário',d:'A gente entra e observa: como o lead chega, quem atende, quanto tempo demora, o que acontece depois. O problema fica claro em 2 dias, não em 2 semanas.'},
+            {t:'Rotina instalada, não sugerida',d:'Ritual diário (15 min), ritual semanal (30 min), fechamento mensal. A rotina existe porque a gente está lá para cobrar e ajustar.'},
+            {t:'Correção em tempo real',d:'Quando o script não converte, a gente muda amanhã. Quando a equipe não segue o funil, a gente conversa no dia. Não espera o próximo relatório.'},
+            {t:'Saída com processo documentado',d:'Quando o ciclo terminar, a operação roda sem a gente. Playbook, scripts, metas e governança ficam com você.'},
+          ].map((x,i)=>(
+            <div key={i} className="card" style={{borderRadius:12}}>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:14,marginBottom:5}}>{x.t}</div>
+              <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>{x.d}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{display:'grid',gap:14,alignContent:'start'}}>
+          <div style={{padding:'20px',background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:14}}>
+            <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:14,fontWeight:600}}>O que muda na prática</div>
+            {[
+              {antes:'Atendimento depende da memória do dono',depois:'SLA de resposta e funil registrado'},
+              {antes:'Follow-up acontece quando lembra',depois:'Cadência obrigatória com cobrança'},
+              {antes:'Taxa de conversão oscila sem explicação',depois:'Script testado e otimizado semanalmente'},
+              {antes:'Não sabe quantos leads perdeu esse mês',depois:'Painel com indicadores e motivos de perda'},
+            ].map((x,i)=>(
+              <div key={i} style={{padding:'10px 0',borderBottom:'1px solid var(--divider)'}}>
+                <div style={{fontSize:11,color:'#dc003c',marginBottom:3,lineHeight:1.5}}>Antes: {x.antes}</div>
+                <div style={{fontSize:11,color:'#00c864',lineHeight:1.5}}>Depois: {x.depois}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{padding:'16px',background:'linear-gradient(135deg,rgba(148,0,211,.08),rgba(204,0,255,.04))',border:'1px solid var(--accent-border)',borderRadius:12,fontSize:13,lineHeight:1.7,color:'var(--text)'}}>
+            <span style={{color:'var(--accent2)',fontWeight:700}}>Em 4 semanas</span> a operação tem processo, rotina e previsibilidade. Não é mágica: é método executado de dentro.
+          </div>
+        </div>
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 3: JORNADA COMPLETA ─────────────────────────────────────────────
+function Slide3({client}){
+  const [active,setActive]=useState(1);
+  const stages=[
+    {
+      id:0,
+      label:'Captação',
+      icon:'📣',
+      color:'#00b4ff',
+      border:'rgba(0,180,255,.3)',
+      bg:'rgba(0,180,255,.06)',
+      title:'Criação de Demanda Qualificada',
+      sub:'Especialista em marketing',
+      desc:'Tráfego pago, conteúdo estratégico e posicionamento de oferta. O objetivo é gerar o lead certo: aquele que tem intenção real: com o menor custo possível.',
+      items:['Campanhas de tráfego pago (Meta, Google)','Segmentação e qualificação de público','Otimização de custo por lead','Landing pages e captura de contatos','Relatório de fonte de leads e CAC'],
+    },
+    {
+      id:1,
+      label:'Conversão',
+      icon:'🎯',
+      color:'var(--accent2)',
+      border:'var(--accent-border)',
+      bg:'var(--accent-soft)',
+      title:'Do Lead ao Aluno Matriculado',
+      sub:'Operação comercial em campo',
+      desc:'Funil, script, SLA de resposta, follow-up e gestão de funil. A gente entra na operação e faz o lead virar aluno com processo, não com improviso.',
+      items:['Script de abordagem e matriz de objeções','SLA de 1ª resposta (<5 min no horário comercial)','Cadência de follow-up com no mínimo 5 touchpoints','Funil com etapas e registro obrigatório','Metas de conversão e painel semanal'],
+    },
+    {
+      id:2,
+      label:'Crescimento de LTV',
+      icon:'📈',
+      color:'#00c864',
+      border:'rgba(0,200,100,.3)',
+      bg:'rgba(0,200,100,.06)',
+      title:'Retenção e Aumento de Receita por Aluno',
+      sub:'Gestor especialista em educação',
+      desc:'Com o aluno matriculado, o trabalho de crescimento começa. A Wayzen atua ativamente na retenção da base, na redução de churn e na ativação de indicação estruturada para transformar cada aluno num promotor da escola.',
+      items:['Onboarding estruturado com régua de boas-vindas','Pesquisa de NPS periódica e recuperação de detratores','Programa de indicação ativo com incentivos definidos','Upsell de planos e produtos complementares','Régua de reativação de alunos inativos'],
+    },
+  ];
+  const s=stages[active];
+  return(
+    <SlideShell
+      badge="Nossa jornada"
+      title={<>Atuamos em <span className="glow-text">toda a jornada</span> do aluno.</>}
+      subtitle={`Da captação do primeiro lead ao aumento do LTV: cada fase tem um especialista dedicado.${client.produto?` Foco atual: ${client.produto}.`:''}`}
+    >
+      {/* Stage tabs */}
+      <div style={{display:'flex',gap:0,marginBottom:20,borderRadius:12,overflow:'hidden',border:'1px solid var(--divider)',background:'var(--surface2)'}}>
+        {stages.map(st=>(
+          <button key={st.id} onClick={()=>setActive(st.id)} style={{flex:1,padding:'14px 8px',background:active===st.id?st.bg:'transparent',border:'none',borderRight:st.id<2?'1px solid var(--divider)':'none',cursor:'pointer',transition:'all .2s',position:'relative'}}>
+            {active===st.id&&<div style={{position:'absolute',top:0,left:0,right:0,height:2,background:`linear-gradient(90deg,${st.color},transparent)`}}/>}
+            <div style={{fontSize:18,marginBottom:4}}>{st.icon}</div>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:700,fontSize:12,color:active===st.id?st.color:'var(--muted)'}}>{st.label}</div>
+          </button>
+        ))}
+      </div>
+      {/* Active stage detail */}
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16,animation:'fadeIn .3s ease both'}}>
+        <div>
+          <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:16}}>
+            <div style={{width:44,height:44,borderRadius:12,background:s.bg,border:`1px solid ${s.border}`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:22}}>{s.icon}</div>
+            <div>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:18,color:s.color}}>{s.title}</div>
+              <div style={{fontSize:11,color:'var(--muted)',marginTop:2}}>{s.sub}</div>
+            </div>
+          </div>
+          <p style={{fontSize:13,color:'var(--muted)',lineHeight:1.8,marginBottom:16}}>{s.desc}</p>
+        </div>
+        <div>
+          <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:12,fontWeight:600}}>O que entra nessa fase</div>
+          <div style={{display:'grid',gap:8}}>
+            {s.items.map((item,i)=>(
+              <div key={i} style={{display:'flex',alignItems:'flex-start',gap:10,padding:'10px 12px',background:'rgba(255,255,255,.03)',border:'1px solid var(--divider)',borderRadius:8}}>
+                <div style={{width:6,height:6,borderRadius:50,background:s.color,marginTop:5,flexShrink:0}}/>
+                <div style={{fontSize:12,color:'var(--text)',lineHeight:1.5}}>{item}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 4: NOSSO TIME (com hover cards) ─────────────────────────────────
+function Slide4(){
+  const [openCard,setOpenCard]=useState(null);
+
+  return(
+    <SlideShell
+      badge="Nosso time"
+      title={<>Especialistas em cada <span className="glow-text">fase da jornada</span>.</>}
+      subtitle="Cada membro tem função clara na jornada. Passe o mouse ou clique em cada perfil para saber mais."
+    >
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:16,marginBottom:16}}>
+        {TEAM.map((m,i)=>(
+          <div
+            key={i}
+            className={`team-member-card ${openCard===i?'open':''}`}
+            onMouseEnter={()=>setOpenCard(i)}
+            onMouseLeave={()=>setOpenCard(null)}
+            onClick={()=>setOpenCard(openCard===i?null:i)}
+          >
+            {/* HOVER CARD */}
+            <div className="team-hover-card">
+              {/* Foto placeholder */}
+              <div className="team-photo-placeholder">
+                {m.foto
+                  ? <img src={m.foto} alt={m.fotoAlt}/>
+                  : (
+                    <div style={{textAlign:'center',padding:'16px'}}>
+                      <div style={{fontSize:32,marginBottom:8}}>{m.icon}</div>
+                      <div style={{fontSize:10,color:'var(--muted)',lineHeight:1.5}}>Adicione uma foto<br/>de {m.nome.split(' ')[0]}</div>
+                    </div>
+                  )
+                }
+              </div>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:16,marginBottom:4}}>{m.nome}</div>
+              <div style={{fontSize:11,color:'var(--accent2)',marginBottom:10,fontWeight:600}}>{m.cargo}</div>
+              <div style={{fontSize:12,color:'var(--muted)',lineHeight:1.7}}>{m.expanded}</div>
+            </div>
+
+            {/* CARD NORMAL */}
+            <div className="card" style={{borderRadius:16,cursor:'pointer',transition:'border-color .2s,transform .2s',borderColor:openCard===i?'var(--accent-border)':'var(--divider)',transform:openCard===i?'translateY(-2px)':'none',position:'relative',overflow:'hidden'}}>
+              <div style={{position:'absolute',inset:0,background:'radial-gradient(400px 200px at 20% 0%,rgba(148,0,211,.10),transparent 60%)',pointerEvents:'none'}}/>
+              <div style={{display:'flex',gap:10,alignItems:'center',marginBottom:12,position:'relative'}}>
+                <div style={{width:44,height:44,borderRadius:12,background:'rgba(148,0,211,.14)',border:'1px solid var(--accent-border)',display:'flex',alignItems:'center',justifyContent:'center',fontSize:20}}>{m.icon}</div>
+                <div>
+                  <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:15}}>{m.nome}</div>
+                  <div style={{fontSize:11,color:'var(--muted)'}}>{m.cargo}</div>
+                </div>
+              </div>
+              <div style={{fontSize:12,color:'var(--muted)',lineHeight:1.7,position:'relative'}}>{m.bio}</div>
+              <div style={{marginTop:10,fontSize:11,color:openCard===i?'var(--accent2)':'var(--muted)',display:'flex',alignItems:'center',gap:4,fontWeight:600}}>
+                <span>{openCard===i?'▼':'▶'}</span>
+                <span>{openCard===i?'Ver menos':'Ver mais'}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div style={{padding:'14px 18px',background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:12,fontSize:12,color:'var(--muted)',lineHeight:1.7}}>
+        Durante os 4 sprints, um especialista da Wayzen fica alocado dentro da sua operação construindo o comercial do zero. Ao final do ciclo, a Wayzen contrata e disponibiliza um profissional dedicado exclusivamente ao seu projeto: funcionário da Wayzen, operando na sua empresa. Você não precisa contratar, treinar nem arcar com encargos trabalhistas.
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 5: O QUE INSTALAMOS / DOR ────────────────────────────────────────
+function Slide5({diag}){
+  const resp=Number(diag.tempo||0);
+  const noRet=Number(diag.semRetorno||0);
+  const conv=Number(diag.conversao||0);
+  const respK=resp<=10?'ok':resp<=60?'warn':'bad';
+  const fuK=noRet<=25?'ok':noRet<=45?'warn':'bad';
+  const convK=conv>=30?'ok':conv>=18?'warn':'bad';
+  const badgeCls=k=>k==='ok'?'bok':k==='warn'?'bw':'br';
+  const badgeTxt=k=>k==='ok'?'Ok':k==='warn'?'Atenção':'Crítico';
+  return(
+    <SlideShell
+      badge="O que instalamos"
+      title={<>Fechamos os vazamentos e <span className="glow-text">instalamos rotina de conversão</span>.</>}
+      subtitle="O problema normalmente não é falta de demanda. É falta de velocidade, follow-up e processo."
+    >
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:16}}>
+        <div>
+          <div className="card" style={{borderRadius:16,marginBottom:14}}>
+            <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:12,fontWeight:600}}>Diagnóstico da operação atual</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10}}>
+              {[{l:'1ª resposta',v:`${resp} min`,k:respK},{l:'Sem follow-up',v:`${noRet}%`,k:fuK},{l:'Conversão',v:`${conv}%`,k:convK}].map((x,i)=>(
+                <div key={i} style={{padding:'12px',background:'rgba(255,255,255,.03)',border:'1px solid var(--divider)',borderRadius:10}}>
+                  <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6}}>
+                    <span style={{fontSize:10,color:'var(--muted)',fontWeight:700,textTransform:'uppercase'}}>{x.l}</span>
+                    <span className={`badge ${badgeCls(x.k)}`}>{badgeTxt(x.k)}</span>
+                  </div>
+                  <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:18}}>{x.v}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{marginTop:12,fontSize:12,color:'var(--muted)',lineHeight:1.7}}>Com base nesses sinais, a Wayzen instala: SLA, cadência de follow-up, scripts, funil e governança semanal: dentro da sua operação.</div>
+          </div>
+          <div className="card" style={{borderRadius:16,borderColor:'var(--accent-border)',background:'linear-gradient(135deg,rgba(148,0,211,.06),transparent)'}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:15,marginBottom:10}}>A presença no dia a dia faz diferença</div>
+            {['Ajuste de script acontece amanhã, não em 15 dias','Gargalo identificado e resolvido na semana','Equipe cobrada e treinada de dentro, não por e-mail','Relatório é consequência: a operação é o foco'].map((t,i)=>(
+              <div key={i} className="ci">
+                <div className="ci-icon"><Ic n="ck" s={11} c="var(--accent2)"/></div>
+                <div style={{fontSize:12,color:'var(--text)',lineHeight:1.6}}>{t}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{display:'grid',gap:12}}>
+          {[
+            {t:'SLA e priorização',d:'Resposta rápida ao lead quente. O concorrente não tem tempo para roubar a oportunidade.'},
+            {t:'Follow-up obrigatório',d:'Cadência de 5 touchpoints antes de arquivar. Recupera oportunidade que hoje some por falta de rotina.'},
+            {t:'Script e objeções',d:'Linguagem padronizada, testada e otimizada semanalmente com base no que está fechando.'},
+            {t:'Registro e KPIs',d:'O que não está registrado não existe. O funil mostra onde estão perdendo e quanto.'},
+          ].map((x,i)=>(
+            <div key={i} className="card" style={{borderRadius:14}}>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,marginBottom:4}}>{x.t}</div>
+              <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>{x.d}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 6: CASES ─────────────────────────────────────────────────────────
+function Slide6(){
+  const cases=[
+    {empresa:'Instituição de Ensino',resultado:'de 100 vendas/ano para 500 em 2 meses',desc:'Assumimos o atendimento, reativamos a base e instalamos follow-up com playbook e metas diárias. O time passou a bater meta pela primeira vez.'},
+    {empresa:'Serviço local (alto ticket)',resultado:'Mais fechamentos com o mesmo volume de leads',desc:'Ajuste de script e qualificação de leads. Menos proposta perdida por demora e mais urgência real no processo de fechamento.'},
+    {empresa:'Negócio recorrente',resultado:'Redução de vazamento e aumento de retenção',desc:'Padronização de jornada de onboarding e rotina de reativação. Desistência caiu e o NPS subiu em 8 semanas de operação.'},
+  ];
+  return(
+    <SlideShell
+      badge="Resultados reais"
+      title={<>Resultado não vem de sorte. Vem de <span className="glow-text">processo dentro da operação</span>.</>}
+      subtitle="A gente entra, instala a rotina e mede. O que funciona vira padrão."
+    >
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14,marginBottom:14}}>
+        {cases.map((c,i)=>(
+          <div key={i} className="card" style={{borderRadius:16,position:'relative',overflow:'hidden'}}>
+            <div style={{position:'absolute',inset:0,background:'radial-gradient(450px 220px at 20% 0%,rgba(148,0,211,.10),transparent 60%)',pointerEvents:'none'}}/>
+            <div style={{position:'relative'}}>
+              <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',fontWeight:700,marginBottom:8}}>{c.empresa}</div>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:17,marginBottom:10,lineHeight:1.3}}>{c.resultado}</div>
+              <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>{c.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style={{padding:'12px 16px',background:'rgba(255,255,255,.03)',border:'1px solid var(--divider)',borderRadius:12,fontSize:12,color:'var(--muted)',lineHeight:1.7}}>
+        Tudo o que foi feito ficou documentado: playbook, scripts e governança. O objetivo é sempre tornar o processo repetível: com ou sem a Wayzen presente.
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 7: DIFERENCIAIS ──────────────────────────────────────────────────
+function Slide7(){
+  const diffs=[
+    {titulo:'Presença dentro da empresa',desc:'Não mandamos relatório por e-mail. Estamos na operação, no dia a dia, resolvendo junto.',icon:'🏢'},
+    {titulo:'Cobertura de toda a jornada',desc:'Do lead ao aluno retido: captação, conversão e LTV. Três especialistas, três fases.',icon:'🔗'},
+    {titulo:'4 sprints com entregáveis reais',desc:'Cada semana tem objetivo, entregável e métrica. Sem promessa vaga.',icon:'⚡'},
+    {titulo:'Registro e cultura de dados',desc:'Sem registro não existe gestão. Instalamos a cultura de documentar e medir.',icon:'📊'},
+    {titulo:'Playbook transferível',desc:'Ao final do ciclo você tem processo documentado e treinamento feito. Independência total.',icon:'📋'},
+    {titulo:'Especialista em educação',desc:'O gestor de LTV tem foco exclusivo no nicho educacional: conhece a jornada do aluno.',icon:'🎓'},
+  ];
+  return(
+    <SlideShell
+      badge="Nossos diferenciais"
+      title={<>O que faz a Wayzen ser <span className="glow-text">diferente na prática</span>.</>}
+      subtitle="Negócio educacional precisa de execução com rotina e especialistas em cada fase da jornada."
+    >
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14}}>
+        {diffs.map((d,i)=>(
+          <div key={i} className="card" style={{borderRadius:16}}>
+            <div style={{display:'flex',gap:10,alignItems:'center',marginBottom:10}}>
+              <div style={{width:38,height:38,borderRadius:12,background:'rgba(148,0,211,.14)',border:'1px solid var(--accent-border)',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                <span style={{fontSize:16}}>{d.icon}</span>
+              </div>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14}}>{d.titulo}</div>
+            </div>
+            <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>{d.desc}</div>
+          </div>
+        ))}
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 8: PROCESSO EM 4 SPRINTS ─────────────────────────────────────────
+function Slide8(){
+  const [act,setAct]=useState(0);
+  return(
+    <SlideShell
+      badge="Processo em 4 sprints"
+      title={<>Quatro semanas para <span className="glow-text">instalar o processo</span>.</>}
+      subtitle="Cada sprint tem entregáveis claros. A operação sai documentada, com rotinas e equipe treinada."
+    >
+      <div className="tl" style={{marginBottom:18}}>
+        {SPRINTS.map((s,i)=>(
+          <div key={s.n} className="tl-item" onClick={()=>setAct(i)} style={{cursor:'pointer'}}>
+            <div className={`tl-dot ${act===i?'act':''}`}>{s.n}</div>
+            <div style={{marginTop:10,fontSize:11,color:act===i?'var(--text)':'var(--muted)',fontWeight:700,textAlign:'center',maxWidth:150}}>{s.titulo}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:14}}>
+        <div className="card" style={{borderRadius:16}}>
+          <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:18,marginBottom:8}}>{SPRINTS[act].titulo}</div>
+          <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>{SPRINTS[act].texto}</div>
+          <div className="divider" style={{margin:'14px 0'}}/>
+          <div style={{fontSize:11,letterSpacing:'.1em',textTransform:'uppercase',color:'var(--muted)',marginBottom:10,fontWeight:700}}>Entregáveis</div>
+          {SPRINTS[act].entregaveis.map((t,i)=>(
+            <div key={i} className="ci">
+              <div className="ci-icon"><Ic n="ck" s={11} c="var(--accent2)"/></div>
+              <div style={{fontSize:12,color:'var(--text)',lineHeight:1.6}}>{t}</div>
+            </div>
+          ))}
+        </div>
+        <div style={{display:'grid',gap:12}}>
+          {[
+            {t:'Ritual diário (15 min)',d:'Metas do dia, revisão rápida do funil e priorização dos follow-ups mais quentes.'},
+            {t:'Ritual semanal (30–45 min)',d:'Números da semana, gargalos identificados, testes e plano da próxima semana.'},
+            {t:'Ritual mensal (60 min)',d:'Fechamento do mês, LOA, decisões estratégicas e metas do próximo ciclo.'},
+          ].map((x,i)=>(
+            <div key={i} className="card" style={{borderRadius:14}}>
+              <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,marginBottom:4}}>{x.t}</div>
+              <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>{x.d}</div>
+            </div>
+          ))}
+          <div className="card" style={{borderRadius:14,borderColor:'var(--accent-border)',background:'linear-gradient(135deg,rgba(148,0,211,.06),transparent)'}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,marginBottom:4}}>Governança e transferência</div>
+            <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>No fim do ciclo, tudo vira playbook: scripts, funil, metas e regras. Você decide se continua com Wayzen ou internaliza com treinamento.</div>
+          </div>
+        </div>
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 9: SUA EMPRESA AO FINAL ──────────────────────────────────────────
+function Slide9(){
+  const blocks=[
+    {t:'Funil rodando',d:'Etapas claras, registro obrigatório, motivos de perda e previsão de receita por etapa.'},
+    {t:'Playbook pronto',d:'Scripts, objeções, checklist de atendimento e padrão de proposta documentados.'},
+    {t:'Rotina instalada',d:'Rituais diários e semanais. A operação não depende de "boa vontade".'},
+    {t:'KPIs e painel',d:'Resposta, follow-up, propostas, conversão, receita. Tudo visível.'},
+    {t:'Time treinado',d:'Simulações práticas e acompanhamento até a equipe internalizar o processo.'},
+    {t:'Plano de 60 dias',d:'Próximo ciclo definido com base em números e maturidade da operação.'},
+  ];
+  return(
+    <SlideShell
+      badge="Sua empresa ao final"
+      title={<>Uma operação que <span className="glow-text">funciona sem improviso</span>.</>}
+      subtitle="O dono para de apagar incêndio e passa a gerir por processo. A empresa ganha previsibilidade real."
+    >
+      <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:14,marginBottom:14}}>
+        {blocks.map((b,i)=>(
+          <div key={i} className="card" style={{borderRadius:16}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:15,marginBottom:6}}>{b.t}</div>
+            <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.7}}>{b.d}</div>
+          </div>
+        ))}
+      </div>
+      <div style={{padding:'14px 18px',background:'var(--surface)',border:'1px solid var(--divider)',borderRadius:12,fontSize:12,color:'var(--muted)',lineHeight:1.8}}>
+        <span style={{color:'var(--text)',fontWeight:700}}>Rotas de continuidade:</span> operação continua com Wayzen (com especialista em campo), manutenção híbrida com visitas programadas, ou transferência completa do método para seu time com treinamento.
+      </div>
+    </SlideShell>
+  );
+}
+
+// ─── SLIDE 10 - INVESTIMENTO ─────────────────────────────────────────────────
+function Slide10({selectedPlan,onSelect,diag}){
+  const planId=diag.planEscolhido||selectedPlan||'padrao';
+  const p=PLANS.find(x=>x.id===planId)||PLANS[1];
+  const baseAlunos=diag.baseAlunos||100;
+  const mensalidade=diag.mensalidade||diag.ticket||800;
+  const margemPct=diag.margem||30;
+  const [novosAlunos,setNovosAlunos]=useState(20);
+  const recAtual=baseAlunos*mensalidade;
+  const recAdicional=novosAlunos*mensalidade;
+  const recTotal=recAtual+recAdicional;
+  const lucroAtual=recAtual*(margemPct/100);
+  const lucroTotal=recTotal*(margemPct/100);
+  const lucroAdicional=lucroTotal-lucroAtual;
+  const taxaMedia=(p.taxaMin+p.taxaMax)/2;
+  const loaWayzen=lucroAdicional>0?lucroAdicional*(p.loa/100):0;
+  const custoTotalWayzen=taxaMedia+loaWayzen;
+  const retornoLiquidoEscola=lucroAdicional-custoTotalWayzen;
+  const propWayzen=lucroAdicional>0?Math.min(100,(custoTotalWayzen/lucroAdicional)*100):0;
+  const propEscola=Math.max(0,100-propWayzen);
+  const quando={
+    entrada:'Melhor para validar o processo. Volume baixo ou comercial ainda nao estruturado.',
+    padrao:'Equilibrio ideal para a maioria dos casos. Execucao real com custo controlado.',
+    agressivo:'Para crescimento acelerado. Meta agressiva e disposicao para investir mais.',
+  };
+  return(
+    <SlideShell
+      badge="Investimento"
+      title={<>Taxa de operacao + <span className="glow-text">participacao no resultado</span>.</>}
+      subtitle="Uma taxa fixa para viabilizar a presenca da equipe e uma participacao no lucro adicional gerado. Se a escola nao crescer, a Wayzen nao cobra LOA."
+    >
+      <div style={{display:'grid',gridTemplateColumns:'1.4fr .6fr',gap:16,alignItems:'start'}}>
+        <div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:10,marginBottom:16}}>
+            {PLANS.map(pl=>{
+              const sel=pl.id===planId;
+              return(
+                <div key={pl.id} className={`plan ${sel?'sel':''}`} onClick={()=>onSelect(pl.id)} style={{borderRadius:14,padding:'18px'}}>
+                  {pl.destaque&&<div className="badge ba" style={{position:'absolute',top:12,right:12,fontSize:9}}>Popular</div>}
+                  <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,marginBottom:5}}>{pl.label}</div>
+                  <div style={{color:'var(--muted)',fontSize:11,marginBottom:10,lineHeight:1.5}}>{quando[pl.id]}</div>
+                  <div style={{fontSize:10,color:'var(--muted)',fontWeight:700,letterSpacing:'.06em',textTransform:'uppercase'}}>Taxa operacional</div>
+                  <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:13,marginBottom:8}}>{pl.taxa}</div>
+                  <div style={{fontSize:10,color:'var(--muted)',fontWeight:700,letterSpacing:'.06em',textTransform:'uppercase'}}>Participacao no LOA</div>
+                  <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,color:'var(--accent2)'}}>{pl.loa}%</div>
+                  {sel&&diag.planEscolhido===pl.id&&<div style={{marginTop:8,fontSize:9,color:'#00c864',fontWeight:700,letterSpacing:'.06em'}}>RECOMENDADO NO DIAGNOSTICO</div>}
+                </div>
+              );
+            })}
+          </div>
+          <div className="card" style={{borderRadius:16}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:15,marginBottom:4}}>Quanto a escola ganha com a operacao rodando</div>
+            <div style={{fontSize:12,color:'var(--muted)',lineHeight:1.6,marginBottom:18}}>Simulacao baseada nos dados do diagnostico. Ajuste o numero de novos alunos por mes para visualizar o impacto no resultado da escola e o custo da Wayzen.</div>
+            <div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:8,marginBottom:20,padding:'14px',background:'rgba(255,255,255,.02)',border:'1px solid var(--divider)',borderRadius:10}}>
+              {[{l:'Alunos ativos hoje',v:baseAlunos.toLocaleString('pt-BR')},{l:'Mensalidade media',v:fmtBRL(mensalidade)},{l:'Margem operacional',v:`${margemPct}%`}].map(x=>(
+                <div key={x.l} style={{textAlign:'center'}}>
+                  <div style={{fontSize:10,color:'var(--muted)',fontWeight:600,textTransform:'uppercase',letterSpacing:'.06em',marginBottom:4}}>{x.l}</div>
+                  <div style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:15}}>{x.v}</div>
+                </div>
+              ))}
+            </div>
+            <div style={{marginBottom:22}}>
+              <div style={{display:'flex',justifyContent:'space-between',marginBottom:8,alignItems:'center'}}>
+                <span style={{fontSize:12,color:'var(--muted)',fontWeight:500}}>Novos alunos matriculados por mes com a Wayzen</span>
+                <span style={{fontFamily:'var(--font-h)',fontWeight:800,fontSize:22,color:'var(--accent2)'}}>{novosAlunos}</span>
+              </div>
+              <input type="range" min={0} max={150} value={novosAlunos} onChange={e=>setNovosAlunos(Number(e.target.value))}/>
+              <div style={{display:'flex',justifyContent:'space-between',fontSize:10,color:'var(--muted)',marginTop:4}}>
+                <span>0 alunos novos</span><span>150 alunos novos</span>
+              </div>
+            </div>
+            <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12,marginBottom:14}}>
+              <div style={{padding:'18px',background:'rgba(0,200,100,.04)',border:'1px solid rgba(0,200,100,.15)',borderRadius:12}}>
+                <div style={{fontSize:10,color:'#00c864',fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',marginBottom:14}}>Receita da Escola</div>
+                {[
+                  {l:'Receita atual (base existente)',v:fmtBRL(recAtual)},
+                  {l:'Receita adicional com novos alunos',v:fmtBRL(recAdicional),accent:true},
+                  {l:'Receita total projetada',v:fmtBRL(recTotal),big:true},
+                  {l:'Lucro adicional estimado',v:fmtBRL(lucroAdicional),green:true},
+                ].map(x=>(
+                  <div key={x.l} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'7px 0',borderBottom:'1px solid rgba(0,200,100,.08)'}}>
+                    <span style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,maxWidth:'55%'}}>{x.l}</span>
+                    <span style={{fontFamily:'var(--font-h)',fontWeight:x.big?900:700,fontSize:x.big?16:12,color:x.green?'#00c864':x.accent?'var(--accent2)':'var(--text)'}}>{x.v}</span>
+                  </div>
+                ))}
+                {lucroAdicional>0&&(
+                  <div style={{marginTop:12,padding:'10px 12px',background:'rgba(0,200,100,.08)',borderRadius:8}}>
+                    <div style={{fontSize:10,color:'#00c864',fontWeight:700,marginBottom:2}}>Retorno liquido da escola</div>
+                    <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:20,color:'#00c864'}}>{fmtBRL(Math.max(0,retornoLiquidoEscola))}</div>
+                    <div style={{fontSize:10,color:'var(--muted)',marginTop:2}}>por mes, apos descontar o custo Wayzen</div>
+                  </div>
+                )}
+              </div>
+              <div style={{padding:'18px',background:'var(--accent-soft)',border:'1px solid var(--accent-border)',borderRadius:12}}>
+                <div style={{fontSize:10,color:'var(--accent2)',fontWeight:700,letterSpacing:'.08em',textTransform:'uppercase',marginBottom:14}}>Wayzen ({p.label})</div>
+                {[
+                  {l:'Taxa operacional (media)',v:fmtBRL(taxaMedia)},
+                  {l:`Participacao no lucro adicional (${p.loa}%)`,v:fmtBRL(loaWayzen)},
+                  {l:'Custo total Wayzen',v:fmtBRL(custoTotalWayzen),big:true},
+                ].map(x=>(
+                  <div key={x.l} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'7px 0',borderBottom:'1px solid var(--divider)'}}>
+                    <span style={{fontSize:11,color:'var(--muted)',lineHeight:1.4,maxWidth:'55%'}}>{x.l}</span>
+                    <span style={{fontFamily:'var(--font-h)',fontWeight:x.big?900:700,fontSize:x.big?16:12,color:'var(--text)'}}>{x.v}</span>
+                  </div>
+                ))}
+                <div style={{marginTop:12,padding:'10px 12px',background:'rgba(148,0,211,.12)',borderRadius:8,fontSize:11,color:'var(--muted)',lineHeight:1.6}}>
+                  A participacao so existe se houver lucro adicional gerado. A porcentagem do LOA e fixa no plano e nunca aumenta alem do acordado.
+                </div>
+                {lucroAdicional>0&&(
+                  <div style={{marginTop:12}}>
+                    <div style={{fontSize:10,color:'var(--muted)',marginBottom:6,fontWeight:600}}>Como o lucro adicional se divide</div>
+                    <div style={{height:10,borderRadius:999,overflow:'hidden',background:'rgba(255,255,255,.06)',display:'flex'}}>
+                      <div style={{width:`${propWayzen}%`,background:'linear-gradient(90deg,var(--accent),var(--accent2))',transition:'width .4s ease'}}/>
+                      <div style={{flex:1,background:'rgba(0,200,100,.35)',transition:'flex .4s ease'}}/>
+                    </div>
+                    <div style={{display:'flex',justifyContent:'space-between',marginTop:5}}>
+                      <span style={{fontSize:10,color:'var(--accent2)',fontWeight:600}}>Wayzen: {Math.round(propWayzen)}%</span>
+                      <span style={{fontSize:10,color:'#00c864',fontWeight:600}}>Escola: {Math.round(propEscola)}%</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div style={{fontSize:10,color:'var(--muted)',lineHeight:1.6,padding:'8px 12px',background:'rgba(255,255,255,.02)',borderRadius:8}}>
+              Simulacao estimada com base nos dados do diagnostico. Os valores reais dependem do faturamento e da margem apurada no fechamento mensal via DRE ou demonstrativo gerencial.
+            </div>
+          </div>
+        </div>
+        <div style={{display:'grid',gap:12}}>
+          <div className="card" style={{borderRadius:14,borderColor:'var(--accent-border)'}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,marginBottom:8}}>Como apuramos o LOA</div>
+            <div style={{color:'var(--muted)',fontSize:12,lineHeight:1.8}}>Via DRE, balancete ou demonstrativo gerencial do financeiro ou contador. O contrato define o padrao minimo e o calendario de entrega.</div>
+          </div>
+          <div className="card" style={{borderRadius:14}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,marginBottom:10}}>Calendario</div>
+            {[{l:'Dia 01 a 03',v:'Entrega do fechamento do mes anterior'},{l:'Dia 04 a 05',v:'Wayzen valida o LOA'},{l:'Dia 10',v:'Pagamento da taxa e participacao'}].map((x,i)=>(
+              <div key={i} style={{display:'flex',justifyContent:'space-between',gap:10,padding:'8px 0',borderBottom:'1px solid var(--divider)'}}>
+                <span style={{fontSize:11,color:'var(--muted)',flexShrink:0}}>{x.l}</span>
+                <span style={{fontSize:11,color:'var(--text)',textAlign:'right'}}>{x.v}</span>
+              </div>
+            ))}
+          </div>
+          <div className="card" style={{borderRadius:14}}>
+            <div style={{fontFamily:'var(--font-h)',fontWeight:900,fontSize:14,marginBottom:8}}>O que esta incluido</div>
+            {['Especialista alocado durante os 4 sprints','Playbook e scripts desenvolvidos','Operacao comercial instalada e rodando','Treinamento e transferencia do metodo','Contratacao do operador dedicado ao final'].map((t,i)=>(
+              <div key={i} className="ci">
+                <div className="ci-icon"><Ic n="ck" s={11} c="var(--accent2)"/></div>
+                <div style={{fontSize:11,color:'var(--text)',lineHeight:1.6}}>{t}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </SlideShell>
+  );
+}
+// ─── HOME ─────────────────────────────────────────────────────────────────────
+function Home({onNew,saved}){
+  return(
+    <div style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',height:'100vh',gap:24,padding:32,position:'relative',overflow:'hidden'}}>
+      <div className="orb" style={{width:600,height:600,background:'radial-gradient(circle,rgba(148,0,211,.14),transparent 70%)',top:-200,right:-200}}/>
+      <div className="orb" style={{width:400,height:400,background:'radial-gradient(circle,rgba(204,0,255,.08),transparent 70%)',bottom:-100,left:-100}}/>
+      <div className="au"><WzLogo size={40}/></div>
+      <div className="au1" style={{textAlign:'center'}}>
+        <h1 style={{fontFamily:'var(--font-h)',fontSize:'clamp(2rem,5vw,3.5rem)',fontWeight:800,letterSpacing:'-.03em',lineHeight:1.1}}>Proposta Comercial</h1>
+        <p style={{color:'var(--muted)',fontSize:15,marginTop:10,lineHeight:1.7}}>Monte sua proposta personalizada enquanto conversa com o cliente.</p>
+      </div>
+      <div className="au2" style={{display:'flex',gap:12,flexWrap:'wrap',justifyContent:'center'}}>
+        <button className="btn btn-p btn-lg" onClick={onNew}><Ic n="pl" s={16}/> Nova Proposta</button>
+        {saved.length>0&&<button className="btn btn-s btn-lg" onClick={()=>{}}><Ic n="usr" s={16}/> {saved.length} salva{saved.length>1?'s':''}</button>}
+      </div>
+    </div>
+  );
+}
+
+// ─── FORM WIZARD ─────────────────────────────────────────────────────────────
+function FormWizard({client,setClient,diag,setDiag,onComplete}){
+  const [phase,setPhase]=useState('ident');
+  const phases=['ident','foco','diag'];
+  const idx=phases.indexOf(phase);
+  const canNext={ident:!!(client.empresa&&client.decisor),foco:!!(client.produto),diag:true};
+  const next=()=>{if(idx<phases.length-1)setPhase(phases[idx+1]);else onComplete();};
+  return(
+    <div className="shell">
+      <Sidebar client={client} diag={diag} plan={null} phase={phase} onPhase={setPhase}/>
+      <div className="main">
+        <div className="top-bar no-print">
+          <WzLogo size={22}/>
+          <div style={{display:'flex',gap:6,alignItems:'center'}}>
+            {phases.map((p,i)=><div key={p} className={`step-dot ${phase===p?'active':i<idx?'done':''}`} onClick={()=>setPhase(p)}/>)}
+          </div>
+          <div style={{display:'flex',gap:6}}>
+            {idx>0&&<button className="btn btn-g btn-sm" onClick={()=>setPhase(phases[idx-1])}><Ic n="al" s={13}/> Voltar</button>}
+            <button className="btn btn-p btn-sm" onClick={next} disabled={!canNext[phase]} style={{opacity:canNext[phase]?1:.5}}>
+              {idx===phases.length-1?<><Ic n="pr" s={13}/> Ver Apresentação</>:<>Próximo <Ic n="ar" s={13}/></>}
+            </button>
+          </div>
+        </div>
+        <div className="scroll" style={{flex:1}}>
+          {phase==='ident'&&<PhaseIdent c={client} sc={setClient}/>}
+          {phase==='foco'&&<PhaseFoco c={client} sc={setClient}/>}
+          {phase==='diag'&&<PhaseDiag d={diag} sd={setDiag}/>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── PRESENTATION ────────────────────────────────────────────────────────────
+function Presentation({client,diag,sim,plan,setPlan,onEdit}){
+  const [slide,setSlide]=useState(0);
+  const TOTAL=10;
+
+  useEffect(()=>{
+    const h=e=>{
+      if(e.key==='ArrowRight'||e.key==='ArrowDown')setSlide(s=>Math.min(s+1,TOTAL-1));
+      if(e.key==='ArrowLeft'||e.key==='ArrowUp')setSlide(s=>Math.max(s-1,0));
+    };
+    window.addEventListener('keydown',h);
+    return()=>window.removeEventListener('keydown',h);
+  },[]);
+
+  const slides=[
+    ()=><Slide1 client={client}/>,
+    ()=><Slide2/>,
+    ()=><Slide3 client={client}/>,
+    ()=><Slide4/>,
+    ()=><Slide5 diag={diag}/>,
+    ()=><Slide6/>,
+    ()=><Slide7/>,
+    ()=><Slide8/>,
+    ()=><Slide9/>,
+    ()=><Slide10 selectedPlan={plan} onSelect={setPlan} diag={diag} sim={sim}/>,
+  ];
+
+  const titles=['Capa','Como Trabalhamos','Jornada Completa','Nosso Time','O que Instalamos','Resultados','Diferenciais','4 Sprints','Sua Empresa','Investimento'];
+
+  const handleCopy=()=>{
+    const p=PLANS.find(x=>x.id===plan)||PLANS[1];
+    const msg=
+`*Proposta Wayzen: ${client.empresa}*\n\n`+
+`Olá, ${client.decisor}!\n\n`+
+`A Wayzen entra dentro da sua operação: não manda relatório por e-mail. A nossa presença no dia a dia garante que o processo de aquisição, conversão e retenção de alunos aconteça de verdade.\n\n`+
+`Atuamos em 3 frentes:\n`+
+`📣 Captação: leads qualificados com especialista em marketing\n`+
+`🎯 Conversão: funil, scripts e follow-up instalados em campo\n`+
+`📈 LTV: retenção e crescimento de receita por aluno (em estruturação)\n\n`+
+`Plano selecionado: ${p.label}\n`+
+`Taxa operacional: ${p.taxa}\n`+
+`Participação no LOA: ${p.loa}%\n\n`+
+`Próximo passo: alinhar acessos e data de início.\n\n`+
+`Wayzen`;
+    navigator.clipboard.writeText(msg).then(()=>alert('Mensagem copiada!')).catch(()=>alert('Copie manualmente.'));
+  };
+
+  return(
+    <div style={{width:'100vw',height:'100vh',background:'var(--bg)',position:'relative',overflow:'hidden'}}>
+      <div className="no-print" style={{position:'fixed',top:0,left:0,right:0,zIndex:50,padding:'10px 24px',background:'rgba(5,0,8,.85)',backdropFilter:'blur(12px)',borderBottom:'1px solid var(--divider)',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+        <WzLogo size={20}/>
+        <div style={{display:'flex',gap:4,alignItems:'center',overflowX:'auto'}}>
+          {titles.map((t,i)=>(
+            <button key={i} onClick={()=>setSlide(i)} style={{background:slide===i?'var(--accent-soft)':'none',border:'none',cursor:'pointer',padding:'4px 10px',borderRadius:100,color:slide===i?'var(--text)':'var(--muted)',fontSize:11,fontWeight:slide===i?600:400,transition:'all .15s',fontFamily:'var(--font-b)',whiteSpace:'nowrap'}}>{i+1}. {t}</button>
+          ))}
+        </div>
+        <div style={{display:'flex',gap:6,flexShrink:0}}>
+          <button className="btn btn-g btn-sm" onClick={onEdit}><Ic n="ed" s={13}/> Editar</button>
+          <button className="btn btn-s btn-sm" onClick={handleCopy}><Ic n="cp" s={13}/> WA</button>
+          <button className="btn btn-p btn-sm" onClick={()=>window.print()}><Ic n="dn" s={13}/> PDF</button>
+        </div>
+      </div>
+      <div style={{paddingTop:52,height:'100vh'}}>
+        <div key={slide} className="ai" style={{position:'relative',height:'calc(100vh - 52px)',overflow:'hidden'}}>
+          {slides[slide]()}
+        </div>
+      </div>
+      <div className="pres-nav no-print">
+        <button className="prev-btn" onClick={()=>setSlide(s=>Math.max(0,s-1))}><Ic n="al" s={18}/></button>
+        <div className="slide-counter">{slide+1}/{TOTAL}</div>
+        <button className="next-btn" onClick={()=>setSlide(s=>Math.min(TOTAL-1,s+1))}><Ic n="ar" s={18}/></button>
+      </div>
+    </div>
+  );
+}
+
+// ─── APP ─────────────────────────────────────────────────────────────────────
+function App(){
+  const [screen,setScreen]=useState('home');
+  const [client,setClient]=useLS('wz_c3',defClient);
+  const [diag,setDiag]=useLS('wz_d3',defDiag);
+  const [sim,setSim]=useLS('wz_s3',defSim);
+  const [plan,setPlan]=useLS('wz_p3','padrao');
+  const [saved,setSaved]=useLS('wz_sv3',[]);
+
+  if(screen==='home') return <Home onNew={()=>setScreen('form')} saved={saved}/>;
+  if(screen==='form') return <FormWizard client={client} setClient={setClient} diag={diag} setDiag={setDiag} onComplete={()=>setScreen('pres')}/>;
+  if(screen==='pres') return <Presentation client={client} diag={diag} sim={sim} plan={plan} setPlan={setPlan} onEdit={()=>setScreen('form')}/>;
+  return null;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

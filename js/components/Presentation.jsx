@@ -69,7 +69,15 @@ export default function Presentation({ cliente, diagnostico, plano, onExit, onRe
 
       {/* SLIDE ATUAL */}
       <div className="slide-wrapper">
-        <CurrentSlide cliente={cliente} diagnostico={diagnostico} plano={plano} />
+        <CurrentSlide
+          cliente={cliente}
+          diag={diagnostico}
+          diagnostico={diagnostico}
+          plano={plano}
+          plan={plano}
+          selectedPlan={plano}
+          onSelect={() => {}}
+        />
       </div>
 
       {/* BARRA DE NAVEGAÇÃO */}

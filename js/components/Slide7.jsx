@@ -4,118 +4,48 @@
 
 import SlideShell from './SlideShell';
 import Icon from './Icon';
+import { PLANS, SPRINTS, TEAM } from '../data';
 
 export default function Slide7() {
-  const diferenciais = [
-    {
-      title: 'Foco em Educação',
-      desc: 'Somos educadores. Conhecemos os desafios únicos das escolas.',
-      icon: 'BookOpen',
-    },
-    {
-      title: 'Diagnóstico Honesto',
-      desc: 'Não vendemos soluções. Vendemos o que a sua escola realmente precisa.',
-      icon: 'Eye',
-    },
-    {
-      title: 'Resultados Mensuráveis',
-      desc: 'Todo mês você acompanha o progresso direto no dashboard.',
-      icon: 'BarChart3',
-    },
-    {
-      title: 'Implementação Total',
-      desc: 'Não deixamos projetos a meio caminho. Acompanhamos até o resultado.',
-      icon: 'CheckCircle',
-    },
-    {
-      title: 'Parceria, Não Venda',
-      desc: 'Você só ganha quando a escola ganha. Seus objetivos são nossos.',
-      icon: 'Handshake',
-    },
-    {
-      title: 'Flexibilidade',
-      desc: 'Adaptamos o plano conforme aprendemos sobre o seu negócio.',
-      icon: 'Zap',
-    },
-  ];
+  const diffs = [
+      { titulo: 'Presença dentro da empresa', desc: 'Não mandamos relatório por e-mail. Estamos na operação, no dia a dia, resolvendo junto.', icon: '🏢' },
+      { titulo: 'Cobertura de toda a jornada', desc: 'Do lead ao aluno retido: captação, conversão e LTV. Três especialistas, três fases.', icon: '🔗' },
+      { titulo: '4 sprints com entregáveis reais', desc: 'Cada semana tem objetivo, entregável e métrica. Sem promessa vaga.', icon: '⚡' },
+      { titulo: 'Registro e cultura de dados', desc: 'Sem registro não existe gestão. Instalamos a cultura de documentar e medir.', icon: '📊' },
+      { titulo: 'Playbook transferível', desc: 'Ao final do ciclo você tem processo documentado e treinamento feito. Independência total.', icon: '📋' },
+      { titulo: 'Especialista em educação', desc: 'O gestor de LTV tem foco exclusivo no nicho educacional: conhece a jornada do aluno.', icon: '🎓' },
+    ];
 
-  return (
-    <SlideShell>
-      <div style={{ maxWidth: 1000 }}>
-        <h2
-          style={{
-            fontSize: '2.4rem',
-            fontFamily: 'var(--font-h)',
-            fontWeight: 800,
-            marginBottom: 12,
-            color: 'white',
-          }}
-        >
-          Por Que Somos Diferentes
-        </h2>
-        <div
-          style={{
-            fontSize: '1rem',
-            color: 'rgba(255, 255, 255, .7)',
-            marginBottom: 48,
-          }}
-        >
-          O que nos distingue das outras consultoras de crescimento
-        </div>
-
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: 20,
-          }}
-        >
-          {diferenciais.map((d) => (
-            <div
-              key={d.title}
-              style={{
-                padding: 24,
-                background: 'rgba(255, 255, 255, .05)',
-                border: '1px solid rgba(255, 255, 255, .1)',
-                borderRadius: 16,
-                display: 'flex',
-                gap: 16,
-              }}
-            >
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  background: 'linear-gradient(135deg, var(--accent), var(--accent2))',
-                  borderRadius: 12,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}
-              >
-                <Icon name={d.icon} size={24} color="white" />
-              </div>
-              <div>
-                <h3
+    return (
+      <SlideShell
+        badge="Nossos diferenciais"
+        title={<>O que faz a Wayzen ser <span className="glow-text">diferente na prática</span>.</>}
+        subtitle="Negócio educacional precisa de execução com rotina e especialistas em cada fase da jornada."
+      >
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}>
+          {diffs.map((d, i) => (
+            <div key={i} className="card" style={{ borderRadius: 16 }}>
+              <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10 }}>
+                <div
                   style={{
-                    fontSize: '1rem',
-                    fontFamily: 'var(--font-h)',
-                    fontWeight: 700,
-                    color: 'white',
-                    marginBottom: 6,
+                    width: 38,
+                    height: 38,
+                    borderRadius: 12,
+                    background: 'rgba(148,0,211,.14)',
+                    border: '1px solid var(--accent-border)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                   }}
                 >
-                  {d.title}
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: 'rgba(255, 255, 255, .7)', lineHeight: 1.5 }}>
-                  {d.desc}
-                </p>
+                  <span style={{ fontSize: 16 }}>{d.icon}</span>
+                </div>
+                <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14 }}>{d.titulo}</div>
               </div>
+              <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>{d.desc}</div>
             </div>
           ))}
         </div>
-      </div>
-    </SlideShell>
-  );
+      </SlideShell>
+    );
 }
