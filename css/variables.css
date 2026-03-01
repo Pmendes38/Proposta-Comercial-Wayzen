@@ -13,13 +13,13 @@
   --accent2: #cc00ff;
   --accent-soft: rgba(148, 0, 211, 0.12);
   --accent-border: rgba(148, 0, 211, 0.5);
-  --text: #f0e8ff;
-  --muted: #8070a0;
+  --text: #f4eeff;
+  --muted: #b5a9cf;
   --divider: rgba(100, 60, 140, 0.25);
 
   /* TIPOGRAFIA */
-  --font-h: 'WayzenDisplay', WayzenAlt, 'Syne', sans-serif;
-  --font-b: 'WayzenText', 'DM Sans', system-ui, sans-serif;
+  --font-h: 'NeuePower', 'WayzenDisplay', 'WayzenAlt', sans-serif;
+  --font-b: 'WayzenAlt', 'WayzenText', 'DM Sans', system-ui, sans-serif;
 
   /* ESPAÇAMENTO */
   --spacing-xs: 4px;

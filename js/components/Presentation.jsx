@@ -2,7 +2,7 @@
    COMPONENTS / PRESENTATION.JSX - Apresentação com 10 Slides
    =================================================================== */
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import Icon from './Icon';
 import Slide1 from './Slide1';
 import Slide2 from './Slide2';
@@ -38,6 +38,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isPreparingPdf, setIsPreparingPdf] = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const printStackRef = useRef(null);
 
   const CurrentSlide = useMemo(() => SLIDES[slide], [slide]);
   const planoSelecionado = useMemo(
@@ -147,9 +148,70 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
   }, [slide]);
 
   useEffect(() => {
+    document.body.classList.toggle('preparing-pdf', isPreparingPdf);
+    return () => document.body.classList.remove('preparing-pdf');
+  }, [isPreparingPdf]);
+
+  useEffect(() => {
     if (!isPreparingPdf) return undefined;
-    const timer = window.setTimeout(() => window.print(), 120);
-    return () => window.clearTimeout(timer);
+    let cancelled = false;
+
+    const waitForNextPaint = () =>
+      new Promise((resolve) => {
+        window.requestAnimationFrame(() => window.requestAnimationFrame(resolve));
+      });
+
+    const waitForImages = async () => {
+      const root = printStackRef.current;
+      if (!root) return;
+      const images = Array.from(root.querySelectorAll('img'));
+      if (!images.length) return;
+
+      await Promise.all(
+        images.map(
+          (img) =>
+            new Promise((resolve) => {
+              if (img.complete) {
+                resolve();
+                return;
+              }
+
+              let done = false;
+              const finish = () => {
+                if (done) return;
+                done = true;
+                img.removeEventListener('load', finish);
+                img.removeEventListener('error', finish);
+                resolve();
+              };
+
+              img.addEventListener('load', finish, { once: true });
+              img.addEventListener('error', finish, { once: true });
+              window.setTimeout(finish, 1800);
+            })
+        )
+      );
+    };
+
+    const openPrintDialog = async () => {
+      await waitForNextPaint();
+      if (document.fonts?.ready) {
+        try {
+          await document.fonts.ready;
+        } catch {
+          // ignore font loading errors and proceed with print
+        }
+      }
+      await waitForImages();
+      if (!cancelled) {
+        window.print();
+      }
+    };
+
+    openPrintDialog();
+    return () => {
+      cancelled = true;
+    };
   }, [isPreparingPdf]);
 
   useEffect(() => {
@@ -528,7 +590,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
       </nav>
 
       {isPreparingPdf && (
-        <div className="print-show pdf-print-stack">
+        <div ref={printStackRef} className="print-show pdf-print-stack">
           {SLIDES.map((SlideComponent, idx) => (
             <section key={`pdf-slide-${idx}`} className="pdf-page">
               <SlideComponent
@@ -808,6 +870,16 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
             margin: 8mm;
           }
 
+          :root {
+            --bg: #ffffff;
+            --surface: #ffffff;
+            --surface2: #f7f4ff;
+            --text: #1a1324;
+            --muted: #5a4e73;
+            --divider: rgba(90, 78, 115, 0.28);
+            --accent-border: rgba(122, 44, 224, 0.35);
+          }
+
           .presentation-container {
             position: static;
             inset: auto;
@@ -829,11 +901,36 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
           .pdf-page .slide-content {
             overflow: visible !important;
             max-height: none !important;
+            background: #fff !important;
           }
 
           .pdf-page .orb,
           .pdf-page .slide-bg {
             display: none !important;
+          }
+
+          .pdf-page *,
+          .pdf-page *::before,
+          .pdf-page *::after {
+            animation: none !important;
+            transition: none !important;
+          }
+
+          .pdf-page .au,
+          .pdf-page .au1,
+          .pdf-page .au2,
+          .pdf-page .au3,
+          .pdf-page .au4,
+          .pdf-page .ai,
+          .pdf-page .al {
+            opacity: 1 !important;
+            transform: none !important;
+          }
+
+          .pdf-page .glow-text {
+            background: none !important;
+            -webkit-text-fill-color: #7a2ce0 !important;
+            color: #7a2ce0 !important;
           }
 
           .pdf-page * {

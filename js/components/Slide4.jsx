@@ -1,86 +1,47 @@
 /*
-  Slide com o time (hover cards) - conteúdo copiado da proposta original.
+  Slide do time com painel lateral de detalhes.
+  Evita card flutuante cortado no topo.
 */
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import SlideShell from './SlideShell';
 import { TEAM } from '../data';
 
 export default function Slide4() {
-  const [openCard, setOpenCard] = useState(null);
+  const [openCard, setOpenCard] = useState(0);
+  const activeMember = useMemo(() => TEAM[openCard] || TEAM[0], [openCard]);
 
   return (
     <SlideShell
       badge="Nosso time"
       title={<>Especialistas em cada <span className="glow-text">fase da jornada</span>.</>}
-      subtitle="Cada membro tem função clara na jornada. Passe o mouse ou clique em cada perfil para saber mais."
+      subtitle="Cada membro tem funcao clara na jornada. Clique no perfil para ver os detalhes."
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
           gap: 'clamp(12px, 2vw, 20px)',
           marginBottom: 'clamp(12px, 2vw, 20px)',
         }}
       >
-        {TEAM.map((m, i) => (
-          <div
-            key={i}
-            className={`team-member-card ${openCard === i ? 'open' : ''}`}
-            onMouseEnter={() => setOpenCard(i)}
-            onMouseLeave={() => setOpenCard(null)}
-            onClick={() => setOpenCard(openCard === i ? null : i)}
-          >
-            {/* HOVER CARD */}
-            <div className="team-hover-card">
-              <div className="team-photo-placeholder">
-                {m.foto ? (
-                  <img src={m.foto} alt={m.fotoAlt} />
-                ) : (
-                  <div style={{ textAlign: 'center', padding: '16px' }}>
-                    <div style={{ fontSize: 32, marginBottom: 8 }}>{m.icon}</div>
-                    <div style={{ fontSize: 10, color: 'var(--muted)', lineHeight: 1.5 }}>
-                      Adicione uma foto<br />de {m.nome.split(' ')[0]}
-                    </div>
-                  </div>
-                )}
-              </div>
-              <div
-                style={{
-                  fontFamily: 'var(--font-h)',
-                  fontWeight: 800,
-                  fontSize: 16,
-                  marginBottom: 4,
-                }}
-              >
-                {m.nome}
-              </div>
-              <div
-                style={{
-                  fontSize: 11,
-                  color: 'var(--accent2)',
-                  marginBottom: 10,
-                  fontWeight: 600,
-                }}
-              >
-                {m.cargo}
-              </div>
-              <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.7 }}>
-                {m.expanded}
-              </div>
-            </div>
-
-            {/* CARD NORMAL */}
-            <div
+        {TEAM.map((m, i) => {
+          const isSelected = openCard === i;
+          return (
+            <button
+              key={m.nome}
+              type="button"
               className="card"
+              onClick={() => setOpenCard(i)}
               style={{
                 borderRadius: 16,
-                cursor: 'pointer',
-                transition: 'border-color .2s,transform .2s',
-                borderColor: openCard === i ? 'var(--accent-border)' : 'var(--divider)',
-                transform: openCard === i ? 'translateY(-2px)' : 'none',
+                textAlign: 'left',
+                transition: 'border-color .2s, transform .2s',
+                borderColor: isSelected ? 'var(--accent-border)' : 'var(--divider)',
+                transform: isSelected ? 'translateY(-2px)' : 'none',
                 position: 'relative',
                 overflow: 'hidden',
+                background: 'var(--surface)',
               }}
             >
               <div
@@ -92,52 +53,101 @@ export default function Slide4() {
                   pointerEvents: 'none',
                 }}
               />
-              <div
-                style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 12 }}
-              >
+              <div style={{ position: 'relative' }}>
+                <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 12 }}>
+                  <div
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 12,
+                      background: 'rgba(148,0,211,.14)',
+                      border: '1px solid var(--accent-border)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: 20,
+                      flexShrink: 0,
+                    }}
+                  >
+                    {m.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 15 }}>{m.nome}</div>
+                    <div style={{ fontSize: 11, color: 'var(--muted)' }}>{m.cargo}</div>
+                  </div>
+                </div>
+                <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.7 }}>{m.bio}</div>
                 <div
                   style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 12,
-                    background: 'rgba(148,0,211,.14)',
-                    border: '1px solid var(--accent-border)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 20,
+                    marginTop: 10,
+                    fontSize: 11,
+                    color: isSelected ? 'var(--accent2)' : 'var(--muted)',
+                    fontWeight: 600,
                   }}
                 >
-                  {m.icon}
-                </div>
-                <div>
-                  <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 15 }}>
-                    {m.nome}
-                  </div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)' }}>{m.cargo}</div>
+                  {isSelected ? 'Perfil selecionado' : 'Clique para ver detalhes'}
                 </div>
               </div>
-              <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.7 }}>
-                {m.bio}
+            </button>
+          );
+        })}
+      </div>
+
+      {activeMember && (
+        <div
+          className="card"
+          style={{
+            borderRadius: 18,
+            padding: 'clamp(14px, 2vw, 22px)',
+            marginBottom: 14,
+          }}
+        >
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: 'clamp(14px, 2vw, 24px)',
+              alignItems: 'stretch',
+            }}
+          >
+            <div style={{ textAlign: 'left' }}>
+              <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 22, marginBottom: 6 }}>
+                {activeMember.nome}
               </div>
-              <div
-                style={{
-                  marginTop: 10,
-                  fontSize: 11,
-                  color: openCard === i ? 'var(--accent2)' : 'var(--muted)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 4,
-                  fontWeight: 600,
-                }}
-              >
-                <span>{openCard === i ? '▼' : '▶'}</span>
-                <span>{openCard === i ? 'Ver menos' : 'Ver mais'}</span>
+              <div style={{ fontSize: 12, color: 'var(--accent2)', marginBottom: 12, fontWeight: 700 }}>
+                {activeMember.cargo}
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.75 }}>
+                {activeMember.expanded}
               </div>
             </div>
+
+            <div
+              className="team-photo-placeholder"
+              style={{
+                marginBottom: 0,
+                minHeight: 240,
+                background: 'rgba(255, 255, 255, 0.03)',
+              }}
+            >
+              {activeMember.foto ? (
+                <img
+                  src={activeMember.foto}
+                  alt={activeMember.fotoAlt || activeMember.nome}
+                  style={{ objectFit: 'contain', padding: 8 }}
+                />
+              ) : (
+                <div style={{ textAlign: 'center', padding: 16 }}>
+                  <div style={{ fontSize: 46, marginBottom: 10 }}>{activeMember.icon}</div>
+                  <div style={{ fontSize: 11, color: 'var(--muted)', lineHeight: 1.6 }}>
+                    Adicione uma foto de {activeMember.nome.split(' ')[0]}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
-        ))}
-      </div>
+        </div>
+      )}
 
       <div
         style={{
@@ -148,12 +158,13 @@ export default function Slide4() {
           fontSize: 12,
           color: 'var(--muted)',
           lineHeight: 1.7,
+          textAlign: 'left',
         }}
       >
-        Durante os 4 sprints, um especialista da Wayzen fica alocado dentro da sua operação
+        Durante os 4 sprints, um especialista da Wayzen fica alocado dentro da sua operacao
         construindo o comercial do zero. Ao final do ciclo, a Wayzen contrata e disponibiliza um
-        profissional dedicado exclusivamente ao seu projeto: funcionário da Wayzen, operando na
-        sua empresa. Você não precisa contratar, treinar nem arcar com encargos trabalhistas.
+        profissional dedicado exclusivamente ao seu projeto: funcionario da Wayzen, operando na
+        sua empresa. Voce nao precisa contratar, treinar nem arcar com encargos trabalhistas.
       </div>
     </SlideShell>
   );
