@@ -20,6 +20,10 @@ body {
   font-family: var(--font-b);
 }
 
+h1 {
+  font-family: 'NeuePower', 'WayzenDisplay', 'WayzenAlt', sans-serif !important;
+}
+
 #root {
   height: 100%;
   overflow: hidden;
