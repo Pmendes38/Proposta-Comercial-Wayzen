@@ -37,6 +37,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
   const [planAtivo, setPlanAtivo] = useState(plan);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [isPreparingPdf, setIsPreparingPdf] = useState(false);
+  const [showControls, setShowControls] = useState(false);
 
   const CurrentSlide = useMemo(() => SLIDES[slide], [slide]);
   const planoSelecionado = useMemo(
@@ -125,12 +126,17 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
     setIsPreparingPdf(true);
   };
 
+  const handleToggleControls = () => {
+    setShowControls((prev) => !prev);
+  };
+
   // Teclado: Setas
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') handlePrev();
       if (e.key === 'ArrowRight') handleNext();
       if (e.key === 'Escape') handleExit();
+      if (e.key.toLowerCase() === 'h') handleToggleControls();
       if (e.key === ' ') {
         e.preventDefault();
         handleNext();
@@ -163,7 +169,10 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
       </div>
 
       {/* SLIDE ATUAL */}
-      <div className="slide-wrapper no-print">
+      <div
+        className="slide-wrapper no-print"
+        style={{ bottom: showControls ? 60 : 0, transition: 'bottom .25s ease' }}
+      >
         <CurrentSlide
           key={slide}
           cliente={cliente}
@@ -175,6 +184,31 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
           onSelect={setPlanAtivo}
         />
       </div>
+
+      {!showControls && (
+        <button
+          type="button"
+          className="no-print"
+          onClick={handleToggleControls}
+          style={{
+            position: 'absolute',
+            right: 24,
+            bottom: 16,
+            zIndex: 120,
+            padding: '8px 12px',
+            background: 'rgba(0, 0, 0, .5)',
+            border: '1px solid rgba(255, 255, 255, .25)',
+            borderRadius: 8,
+            color: 'white',
+            fontSize: 11,
+            fontWeight: 600,
+            cursor: 'pointer',
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          Mostrar controles
+        </button>
+      )}
 
       {/* BARRA DE NAVEGAÇÃO */}
       <nav
@@ -191,6 +225,9 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
           left: 0,
           right: 0,
           zIndex: 100,
+          transform: showControls ? 'translateY(0)' : 'translateY(calc(100% + 8px))',
+          transition: 'transform .25s ease',
+          pointerEvents: showControls ? 'auto' : 'none',
         }}
       >
         {/* BOTÃO: SAIR */}
@@ -336,6 +373,31 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button
+            onClick={handleToggleControls}
+            className="nav-btn"
+            style={{
+              padding: '8px 12px',
+              background: 'rgba(255, 255, 255, .12)',
+              border: '1px solid rgba(255, 255, 255, .2)',
+              color: 'white',
+              borderRadius: 6,
+              fontFamily: 'var(--font-b)',
+              fontSize: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'all .15s',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, .22)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, .12)';
+            }}
+          >
+            Ocultar barra
+          </button>
+
           <button
             onClick={handleGeneratePdf}
             className="nav-btn"
@@ -489,7 +551,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
           className="no-print"
           style={{
             position: 'absolute',
-            bottom: 120,
+            bottom: showControls ? 120 : 24,
             right: 32,
             fontSize: 11,
             color: 'rgba(255, 255, 255, .6)',
@@ -499,6 +561,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
         >
           <div style={{ marginBottom: 4 }}>→ Próximo slide</div>
           <div style={{ marginBottom: 4 }}>← Slide anterior</div>
+          <div style={{ marginBottom: 4 }}>H Mostrar/ocultar barra</div>
           <div style={{ marginBottom: 4 }}>ESC Sair</div>
         </div>
       )}
