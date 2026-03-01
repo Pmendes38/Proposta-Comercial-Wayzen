@@ -28,7 +28,10 @@ export default function SlideShell({ badge, title, subtitle, children, alignTop 
           margin: '0 auto',
           width: '100%',
           minHeight: '100%',
-          overflowY: alignTop ? 'hidden' : 'auto',
+          /* sempre permitir scroll; o alinhamento vertical é controlado
+             por justifyContent, não por overflowY. ajustar alignTop apenas
+             move o conteúdo para o topo sem bloquear o rolamento. */
+          overflowY: 'auto',
         }}
       >
         <div style={{ textAlign: 'center', width: '100%' }}>
