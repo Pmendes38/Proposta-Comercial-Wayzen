@@ -3,15 +3,16 @@
   src:
     local('Neue Power'),
     local('NeuePower'),
-    local('Neue Power Regular');
-  font-weight: 400 900;
+    local('Neue Power Regular'),
+    url('/assets/fonts/NeuePower-Ultra.ttf') format('truetype');
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
   font-family: 'WayzenDisplay';
-  src: url('/assets/MonaSans-VariableFont_wdth,wght.ttf') format('truetype');
+  src: url('/assets/fonts/MonaSans-VariableFont_wdth,wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -19,7 +20,7 @@
 
 @font-face {
   font-family: 'WayzenText';
-  src: url('/assets/Metrophobic-Regular.ttf') format('truetype');
+  src: url('/assets/fonts/Metrophobic-Regular.ttf') format('truetype');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -27,7 +28,7 @@
 
 @font-face {
   font-family: 'WayzenAlt';
-  src: url('/assets/Manrope-VariableFont_wght.ttf') format('truetype');
+  src: url('/assets/fonts/Manrope-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
