@@ -934,6 +934,12 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
           max-width: calc(100vw - 32px);
         }
 
+        @media (hover: none) and (pointer: coarse) {
+          .presentation-side-nav {
+            display: block;
+          }
+        }
+
         @media (max-width: 1200px) {
           .presentation-side-nav {
             display: block;

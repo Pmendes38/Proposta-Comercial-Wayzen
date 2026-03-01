@@ -53,24 +53,17 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
       }
       subtitle="Uma taxa fixa para viabilizar a presenca da equipe e uma participacao no lucro adicional gerado. Se a escola nao crescer, a Wayzen nao cobra LOA."
     >
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 22, alignItems: 'start' }}>
-        <div>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
-              gap: 10,
-              marginBottom: 22,
-            }}
-          >
+      <div className="slide10-layout">
+        <div className="slide10-main">
+          <div className="slide10-plans" style={{ marginBottom: 26 }}>
             {PLANS.map((pl) => {
               const sel = pl.id === planId;
               return (
                 <div
                   key={pl.id}
-                  className={`plan ${sel ? 'sel' : ''}`}
+                  className={`plan slide10-plan ${sel ? 'sel' : ''}`}
                   onClick={() => onSelect(pl.id)}
-                  style={{ borderRadius: 14, padding: '18px' }}
+                  style={{ borderRadius: 14, padding: '20px' }}
                 >
                   {pl.destaque && (
                     <div
@@ -164,13 +157,13 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               );
             })}
           </div>
-          <div className="card" style={{ borderRadius: 16, padding: '22px' }}>
+          <div className="card slide10-summary" style={{ borderRadius: 16, padding: '24px' }}>
             <div
               style={{
                 fontFamily: 'var(--font-h)',
                 fontWeight: 900,
                 fontSize: 15,
-                marginBottom: 4,
+                marginBottom: 8,
               }}
             >
               Quanto a escola ganha com a operacao rodando
@@ -180,19 +173,17 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                 fontSize: 12,
                 color: 'var(--muted)',
                 lineHeight: 1.6,
-                marginBottom: 18,
+                marginBottom: 22,
               }}
             >
               Simulacao baseada nos dados do diagnostico. Ajuste o numero de novos alunos por mes para
               visualizar o impacto no resultado da escola e o custo da Wayzen.
             </div>
             <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-              gap: 8,
-              marginBottom: 20,
-              padding: '14px',
+              className="slide10-kpis"
+              style={{
+                marginBottom: 26,
+                padding: '16px',
                 background: 'rgba(255,255,255,.02)',
                 border: '1px solid var(--divider)',
                 borderRadius: 10,
@@ -229,7 +220,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                 </div>
               ))}
             </div>
-            <div style={{ marginBottom: 22 }}>
+            <div style={{ marginBottom: 26 }}>
               <div
                 style={{
                   display: 'flex',
@@ -275,16 +266,15 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               </div>
             </div>
             <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: 12,
-              marginBottom: 14,
-            }}
+              className="slide10-results"
+              style={{
+                gap: 16,
+                marginBottom: 16,
+              }}
             >
               <div
                 style={{
-                  padding: '18px',
+                  padding: '20px',
                   background: 'rgba(0,200,100,.04)',
                   border: '1px solid rgba(0,200,100,.15)',
                   borderRadius: 12,
@@ -378,7 +368,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               </div>
               <div
                 style={{
-                  padding: '18px',
+                  padding: '20px',
                   background: 'var(--accent-soft)',
                   border: '1px solid var(--accent-border)',
                   borderRadius: 12,
@@ -509,7 +499,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
             </div>
           </div>
         </div>
-        <div style={{ display: 'grid', gap: 12 }}>
+        <div className="slide10-side" style={{ display: 'grid', gap: 16 }}>
           <div className="card" style={{ borderRadius: 14, borderColor: 'var(--accent-border)' }}>
             <div
               style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 8 }}
