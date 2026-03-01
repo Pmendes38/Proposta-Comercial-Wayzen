@@ -163,6 +163,14 @@
   min-height: 0;
 }
 
+@media (max-width: 900px), (hover: none) and (pointer: coarse) and (orientation: landscape) {
+  .slide .slide-content {
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding-top: clamp(56px, 10vh, 96px) !important;
+  }
+}
+
 /* ─── ORBS (BACKGROUND EFFECTS) ──────────────────────────────────── */
 .orb {
   position: absolute;

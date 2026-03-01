@@ -23,7 +23,7 @@ export default function SlideShell({ badge, title, subtitle, children, alignTop 
         style={{
           justifyContent: alignTop ? 'flex-start' : 'center',
           alignItems: 'center',
-          padding: 'clamp(26px, 6vw, 96px)',
+          padding: 'clamp(40px, 8vh, 92px) clamp(22px, 6vw, 96px) clamp(28px, 5vh, 56px)',
           maxWidth: 1280,
           margin: '0 auto',
           width: '100%',
