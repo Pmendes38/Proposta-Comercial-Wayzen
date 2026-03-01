@@ -48,6 +48,45 @@ export default function Slide1({ cliente, diag }) {
           A Wayzen entra dentro da sua operação e constrói: junto com você: o processo de
           aquisição, conversão e retenção de alunos. Presença real. Resultado mensurável.
         </div>
+        
+        {/* INFO DO CLIENTE E DATA */}
+        {(cliente?.empresa || diag?.data) && (
+          <div
+            className="au4"
+            style={{
+              padding: '16px 24px',
+              background: 'rgba(255,255,255,.05)',
+              border: '1px solid var(--divider)',
+              borderRadius: 12,
+              marginBottom: 24,
+              fontSize: 13,
+              color: 'var(--muted)',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+              flexWrap: 'wrap',
+            }}
+          >
+            {cliente?.empresa && (
+              <span>
+                <strong style={{ color: 'var(--text)' }}>{cliente.empresa}</strong>
+                {cliente.decisor && (
+                  <>
+                    <span style={{ opacity: 0.6 }}> · </span>
+                    <span>{cliente.decisor}</span>
+                  </>
+                )}
+              </span>
+            )}
+            {diag?.data && (
+              <>
+                <span style={{ opacity: 0.3 }}>—</span>
+                <span>{new Date(diag.data).toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' })}</span>
+              </>
+            )}
+          </div>
+        )}
+        
         <div
           className="au4"
           style={{

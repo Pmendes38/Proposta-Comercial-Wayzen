@@ -9,11 +9,12 @@ import PhaseFoco from './PhaseFoco';
 import PhaseDiag from './PhaseDiag';
 import Icon from './Icon';
 
-export default function FormWizard({ cliente, diag, plano, onSave, onPresentation }) {
+export default function FormWizard({ cliente, diag, plan, onSave, onPresentation }) {
   const [phase, setPhase] = useState('ident');
   const [client, setClient] = useState(cliente || {});
   const [diagnostic, setDiagnostic] = useState(diag || {});
-  const [plan, setPlan] = useState(plano || 'padrao');
+  const [selectedPlan, setSelectedPlan] = useState(plan || 'padrao');
+  const [showValidation, setShowValidation] = useState(false);
 
   const canNext = useMemo(() => {
     if (phase === 'ident') {
@@ -29,11 +30,17 @@ export default function FormWizard({ cliente, diag, plano, onSave, onPresentatio
   }, [phase, client, diagnostic]);
 
   const handlePrev = () => {
+    setShowValidation(false);
     if (phase === 'foco') setPhase('ident');
     if (phase === 'diag') setPhase('foco');
   };
 
   const handleNext = () => {
+    if (!canNext) {
+      setShowValidation(true);
+      return;
+    }
+    setShowValidation(false);
     if (phase === 'ident') setPhase('foco');
     if (phase === 'foco') setPhase('diag');
   };
@@ -52,7 +59,7 @@ export default function FormWizard({ cliente, diag, plano, onSave, onPresentatio
       <Sidebar
         client={client}
         diag={diagnostic}
-        plan={plan}
+        plan={diagnostic.planEscolhido || selectedPlan}
         phase={phase}
         onPhase={setPhase}
       />
@@ -60,10 +67,10 @@ export default function FormWizard({ cliente, diag, plano, onSave, onPresentatio
         <div className="scroll">
           {/* CONTEÚDO DA FASE */}
           {phase === 'ident' && (
-            <PhaseIdent c={client} sc={setClient} />
+            <PhaseIdent c={client} sc={setClient} showValidation={showValidation} />
           )}
           {phase === 'foco' && (
-            <PhaseFoco c={diagnostic} sc={setDiagnostic} />
+            <PhaseFoco c={diagnostic} sc={setDiagnostic} showValidation={showValidation} />
           )}
           {phase === 'diag' && (
             <PhaseDiag d={diagnostic} sd={setDiagnostic} />

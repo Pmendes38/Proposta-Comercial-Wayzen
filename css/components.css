@@ -416,3 +416,26 @@ input[type='range']::-webkit-slider-thumb:hover {
   color: var(--accent);
   box-shadow: 0 0 16px rgba(148, 0, 211, 0.3);
 }
+
+/* ─── REUTILIZÁVEIS ──────────────────────────────────────────────────── */
+.section-title {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.section-subtitle {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.field-error {
+  border-color: #dc003c !important;
+  box-shadow: 0 0 0 2px rgba(220, 0, 60, 0.15) !important;
+}

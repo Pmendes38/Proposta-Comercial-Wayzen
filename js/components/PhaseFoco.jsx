@@ -4,8 +4,17 @@
 
 import Field from './Field';
 
-export default function PhaseFoco({ c, sc }) {
+export default function PhaseFoco({ c, sc, showValidation }) {
   const u = (k, v) => sc((p) => ({ ...p, [k]: v }));
+  
+  const isFieldEmpty = (field) => !c[field] || c[field].trim() === '';
+  const getFieldStyle = (field) => {
+    if (!showValidation) return {};
+    if (isFieldEmpty(field)) {
+      return { borderColor: '#dc003c', boxShadow: '0 0 0 2px rgba(220, 0, 60, .15)' };
+    }
+    return {};
+  };
 
   return (
     <div>
@@ -21,16 +30,7 @@ export default function PhaseFoco({ c, sc }) {
       <div style={{ padding: '0 32px 32px' }}>
         <div className="fg2">
           <div>
-            <div
-              style={{
-                fontSize: 11,
-                letterSpacing: '.1em',
-                textTransform: 'uppercase',
-                color: 'var(--muted)',
-                marginBottom: 14,
-                fontWeight: 600,
-              }}
-            >
+            <div className="section-title">
               Foco do Ciclo
             </div>
             <Field label="Produto / Serviço Principal" hint="O que mais importa vender ou converter agora">
@@ -39,6 +39,7 @@ export default function PhaseFoco({ c, sc }) {
                 placeholder="Ex.: matrículas, plano anual, cirurgia"
                 value={c.produto}
                 onChange={(e) => u('produto', e.target.value)}
+                style={getFieldStyle('produto')}
               />
             </Field>
             <Field label="Meta para o Semestre" hint="Objetivo concreto deste ciclo de operação">
@@ -47,6 +48,7 @@ export default function PhaseFoco({ c, sc }) {
                 placeholder="Ex.: dobrar matrículas, bater R$ 200k, 100 alunos novos"
                 value={c.meta}
                 onChange={(e) => u('meta', e.target.value)}
+                style={getFieldStyle('meta')}
               />
             </Field>
           </div>

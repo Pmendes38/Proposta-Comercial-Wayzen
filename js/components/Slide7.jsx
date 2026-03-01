@@ -3,8 +3,6 @@
    =================================================================== */
 
 import SlideShell from './SlideShell';
-import Icon from './Icon';
-import { PLANS, SPRINTS, TEAM } from '../data';
 
 export default function Slide7() {
   const diffs = [

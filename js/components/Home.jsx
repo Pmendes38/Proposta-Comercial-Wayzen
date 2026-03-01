@@ -74,12 +74,12 @@ export default function Home({ onNewProposal, onLoadProposal, lastProposal }) {
               transition: 'all .2s',
             }}
             onMouseEnter={(e) => {
-              e.target.style.transform = 'translateY(-2px)';
-              e.target.style.boxShadow = '0 8px 24px rgba(148, 0, 211, .3)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(148, 0, 211, .3)';
             }}
             onMouseLeave={(e) => {
-              e.target.style.transform = 'translateY(0)';
-              e.target.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
             }}
           >
             <Icon name="Plus" size={18} />
@@ -105,12 +105,12 @@ export default function Home({ onNewProposal, onLoadProposal, lastProposal }) {
                 transition: 'all .2s',
               }}
               onMouseEnter={(e) => {
-                e.target.style.background = 'rgba(255, 255, 255, .15)';
-                e.target.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.background = 'rgba(255, 255, 255, .15)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={(e) => {
-                e.target.style.background = 'rgba(255, 255, 255, .1)';
-                e.target.style.transform = 'translateY(0)';
+                e.currentTarget.style.background = 'rgba(255, 255, 255, .1)';
+                e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
               <Icon name="FolderOpen" size={18} />

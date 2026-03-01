@@ -3,7 +3,6 @@
    =================================================================== */
 
 import SlideShell from './SlideShell';
-import { PLANS, SPRINTS, TEAM } from '../data';
 
 export default function Slide9() {
   const blocks = [

@@ -10,7 +10,7 @@ export default function Sidebar({ client, diag, plan, phase, onPhase }) {
   const pl = PLANS.find((p) => p.id === plan);
   const sections = [
     { id: 'ident', label: 'Identificação', done: !!(client.empresa && client.decisor) },
-    { id: 'foco', label: 'Foco e Contexto', done: !!(client.produto) },
+    { id: 'foco', label: 'Foco e Contexto', done: !!(diag?.produto) },
     { id: 'diag', label: 'Diagnóstico', done: !!(diag.ticket) },
   ];
 

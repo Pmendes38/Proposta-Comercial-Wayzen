@@ -6,16 +6,19 @@ import { useMemo } from 'react';
 import SlideShell from './SlideShell';
 import Icon from './Icon';
 import { PLANS, SPRINTS, TEAM } from '../data';
+import { calcularScore } from '../utils';
 
 export default function Slide5({ diag }) {
-  const resp = Number(diag.tempo || 0);
-  const noRet = Number(diag.semRetorno || 0);
-  const conv = Number(diag.conversao || 0);
+  const resp = Number(diag?.tempo || 0);
+  const noRet = Number(diag?.semRetorno || 0);
+  const conv = Number(diag?.conversao || 0);
   const respK = resp <= 10 ? 'ok' : resp <= 60 ? 'warn' : 'bad';
   const fuK = noRet <= 25 ? 'ok' : noRet <= 45 ? 'warn' : 'bad';
   const convK = conv >= 30 ? 'ok' : conv >= 18 ? 'warn' : 'bad';
   const badgeCls = (k) => (k === 'ok' ? 'bok' : k === 'warn' ? 'bw' : 'br');
   const badgeTxt = (k) => (k === 'ok' ? 'Ok' : k === 'warn' ? 'Atenção' : 'Crítico');
+  
+  const { scoreItems, scoreGeral, scoreCor } = useMemo(() => calcularScore(diag || {}), [diag]);
 
   return (
     <SlideShell
@@ -24,6 +27,54 @@ export default function Slide5({ diag }) {
       subtitle="O problema normalmente não é falta de demanda. É falta de velocidade, follow-up e processo."
     >
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 'clamp(12px, 2vw, 20px)' }}>
+        {/* SCORE GERAL */}
+        <div
+          className="card"
+          style={{
+            borderRadius: 16,
+            background: `linear-gradient(135deg, ${scoreCor}15, transparent)`,
+            borderColor: scoreCor,
+            borderWidth: 2,
+            gridColumn: 'span 2',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            padding: '32px',
+          }}
+        >
+          <div style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.1em' }}>
+            Score da Operação
+          </div>
+          <div style={{ fontSize: 64, fontWeight: 900, fontFamily: 'var(--font-h)', color: scoreCor, marginBottom: 16 }}>
+            {scoreGeral}
+          </div>
+          <div
+            style={{
+              width: '100%',
+              maxWidth: 200,
+              height: 8,
+              background: 'rgba(255,255,255,.1)',
+              borderRadius: 4,
+              overflow: 'hidden',
+              marginBottom: 12,
+            }}
+          >
+            <div
+              style={{
+                width: `${scoreGeral}%`,
+                height: '100%',
+                background: scoreCor,
+                transition: 'width .3s',
+              }}
+            />
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--muted)' }}>
+            {scoreGeral >= 70 ? 'Operação saudável' : scoreGeral >= 45 ? 'Oportunidades de melhoria' : 'Alerta: intervenção necessária'}
+          </div>
+        </div>
+        
         <div>
           <div className="card" style={{ borderRadius: 16, marginBottom: 14 }}>
             <div
@@ -158,6 +209,35 @@ export default function Slide5({ diag }) {
             </div>
           ))}
         </div>
+
+        {/* OBSERVAÇÕES DO CLIENTE */}
+        {diag?.obs && (
+          <div
+            className="card"
+            style={{
+              borderRadius: 16,
+              borderColor: 'var(--accent-border)',
+              background: 'linear-gradient(135deg,rgba(148,0,211,.06),transparent)',
+              marginTop: 'clamp(12px, 2vw, 20px)',
+            }}
+          >
+            <div
+              style={{
+                fontSize: 11,
+                letterSpacing: '.1em',
+                textTransform: 'uppercase',
+                color: 'var(--muted)',
+                marginBottom: 8,
+                fontWeight: 600,
+              }}
+            >
+              Contexto da Escola
+            </div>
+            <div style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.8 }}>
+              {diag.obs}
+            </div>
+          </div>
+        )}
       </div>
     </SlideShell>
   );

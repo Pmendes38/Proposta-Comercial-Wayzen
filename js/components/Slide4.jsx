@@ -4,8 +4,7 @@
 
 import { useState } from 'react';
 import SlideShell from './SlideShell';
-import Icon from './Icon';
-import { PLANS, SPRINTS, TEAM } from '../data';
+import { TEAM } from '../data';
 
 export default function Slide4() {
   const [openCard, setOpenCard] = useState(null);

@@ -66,7 +66,7 @@ export default function App() {
         <FormWizard
           cliente={client}
           diag={diagnostic}
-          plano={plan}
+          plan={plan}
           onSave={handleSaveAndPresent}
           onPresentation={(data) => handleSaveAndPresent(data || { client, diagnostic, plan })}
         />
@@ -76,7 +76,7 @@ export default function App() {
         <Presentation
           cliente={client}
           diagnostico={diagnostic}
-          plano={plan}
+          plan={plan}
           onExit={handleExitPresentation}
           onRestart={handleRestartPresentation}
         />

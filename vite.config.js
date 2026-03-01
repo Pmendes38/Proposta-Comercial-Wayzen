@@ -16,10 +16,4 @@ export default defineConfig({
     sourcemap: false,
     minify: 'terser',
   },
-  resolve: {
-    alias: {
-      '@': '/js',
-      '@components': '/js/components',
-    },
-  },
 });

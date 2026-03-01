@@ -4,8 +4,17 @@
 
 import Field from './Field';
 
-export default function PhaseIdent({ c, sc }) {
+export default function PhaseIdent({ c, sc, showValidation }) {
   const u = (k, v) => sc((p) => ({ ...p, [k]: v }));
+  
+  const isFieldEmpty = (field) => !c[field] || c[field].trim() === '';
+  const getFieldStyle = (field) => {
+    if (!showValidation) return {};
+    if (isFieldEmpty(field)) {
+      return { borderColor: '#dc003c', boxShadow: '0 0 0 2px rgba(220, 0, 60, .15)' };
+    }
+    return {};
+  };
 
   return (
     <div>
@@ -21,16 +30,7 @@ export default function PhaseIdent({ c, sc }) {
       <div style={{ padding: '0 32px 32px' }}>
         <div className="fg2">
           <div>
-            <div
-              style={{
-                fontSize: 11,
-                letterSpacing: '.1em',
-                textTransform: 'uppercase',
-                color: 'var(--muted)',
-                marginBottom: 14,
-                fontWeight: 600,
-              }}
-            >
+            <div className="section-title">
               Empresa
             </div>
             <Field label="Nome da Empresa">
@@ -39,6 +39,7 @@ export default function PhaseIdent({ c, sc }) {
                 placeholder="Nome da empresa"
                 value={c.empresa}
                 onChange={(e) => u('empresa', e.target.value)}
+                style={getFieldStyle('empresa')}
               />
             </Field>
             <Field label="Segmento">
@@ -47,6 +48,7 @@ export default function PhaseIdent({ c, sc }) {
                 placeholder="Ex.: educação, saúde, varejo, serviços"
                 value={c.segmento}
                 onChange={(e) => u('segmento', e.target.value)}
+                style={getFieldStyle('segmento')}
               />
             </Field>
             <Field label="Cidade">
@@ -55,20 +57,12 @@ export default function PhaseIdent({ c, sc }) {
                 placeholder="Cidade / UF"
                 value={c.cidade}
                 onChange={(e) => u('cidade', e.target.value)}
+                style={getFieldStyle('cidade')}
               />
             </Field>
           </div>
           <div>
-            <div
-              style={{
-                fontSize: 11,
-                letterSpacing: '.1em',
-                textTransform: 'uppercase',
-                color: 'var(--muted)',
-                marginBottom: 14,
-                fontWeight: 600,
-              }}
-            >
+            <div className="section-title">
               Decisor
             </div>
             <Field label="Nome do Decisor">
@@ -77,6 +71,7 @@ export default function PhaseIdent({ c, sc }) {
                 placeholder="Dono, diretor, gestor"
                 value={c.decisor}
                 onChange={(e) => u('decisor', e.target.value)}
+                style={getFieldStyle('decisor')}
               />
             </Field>
             <Field label="Cargo">
