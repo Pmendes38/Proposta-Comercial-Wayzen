@@ -1,0 +1,32 @@
+{
+  "name": "proposta-interativa-wayzen",
+  "version": "2.0.0",
+  "description": "Aplicação de geração de propostas comerciais interativas - Refatorada para estrutura modular",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .js,.jsx"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.22.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "terser": "^5.46.0",
+    "vite": "^4.4.0"
+  },
+  "keywords": [
+    "proposta",
+    "wayzen",
+    "comercial",
+    "react",
+    "educação"
+  ],
+  "author": "Pedro Mendes",
+  "license": "MIT"
+}

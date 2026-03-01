@@ -1,0 +1,42 @@
+/* ===================================================================
+   VARIÁVEIS DE TEMA - Design System
+   =================================================================== */
+
+:root {
+  /* CORES */
+  --bg: #050008;
+  --surface: #120020;
+  --surface2: #0d0018;
+  --accent: #9400d3;
+  --accent2: #cc00ff;
+  --accent-soft: rgba(148, 0, 211, 0.12);
+  --accent-border: rgba(148, 0, 211, 0.5);
+  --text: #f0e8ff;
+  --muted: #8070a0;
+  --divider: rgba(100, 60, 140, 0.25);
+
+  /* TIPOGRAFIA */
+  --font-h: 'Syne', sans-serif;
+  --font-b: 'DM Sans', sans-serif;
+
+  /* ESPAÇAMENTO */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 32px;
+
+  /* BORDER RADIUS */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-2xl: 16px;
+
+  /* TRANSIÇÕES */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}

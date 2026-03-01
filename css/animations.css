@@ -1,0 +1,112 @@
+/* ===================================================================
+   ANIMAÇÕES - Keyframes e Classes de Animação
+   =================================================================== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(148, 0, 211, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(148, 0, 211, 0);
+  }
+}
+
+@keyframes flowRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
+}
+
+/* CLASSES DE ANIMAÇÃO REUTILIZÁVEIS */
+.au {
+  animation: fadeUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.au1 {
+  animation: fadeUp 0.55s 0.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.au2 {
+  animation: fadeUp 0.55s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.au3 {
+  animation: fadeUp 0.55s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.au4 {
+  animation: fadeUp 0.55s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.ai {
+  animation: fadeIn 0.4s ease both;
+}
+
+.al {
+  animation: slideLeft 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}

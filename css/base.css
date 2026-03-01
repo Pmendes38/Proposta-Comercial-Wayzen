@@ -1,0 +1,83 @@
+/* ===================================================================
+   BASE - Reset, Tipografia e Estilos Globais
+   =================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-b);
+}
+
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-border);
+  border-radius: 2px;
+}
+
+/* SELEÇÃO DE TEXTO */
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* INPUTS E FORMS */
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* IMPRESSÃO */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-show {
+    display: block !important;
+  }
+  body {
+    background: #fff;
+    color: #000;
+    overflow: auto;
+  }
+  #root {
+    overflow: auto;
+    height: auto;
+  }
+}
+
+@media not print {
+  .print-show {
+    display: none !important;
+  }
+}
