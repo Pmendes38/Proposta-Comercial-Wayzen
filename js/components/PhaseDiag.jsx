@@ -1153,7 +1153,7 @@ export default function PhaseDiag({ d, sd }) {
                 Com base no diagnóstico, escolha o plano que melhor se encaixa no momento e no
                 potencial da escola. Ele será destacado na apresentação.
               </p>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 10 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 10 }}>
                 {PLANS.map((pl) => {
                   const sel = (d.planEscolhido || 'padrao') === pl.id;
                   const quando = {

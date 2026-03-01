@@ -12,7 +12,7 @@ export default function Slide1({ cliente, diag }) {
       <Orbs />
       <div
         className="slide-content"
-        style={{ justifyContent: 'center', padding: '40px 80px' }}
+        style={{ justifyContent: 'center', padding: 'clamp(20px, 4vw, 40px) clamp(18px, 6vw, 80px)' }}
       >
         <div className="au" style={{ marginBottom: 40 }}>
           <WzLogo size={34} />

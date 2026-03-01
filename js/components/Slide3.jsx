@@ -75,6 +75,7 @@ export default function Slide3({ cliente, diag }) {
         style={{
           display: 'flex',
           gap: 0,
+          flexWrap: 'wrap',
           marginBottom: 20,
           borderRadius: 12,
           overflow: 'hidden',
@@ -87,7 +88,8 @@ export default function Slide3({ cliente, diag }) {
             key={st.id}
             onClick={() => setActive(st.id)}
             style={{
-              flex: 1,
+              flex: '1 1 220px',
+              minWidth: 180,
               padding: '14px 8px',
               background: active === st.id ? st.bg : 'transparent',
               border: 'none',
@@ -124,7 +126,7 @@ export default function Slide3({ cliente, diag }) {
         ))}
       </div>
       {/* Active stage detail */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: 'clamp(12px, 2vw, 20px)', animation: 'fadeIn .3s ease both' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(12px, 2vw, 20px)', animation: 'fadeIn .3s ease both' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div

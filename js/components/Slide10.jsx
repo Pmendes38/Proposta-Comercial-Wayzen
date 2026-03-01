@@ -53,12 +53,12 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
       }
       subtitle="Uma taxa fixa para viabilizar a presenca da equipe e uma participacao no lucro adicional gerado. Se a escola nao crescer, a Wayzen nao cobra LOA."
     >
-      <div style={{ display: 'grid', gridTemplateColumns: '1.4fr .6fr', gap: 16, alignItems: 'start' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 16, alignItems: 'start' }}>
         <div>
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(3,1fr)',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))',
               gap: 10,
               marginBottom: 16,
             }}
@@ -187,12 +187,12 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               visualizar o impacto no resultado da escola e o custo da Wayzen.
             </div>
             <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(3,1fr)',
-                gap: 8,
-                marginBottom: 20,
-                padding: '14px',
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+              gap: 8,
+              marginBottom: 20,
+              padding: '14px',
                 background: 'rgba(255,255,255,.02)',
                 border: '1px solid var(--divider)',
                 borderRadius: 10,
@@ -275,12 +275,12 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               </div>
             </div>
             <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: 12,
-                marginBottom: 14,
-              }}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: 12,
+              marginBottom: 14,
+            }}
             >
               <div
                 style={{

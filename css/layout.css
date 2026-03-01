@@ -413,6 +413,20 @@
     font-size: 10px;
     min-width: 35px;
   }
+
+  .tl {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .tl::before {
+    display: none;
+  }
+
+  .tl-item {
+    flex: 0 1 120px;
+  }
 }
 
 /* ─── MOBILE PORTRAIT (320px - 600px) ──────────────────────────── */
@@ -511,6 +525,10 @@
 
   .journey-arrow {
     display: none;
+  }
+
+  .tl-item {
+    flex: 1 1 140px;
   }
 
   .team-hover-card {

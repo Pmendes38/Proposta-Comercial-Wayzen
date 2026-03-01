@@ -232,7 +232,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
 
       {/* SLIDE ATUAL */}
       <div
-        className="slide-wrapper no-print"
+        className={`slide-wrapper no-print ${showControls ? 'controls-visible' : 'controls-hidden'}`}
         style={{ bottom: showControls ? 60 : 0, transition: 'bottom .25s ease' }}
       >
         <CurrentSlide
@@ -250,7 +250,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
       {!showControls && (
         <button
           type="button"
-          className="no-print"
+          className="no-print presentation-show-controls"
           onClick={handleToggleControls}
           style={{
             position: 'absolute',
@@ -295,7 +295,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
         {/* BOTÃO: SAIR */}
         <button
           onClick={handleExit}
-          className="nav-btn"
+          className="nav-btn presentation-nav-exit"
           style={{
             padding: '8px 16px',
             background: 'rgba(220, 0, 60, .2)',
@@ -324,6 +324,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
 
         {/* INFORMAÇÕES E NAVEGAÇÃO DO MEIO */}
         <div
+          className="presentation-nav-center"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -386,6 +387,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
 
           {/* BARRA DE PROGRESSO */}
           <div
+            className="presentation-nav-progress"
             style={{
               width: 120,
               height: 3,
@@ -434,7 +436,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
           </button>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <div className="presentation-nav-actions" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <button
             onClick={handleToggleControls}
             className="nav-btn"
@@ -610,7 +612,7 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
       {/* ATALHOS: MOSTRADOS NO PRIMEIRO SLIDE */}
       {slide === 0 && (
         <div
-          className="no-print"
+          className="no-print presentation-shortcuts"
           style={{
             position: 'absolute',
             bottom: showControls ? 120 : 24,
@@ -847,6 +849,101 @@ export default function Presentation({ cliente, diagnostico, plan, onExit, onRes
 
         .presentation-nav {
           z-index: 101;
+          gap: 12px;
+          flex-wrap: nowrap;
+        }
+
+        .presentation-nav-center {
+          min-width: 260px;
+        }
+
+        .presentation-nav-actions {
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .presentation-show-controls {
+          max-width: calc(100vw - 32px);
+        }
+
+        @media (max-width: 1200px) {
+          .presentation-nav {
+            padding: 12px 16px !important;
+            flex-wrap: wrap;
+          }
+
+          .presentation-nav-center {
+            order: 3;
+            width: 100%;
+            justify-content: center !important;
+            gap: 14px !important;
+          }
+
+          .presentation-nav-actions {
+            flex: 1;
+            justify-content: flex-end;
+          }
+
+          .presentation-nav .nav-btn {
+            padding: 7px 10px !important;
+            font-size: 11px !important;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .slide-wrapper.controls-visible {
+            bottom: 74px !important;
+          }
+
+          .presentation-nav {
+            padding: 10px 12px !important;
+            gap: 8px;
+          }
+
+          .presentation-nav-progress,
+          .presentation-shortcuts {
+            display: none !important;
+          }
+
+          .presentation-nav-center {
+            order: 2;
+            justify-content: space-between !important;
+            margin-left: 0 !important;
+          }
+
+          .presentation-nav-actions {
+            order: 3;
+            width: 100%;
+            justify-content: flex-end;
+          }
+
+          .presentation-nav .nav-btn {
+            padding: 6px 8px !important;
+            font-size: 10px !important;
+          }
+        }
+
+        @media (max-width: 680px) {
+          .slide-wrapper.controls-visible {
+            bottom: 84px !important;
+          }
+
+          .presentation-nav-actions .nav-btn {
+            flex: 1 1 calc(50% - 8px);
+            justify-content: center;
+          }
+
+          .presentation-nav-exit {
+            order: 1;
+          }
+
+          .presentation-nav-center {
+            order: 2;
+          }
+
+          .presentation-nav-actions {
+            order: 3;
+          }
         }
 
         .pdf-print-stack {

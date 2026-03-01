@@ -42,6 +42,10 @@ export default function Slide4() {
                 position: 'relative',
                 overflow: 'hidden',
                 background: 'var(--surface)',
+                color: 'var(--text)',
+                borderWidth: 1,
+                borderStyle: 'solid',
+                appearance: 'none',
               }}
             >
               <div

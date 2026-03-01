@@ -11,7 +11,7 @@ export default function Slide2() {
       title={<>Não é consultoria. É <span className="glow-text">presença dentro</span> da sua operação.</>}
       subtitle="A diferença entre a Wayzen e uma consultoria comum é simples: a gente não entrega relatório e vai embora."
     >
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: 18 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 18 }}>
         <div style={{ display: 'grid', gap: 14 }}>
           {/* Presença badge */}
           <div
