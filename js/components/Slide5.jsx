@@ -23,7 +23,7 @@ export default function Slide5({ diag }) {
       title={<>Fechamos os vazamentos e <span className="glow-text">instalamos rotina de conversão</span>.</>}
       subtitle="O problema normalmente não é falta de demanda. É falta de velocidade, follow-up e processo."
     >
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 'clamp(12px, 2vw, 20px)' }}>
         <div>
           <div className="card" style={{ borderRadius: 16, marginBottom: 14 }}>
             <div
@@ -38,7 +38,7 @@ export default function Slide5({ diag }) {
             >
               Diagnóstico da operação atual
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 10 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: 'clamp(8px, 1.5vw, 12px)' }}>
               {[
                 { l: '1ª resposta', v: `${resp} min`, k: respK },
                 { l: 'Sem follow-up', v: `${noRet}%`, k: fuK },

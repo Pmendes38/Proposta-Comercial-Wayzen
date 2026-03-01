@@ -20,7 +20,7 @@ export default function Slide9() {
       title={<>Uma operação que <span className="glow-text">funciona sem improviso</span>.</>}
       subtitle="O dono para de apagar incêndio e passa a gerir por processo. A empresa ganha previsibilidade real."
     >
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14, marginBottom: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(12px, 2vw, 20px)', marginBottom: 'clamp(12px, 2vw, 20px)' }}>
         {blocks.map((b, i) => (
           <div key={i} className="card" style={{ borderRadius: 16 }}>
             <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 15, marginBottom: 6 }}>

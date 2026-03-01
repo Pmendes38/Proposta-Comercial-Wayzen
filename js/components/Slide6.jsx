@@ -36,7 +36,7 @@ export default function Slide6() {
       }
       subtitle="A gente entra, instala a rotina e mede. O que funciona vira padrão."
     >
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14, marginBottom: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(12px, 2vw, 20px)', marginBottom: 'clamp(12px, 2vw, 20px)' }}>
         {cases.map((c, i) => (
           <div
             key={i}

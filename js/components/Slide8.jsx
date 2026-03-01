@@ -37,7 +37,7 @@ export default function Slide8() {
           </div>
         ))}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(12px, 2vw, 16px)' }}>
         <div className="card" style={{ borderRadius: 16 }}>
           <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 18, marginBottom: 8 }}>
             {SPRINTS[act].titulo}

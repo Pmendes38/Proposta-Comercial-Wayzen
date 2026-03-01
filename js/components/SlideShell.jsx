@@ -6,47 +6,54 @@ import Orbs from './Orbs';
 
 export default function SlideShell({ badge, title, subtitle, children }) {
   return (
-    <div className="slide" style={{ overflow: 'auto' }}>
+    <div className="slide">
       <Orbs />
       <div
         className="slide-content"
         style={{
-          justifyContent: 'flex-start',
-          padding: '32px 80px 80px',
-          maxWidth: 1100,
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: 'clamp(20px, 5vw, 80px)',
+          maxWidth: 1200,
           margin: '0 auto',
           width: '100%',
+          minHeight: '100%',
         }}
       >
-        <div className="au" style={{ marginBottom: 8 }}>
-          {badge && <span className="badge ba">{badge}</span>}
-        </div>
-        <h2
-          className="au1"
-          style={{
-            fontFamily: 'var(--font-h)',
-            fontSize: 'clamp(1.8rem, 3vw, 2.6rem)',
-            fontWeight: 800,
-            marginBottom: 8,
-            letterSpacing: '-.02em',
-          }}
-        >
-          {title}
-        </h2>
-        {subtitle && (
-          <p
-            className="au2"
+        <div style={{ textAlign: 'center', width: '100%' }}>
+          <div className="au" style={{ marginBottom: 12 }}>
+            {badge && <span className="badge ba">{badge}</span>}
+          </div>
+          <h2
+            className="au1"
             style={{
-              color: 'var(--muted)',
-              fontSize: 14,
-              marginBottom: 24,
-              lineHeight: 1.7,
+              fontFamily: 'var(--font-h)',
+              fontSize: 'clamp(1.6rem, 4vw, 2.8rem)',
+              fontWeight: 800,
+              marginBottom: 12,
+              letterSpacing: '-.02em',
+              lineHeight: 1.1,
             }}
           >
-            {subtitle}
-          </p>
-        )}
-        <div className="au3">{children}</div>
+            {title}
+          </h2>
+          {subtitle && (
+            <p
+              className="au2"
+              style={{
+                color: 'var(--muted)',
+                fontSize: 'clamp(13px, 2vw, 16px)',
+                marginBottom: 'clamp(20px, 4vw, 32px)',
+                lineHeight: 1.7,
+                maxWidth: 900,
+                margin: '0 auto clamp(20px, 4vw, 32px)',
+              }}
+            >
+              {subtitle}
+            </p>
+          )}
+          <div className="au3" style={{ width: '100%' }}>{children}</div>
+        </div>
       </div>
     </div>
   );

@@ -157,6 +157,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* ─── ORBS (BACKGROUND EFFECTS) ──────────────────────────────────── */
@@ -314,4 +316,261 @@
   position: absolute;
   inset: 0;
   border-radius: 10px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN - Mobile First Approach
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── TABLET & SMALLER DESKTOPS (768px - 1024px) ────────────────── */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .form-section {
+    padding: 24px;
+  }
+
+  .form-title {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  }
+
+  .pres-nav {
+    bottom: 20px;
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+
+  .prev-btn,
+  .next-btn {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ─── MOBILE LANDSCAPE & TABLETS (600px - 768px) ────────────────── */
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    left: -260px;
+    height: 100vh;
+    z-index: 1000;
+    width: 260px;
+    transition: left var(--transition-normal);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .form-section {
+    padding: 20px 16px;
+  }
+
+  .form-title {
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  }
+
+  .form-sub {
+    font-size: 13px;
+  }
+
+  .scroll {
+    padding: 8px;
+  }
+
+  .fg2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  .top-bar {
+    padding: 10px 16px;
+  }
+
+  .pres-nav {
+    bottom: 16px;
+    padding: 5px 10px;
+    gap: 6px;
+  }
+
+  .prev-btn,
+  .next-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 12px;
+  }
+
+  .slide-counter {
+    font-size: 10px;
+    min-width: 35px;
+  }
+}
+
+/* ─── MOBILE PORTRAIT (320px - 600px) ──────────────────────────── */
+@media (max-width: 600px) {
+  .shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    max-height: 0;
+    overflow: hidden;
+    position: static;
+    border-right: none;
+    border-bottom: 1px solid var(--divider);
+    transition: max-height var(--transition-normal);
+  }
+
+  .sidebar.open {
+    max-height: 100vh;
+    left: 0;
+  }
+
+  .main {
+    flex: 1;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .scroll {
+    padding: 0;
+  }
+
+  .form-section {
+    padding: 16px 12px;
+  }
+
+  .form-title {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    margin-bottom: 6px;
+  }
+
+  .form-sub {
+    font-size: 12px;
+    margin-bottom: 16px;
+  }
+
+  .top-bar {
+    padding: 8px 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .fg2 {
+    grid-template-columns: 1fr !important;
+    gap: 8px !important;
+  }
+
+  .field {
+    margin-bottom: 12px;
+  }
+
+  .fi {
+    padding: clamp(8px, 2vw, 12px) !important;
+    font-size: 14px !important;
+  }
+
+  .badge {
+    font-size: 9px !important;
+    padding: 4px 8px !important;
+  }
+
+  .pres-nav {
+    bottom: 12px;
+    padding: 4px 8px;
+    gap: 4px;
+    width: calc(100% - 24px);
+    left: 12px;
+    right: 12px;
+    transform: none;
+  }
+
+  .prev-btn,
+  .next-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 11px;
+  }
+
+  .slide-counter {
+    font-size: 9px;
+    min-width: 30px;
+  }
+
+  .journey-arrow {
+    display: none;
+  }
+
+  .team-hover-card {
+    width: 260px;
+    padding: 16px;
+  }
+
+  .team-member-card .team-hover-card {
+    width: calc(100vw - 32px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── EXTRA SMALL PHONES (320px - 480px) ───────────────────────── */
+@media (max-width: 480px) {
+  .form-section {
+    padding: 12px 8px;
+  }
+
+  .form-title {
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+    margin-bottom: 4px;
+  }
+
+  .form-sub {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .top-bar {
+    padding: 6px 8px;
+  }
+
+  .fi {
+    padding: 6px 8px !important;
+    font-size: 13px !important;
+  }
+
+  .badge {
+    font-size: 8px !important;
+    padding: 3px 6px !important;
+  }
+
+  .pres-nav {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    width: calc(100% - 16px);
+  }
+
+  .field-label {
+    font-size: 11px;
+  }
+
+  .slide {
+    overflow: hidden;
+  }
+
+  .presentation-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
 }

@@ -7,8 +7,6 @@ import WzLogo from './WzLogo';
 import { PLANS, SPRINTS, TEAM } from '../data';
 
 export default function Slide1({ cliente, diag }) {
-  console.log('Slide1 received - cliente:', cliente);
-  console.log('Slide1 received - diag:', diag);
   return (
     <div className="slide">
       <Orbs />

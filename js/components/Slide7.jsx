@@ -22,7 +22,7 @@ export default function Slide7() {
         title={<>O que faz a Wayzen ser <span className="glow-text">diferente na prática</span>.</>}
         subtitle="Negócio educacional precisa de execução com rotina e especialistas em cada fase da jornada."
       >
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 14 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(12px, 2vw, 20px)' }}>
           {diffs.map((d, i) => (
             <div key={i} className="card" style={{ borderRadius: 16 }}>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginBottom: 10 }}>

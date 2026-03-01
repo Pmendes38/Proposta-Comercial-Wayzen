@@ -19,9 +19,9 @@ export default function Slide4() {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3,1fr)',
-          gap: 16,
-          marginBottom: 16,
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: 'clamp(12px, 2vw, 20px)',
+          marginBottom: 'clamp(12px, 2vw, 20px)',
         }}
       >
         {TEAM.map((m, i) => (

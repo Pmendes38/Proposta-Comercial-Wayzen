@@ -126,7 +126,7 @@ export default function Slide3({ cliente, diag }) {
         ))}
       </div>
       {/* Active stage detail */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, animation: 'fadeIn .3s ease both' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: 'clamp(12px, 2vw, 20px)', animation: 'fadeIn .3s ease both' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
             <div
