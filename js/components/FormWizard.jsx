@@ -39,11 +39,13 @@ export default function FormWizard({ cliente, diag, plano, onSave, onPresentatio
   };
 
   const handleFinish = () => {
+    console.log('handleFinish - client:', client);
+    console.log('handleFinish - diagnostic:', diagnostic);
     if (onSave) {
       onSave({ client, diagnostic, plan: diagnostic.planEscolhido });
     }
     if (onPresentation) {
-      onPresentation();
+      onPresentation({ client, diagnostic, plan: diagnostic.planEscolhido });
     }
   };
 

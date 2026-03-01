@@ -21,6 +21,9 @@ export default function Presentation({ cliente, diagnostico, plano, onExit, onRe
   const [slide, setSlide] = useState(0);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
+  console.log('Presentation received - cliente:', cliente);
+  console.log('Presentation received - diagnostico:', diagnostico);
+
   const CurrentSlide = useMemo(() => SLIDES[slide], [slide]);
 
   const handlePrev = () => {

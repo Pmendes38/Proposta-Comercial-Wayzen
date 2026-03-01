@@ -6,7 +6,7 @@ import SlideShell from './SlideShell';
 import Icon from './Icon';
 import { PLANS, SPRINTS, TEAM } from '../data';
 
-export default function Slide3({ cliente }) {
+export default function Slide3({ cliente, diag }) {
   const [active, setActive] = useState(1);
   const stages = [
     {
@@ -70,7 +70,7 @@ export default function Slide3({ cliente }) {
     <SlideShell
       badge="Nossa jornada"
       title={<>Atuamos em <span className="glow-text">toda a jornada</span> do aluno.</>}
-      subtitle={`Da captação do primeiro lead ao aumento do LTV: cada fase tem um especialista dedicado.${cliente.produto?` Foco atual: ${cliente.produto}.`:''}`}
+      subtitle={`Da captação do primeiro lead ao aumento do LTV: cada fase tem um especialista dedicado.${diag?.produto?` Foco atual: ${diag.produto}.`:''}`}
     >
       {/* Stage tabs */}
       <div

@@ -6,7 +6,9 @@ import Orbs from './Orbs';
 import WzLogo from './WzLogo';
 import { PLANS, SPRINTS, TEAM } from '../data';
 
-export default function Slide1({ cliente }) {
+export default function Slide1({ cliente, diag }) {
+  console.log('Slide1 received - cliente:', cliente);
+  console.log('Slide1 received - diag:', diag);
   return (
     <div className="slide">
       <Orbs />
@@ -78,14 +80,14 @@ export default function Slide1({ cliente }) {
               marginBottom: 4,
             }}
           >
-            {cliente.empresa || 'Sua empresa'}
+            {cliente?.empresa || 'Sua empresa'}
           </div>
           <div style={{ fontSize: 13, color: 'var(--muted)' }}>
-            {cliente.decisor || 'Decisor'}
-            {cliente.cargo ? ` · ${cliente.cargo}` : ''}
-            {cliente.cidade ? ` · ${cliente.cidade}` : ''}
+            {cliente?.decisor || 'Decisor'}
+            {cliente?.cargo ? ` · ${cliente.cargo}` : ''}
+            {cliente?.cidade ? ` · ${cliente.cidade}` : ''}
           </div>
-          {cliente.produto && (
+          {diag?.produto && (
             <div
               style={{
                 marginTop: 10,
@@ -97,8 +99,8 @@ export default function Slide1({ cliente }) {
               }}
             >
               <span style={{ color: 'var(--accent2)', fontWeight: 700 }}>Foco:</span>{' '}
-              {cliente.produto}
-              {cliente.meta ? ` · Meta: ${cliente.meta}` : ''}
+              {diag.produto}
+              {diag?.meta ? ` · Meta: ${diag.meta}` : ''}
             </div>
           )}
         </div>
