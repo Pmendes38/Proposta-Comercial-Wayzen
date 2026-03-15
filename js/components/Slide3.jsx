@@ -111,12 +111,12 @@ export default function Slide3({ cliente, diag }) {
                 }}
               />
             )}
-            <div style={{ fontSize: 18, marginBottom: 4 }}>{st.icon}</div>
+            <div style={{ fontSize: 20, marginBottom: 4 }}>{st.icon}</div>
             <div
               style={{
                 fontFamily: 'var(--font-h)',
                 fontWeight: 700,
-                fontSize: 12,
+                fontSize: 14,
                 color: active === st.id ? st.color : 'var(--muted)',
               }}
             >
@@ -165,7 +165,7 @@ export default function Slide3({ cliente, diag }) {
         <div>
           <div
             style={{
-              fontSize: 11,
+              fontSize: 13,
               letterSpacing: '.1em',
               textTransform: 'uppercase',
               color: 'var(--muted)',

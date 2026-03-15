@@ -51,7 +51,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
           Taxa de operacao + <span className="glow-text">participacao no resultado</span>.
         </>
       }
-      subtitle="Uma taxa fixa para viabilizar a presenca da equipe e uma participacao no lucro adicional gerado. Se a escola nao crescer, a Wayzen nao cobra LOA."
+      subtitle="A Wayzen só ganha em cima do que ela gera. Você não paga pela promessa, você paga pelo resultado que a operação entrega. Se não houver lucro incremental, não há participação."
     >
       <div className="slide10-layout">
         <div className="slide10-main">
@@ -68,7 +68,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   {pl.destaque && (
                     <div
                       className="badge ba"
-                      style={{ position: 'absolute', top: 12, right: 12, fontSize: 9 }}
+                      style={{ position: 'absolute', top: 12, right: 12, fontSize: 11 }}
                     >
                       Popular
                     </div>
@@ -77,7 +77,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     style={{
                       fontFamily: 'var(--font-h)',
                       fontWeight: 900,
-                      fontSize: 14,
+                      fontSize: 16,
                       marginBottom: 5,
                     }}
                   >
@@ -86,7 +86,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   <div
                     style={{
                       color: 'var(--muted)',
-                      fontSize: 11,
+                      fontSize: 13,
                       marginBottom: 10,
                       lineHeight: 1.5,
                     }}
@@ -95,7 +95,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   </div>
                   <div
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       color: 'var(--muted)',
                       fontWeight: 700,
                       letterSpacing: '.06em',
@@ -108,20 +108,20 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     style={{
                       fontFamily: 'var(--font-h)',
                       fontWeight: 900,
-                      fontSize: 13,
+                      fontSize: 15,
                       marginBottom: 8,
                     }}
                   >
                     {pl.taxa}
                     {pl.id === planId && taxaSugestao ? (
-                      <div style={{ fontSize: 10, color: 'var(--accent2)', marginTop: 4 }}>
+                      <div style={{ fontSize: 12, color: 'var(--accent2)', marginTop: 4 }}>
                         sugerida: {fmtBRL(taxaSugestao)}
                       </div>
                     ) : null}
                   </div>
                   <div
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       color: 'var(--muted)',
                       fontWeight: 700,
                       letterSpacing: '.06em',
@@ -134,7 +134,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     style={{
                       fontFamily: 'var(--font-h)',
                       fontWeight: 900,
-                      fontSize: 14,
+                      fontSize: 16,
                       color: 'var(--accent2)',
                     }}
                   >
@@ -144,7 +144,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     <div
                       style={{
                         marginTop: 8,
-                        fontSize: 9,
+                        fontSize: 11,
                         color: '#00c864',
                         fontWeight: 700,
                         letterSpacing: '.06em',
@@ -162,7 +162,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               style={{
                 fontFamily: 'var(--font-h)',
                 fontWeight: 900,
-                fontSize: 15,
+                fontSize: 17,
                 marginBottom: 8,
               }}
             >
@@ -170,7 +170,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
             </div>
             <div
               style={{
-                fontSize: 12,
+                fontSize: 14,
                 color: 'var(--muted)',
                 lineHeight: 1.6,
                 marginBottom: 22,
@@ -198,7 +198,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                 <div key={x.l} style={{ textAlign: 'center' }}>
                   <div
                     style={{
-                      fontSize: 10,
+                      fontSize: 12,
                       color: 'var(--muted)',
                       fontWeight: 600,
                       textTransform: 'uppercase',
@@ -212,7 +212,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     style={{
                       fontFamily: 'var(--font-h)',
                       fontWeight: 800,
-                      fontSize: 15,
+                      fontSize: 17,
                     }}
                   >
                     {x.v}
@@ -230,7 +230,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                 }}
               >
                 <span
-                  style={{ fontSize: 12, color: 'var(--muted)', fontWeight: 500 }}
+                  style={{ fontSize: 14, color: 'var(--muted)', fontWeight: 500 }}
                 >
                   Novos alunos matriculados por mes com a Wayzen
                 </span>
@@ -238,7 +238,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   style={{
                     fontFamily: 'var(--font-h)',
                     fontWeight: 800,
-                    fontSize: 22,
+                    fontSize: 24,
                     color: 'var(--accent2)',
                   }}
                 >
@@ -256,7 +256,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
-                  fontSize: 10,
+                  fontSize: 12,
                   color: 'var(--muted)',
                   marginTop: 4,
                 }}
@@ -282,7 +282,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               >
                 <div
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     color: '#00c864',
                     fontWeight: 700,
                     letterSpacing: '.08em',
@@ -290,13 +290,15 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     marginBottom: 14,
                   }}
                 >
-                  Receita da Escola
+                  Receita e Lucro da Escola
                 </div>
                 {[
                   { l: 'Receita atual (base existente)', v: fmtBRL(recAtual) },
                   { l: 'Receita adicional com novos alunos', v: fmtBRL(recAdicional), accent: true },
                   { l: 'Receita total projetada', v: fmtBRL(recTotal), big: true },
-                  { l: 'Lucro adicional estimado', v: fmtBRL(lucroAdicional), green: true },
+                  { l: 'LOA atual da escola', v: fmtBRL(lucroAtual), muted: true },
+                  { l: 'LOA projetado com Wayzen', v: fmtBRL(lucroTotal), accent: true },
+                  { l: 'LOA incremental gerado', v: fmtBRL(lucroAdicional), green: true, bold: true },
                 ].map((x) => (
                   <div
                     key={x.l}
@@ -310,10 +312,11 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   >
                     <span
                       style={{
-                        fontSize: 11,
-                        color: 'var(--muted)',
+                        fontSize: 13,
+                        color: x.bold ? '#00c864' : 'var(--muted)',
                         lineHeight: 1.4,
                         maxWidth: '55%',
+                        fontWeight: x.bold ? 700 : 400,
                       }}
                     >
                       {x.l}
@@ -321,12 +324,14 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     <span
                       style={{
                         fontFamily: 'var(--font-h)',
-                        fontWeight: x.big ? 900 : 700,
-                        fontSize: x.big ? 16 : 12,
+                        fontWeight: x.big || x.bold ? 900 : 700,
+                        fontSize: x.big ? 18 : x.bold ? 16 : 14,
                         color: x.green
                           ? '#00c864'
                           : x.accent
                           ? 'var(--accent2)'
+                          : x.muted
+                          ? 'var(--muted)'
                           : 'var(--text)',
                       }}
                     >
@@ -344,7 +349,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     }}
                   >
                     <div
-                      style={{ fontSize: 10, color: '#00c864', fontWeight: 700, marginBottom: 2 }}
+                      style={{ fontSize: 12, color: '#00c864', fontWeight: 700, marginBottom: 2 }}
                     >
                       Retorno liquido da escola
                     </div>
@@ -352,14 +357,14 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                       style={{
                         fontFamily: 'var(--font-h)',
                         fontWeight: 900,
-                        fontSize: 20,
+                        fontSize: 22,
                         color: '#00c864',
                       }}
                     >
                       {fmtBRL(Math.max(0, retornoLiquidoEscola))}
                     </div>
                     <div
-                      style={{ fontSize: 10, color: 'var(--muted)', marginTop: 2 }}
+                      style={{ fontSize: 12, color: 'var(--muted)', marginTop: 2 }}
                     >
                       por mes, apos descontar o custo Wayzen
                     </div>
@@ -376,7 +381,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
               >
                 <div
                   style={{
-                    fontSize: 10,
+                    fontSize: 12,
                     color: 'var(--accent2)',
                     fontWeight: 700,
                     letterSpacing: '.08em',
@@ -388,7 +393,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                 </div>
                 {[
                   { l: 'Taxa operacional sugerida', v: fmtBRL(taxaOperacionalCalculada), accent: true },
-                  { l: `Participacao no lucro adicional (${p.loa}%)`, v: fmtBRL(loaWayzen) },
+                  { l: `Participacao APENAS no incremental (${p.loa}%)`, v: fmtBRL(loaWayzen), highlight: true },
                   { l: 'Custo total Wayzen', v: fmtBRL(custoTotalWayzen), big: true },
                 ].map((x) => (
                   <div
@@ -403,10 +408,11 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   >
                     <span
                       style={{
-                        fontSize: 11,
-                        color: 'var(--muted)',
+                        fontSize: 13,
+                        color: x.highlight ? 'var(--accent2)' : 'var(--muted)',
                         lineHeight: 1.4,
                         maxWidth: '55%',
+                        fontWeight: x.highlight ? 700 : 400,
                       }}
                     >
                       {x.l}
@@ -415,8 +421,8 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                       style={{
                         fontFamily: 'var(--font-h)',
                         fontWeight: x.big ? 900 : 700,
-                        fontSize: x.big ? 16 : 12,
-                        color: 'var(--text)',
+                        fontSize: x.big ? 18 : x.highlight ? 16 : 14,
+                        color: x.highlight ? 'var(--accent2)' : 'var(--text)',
                       }}
                     >
                       {x.v}
@@ -429,17 +435,17 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                     padding: '10px 12px',
                     background: 'rgba(148,0,211,.12)',
                     borderRadius: 8,
-                    fontSize: 11,
+                    fontSize: 13,
                     color: 'var(--muted)',
                     lineHeight: 1.6,
                   }}
                 >
-                  A participacao so existe se houver lucro adicional gerado. A porcentagem do LOA e fixa no plano e nunca aumenta alem do acordado.
+                  <strong style={{ color: 'var(--accent2)' }}>A Wayzen só ganha em cima do que ela gera.</strong> A participação é calculada APENAS sobre o lucro incremental (a diferença entre o lucro atual e o projetado). Se não houver crescimento de lucro, não há participação no LOA.
                 </div>
                 {lucroAdicional > 0 && (
                   <div style={{ marginTop: 12 }}>
                     <div
-                      style={{ fontSize: 10, color: 'var(--muted)', marginBottom: 6, fontWeight: 600 }}
+                      style={{ fontSize: 12, color: 'var(--muted)', marginBottom: 6, fontWeight: 600 }}
                     >
                       Como o lucro adicional se divide
                     </div>
@@ -471,12 +477,12 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                       }}
                     >
                       <span
-                        style={{ fontSize: 10, color: 'var(--accent2)', fontWeight: 600 }}
+                        style={{ fontSize: 12, color: 'var(--accent2)', fontWeight: 600 }}
                       >
                         Wayzen: {Math.round(propWayzen)}%
                       </span>
                       <span
-                        style={{ fontSize: 10, color: '#00c864', fontWeight: 600 }}
+                        style={{ fontSize: 12, color: '#00c864', fontWeight: 600 }}
                       >
                         Escola: {Math.round(propEscola)}%
                       </span>
@@ -487,7 +493,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
             </div>
             <div
               style={{
-                fontSize: 10,
+                fontSize: 12,
                 color: 'var(--muted)',
                 lineHeight: 1.6,
                 padding: '8px 12px',
@@ -502,18 +508,18 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
         <div className="slide10-side" style={{ display: 'grid', gap: 16 }}>
           <div className="card" style={{ borderRadius: 14, borderColor: 'var(--accent-border)' }}>
             <div
-              style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 8 }}
+              style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 16, marginBottom: 8 }}
             >
               Como apuramos o LOA
             </div>
-            <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.8 }}>
+            <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.8 }}>
               Via DRE, balancete ou demonstrativo gerencial do financeiro ou contador. O contrato define o
               padrao minimo e o calendario de entrega.
             </div>
           </div>
           <div className="card" style={{ borderRadius: 14 }}>
             <div
-              style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 10 }}
+              style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 16, marginBottom: 10 }}
             >
               Calendario
             </div>
@@ -532,14 +538,14 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                   borderBottom: '1px solid var(--divider)',
                 }}
               >
-                <span style={{ fontSize: 11, color: 'var(--muted)', flexShrink: 0 }}>{x.l}</span>
-                <span style={{ fontSize: 11, color: 'var(--text)', textAlign: 'right' }}>{x.v}</span>
+                <span style={{ fontSize: 13, color: 'var(--muted)', flexShrink: 0 }}>{x.l}</span>
+                <span style={{ fontSize: 13, color: 'var(--text)', textAlign: 'right' }}>{x.v}</span>
               </div>
             ))}
           </div>
           <div className="card" style={{ borderRadius: 14 }}>
             <div
-              style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 8 }}
+              style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 16, marginBottom: 8 }}
             >
               O que esta incluido
             </div>
@@ -554,7 +560,7 @@ export default function Slide10({ selectedPlan, onSelect, diag }) {
                 <div className="ci-icon">
                   <Ic n="ck" s={11} c="var(--accent2)" />
                 </div>
-                <div style={{ fontSize: 11, color: 'var(--text)', lineHeight: 1.6 }}>{t}</div>
+                <div style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.6 }}>{t}</div>
               </div>
             ))}
           </div>

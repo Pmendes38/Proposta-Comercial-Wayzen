@@ -31,7 +31,7 @@ export default function Slide2() {
                 style={{
                   fontFamily: 'var(--font-h)',
                   fontWeight: 700,
-                  fontSize: 15,
+                  fontSize: 17,
                   color: '#00c864',
                   marginBottom: 3,
                 }}
@@ -40,7 +40,7 @@ export default function Slide2() {
               </div>
               <div
                 style={{
-                  fontSize: 12,
+                  fontSize: 14,
                   color: 'var(--muted)',
                   lineHeight: 1.6,
                 }}
@@ -73,13 +73,13 @@ export default function Slide2() {
                 style={{
                   fontFamily: 'var(--font-h)',
                   fontWeight: 800,
-                  fontSize: 14,
+                  fontSize: 16,
                   marginBottom: 5,
                 }}
               >
                 {x.t}
               </div>
-              <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>
+              <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
                 {x.d}
               </div>
             </div>
@@ -96,7 +96,7 @@ export default function Slide2() {
           >
             <div
               style={{
-                fontSize: 11,
+                fontSize: 13,
                 letterSpacing: '.1em',
                 textTransform: 'uppercase',
                 color: 'var(--muted)',
@@ -133,7 +133,7 @@ export default function Slide2() {
               >
                 <div
                   style={{
-                    fontSize: 11,
+                    fontSize: 13,
                     color: '#dc003c',
                     marginBottom: 3,
                     lineHeight: 1.5,
@@ -143,7 +143,7 @@ export default function Slide2() {
                 </div>
                 <div
                   style={{
-                    fontSize: 11,
+                    fontSize: 13,
                     color: '#00c864',
                     lineHeight: 1.5,
                   }}
@@ -159,7 +159,7 @@ export default function Slide2() {
               background: 'linear-gradient(135deg,rgba(148,0,211,.08),rgba(204,0,255,.04))',
               border: '1px solid var(--accent-border)',
               borderRadius: 12,
-              fontSize: 13,
+              fontSize: 15,
               lineHeight: 1.7,
               color: 'var(--text)',
             }}

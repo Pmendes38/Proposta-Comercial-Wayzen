@@ -44,7 +44,7 @@ export default function Slide5({ diag }) {
             padding: '32px',
           }}
         >
-          <div style={{ fontSize: 14, color: 'var(--muted)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.1em' }}>
+          <div style={{ fontSize: 16, color: 'var(--muted)', marginBottom: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.1em' }}>
             Score da Operação
           </div>
           <div style={{ fontSize: 64, fontWeight: 900, fontFamily: 'var(--font-h)', color: scoreCor, marginBottom: 16 }}>
@@ -70,7 +70,7 @@ export default function Slide5({ diag }) {
               }}
             />
           </div>
-          <div style={{ fontSize: 12, color: 'var(--muted)' }}>
+          <div style={{ fontSize: 14, color: 'var(--muted)' }}>
             {scoreGeral >= 70 ? 'Operação saudável' : scoreGeral >= 45 ? 'Oportunidades de melhoria' : 'Alerta: intervenção necessária'}
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function Slide5({ diag }) {
           <div className="card" style={{ borderRadius: 16, marginBottom: 14 }}>
             <div
               style={{
-                fontSize: 11,
+                fontSize: 13,
                 letterSpacing: '.1em',
                 textTransform: 'uppercase',
                 color: 'var(--muted)',
@@ -114,7 +114,7 @@ export default function Slide5({ diag }) {
                   >
                     <span
                       style={{
-                        fontSize: 10,
+                        fontSize: 14,
                         color: 'var(--muted)',
                         fontWeight: 700,
                         textTransform: 'uppercase',
@@ -133,7 +133,7 @@ export default function Slide5({ diag }) {
             <div
               style={{
                 marginTop: 12,
-                fontSize: 12,
+                fontSize: 14,
                 color: 'var(--muted)',
                 lineHeight: 1.7,
               }}
@@ -154,7 +154,7 @@ export default function Slide5({ diag }) {
               style={{
                 fontFamily: 'var(--font-h)',
                 fontWeight: 800,
-                fontSize: 15,
+                fontSize: 17,
                 marginBottom: 10,
               }}
             >
@@ -170,7 +170,7 @@ export default function Slide5({ diag }) {
                 <div className="ci-icon">
                   <Icon n="ck" s={11} c="var(--accent2)" />
                 </div>
-                <div style={{ fontSize: 12, color: 'var(--text)', lineHeight: 1.6 }}>{t}</div>
+                <div style={{ fontSize: 14, color: 'var(--text)', lineHeight: 1.6 }}>{t}</div>
               </div>
             ))}
           </div>
@@ -199,13 +199,13 @@ export default function Slide5({ diag }) {
                 style={{
                   fontFamily: 'var(--font-h)',
                   fontWeight: 900,
-                  fontSize: 14,
+                  fontSize: 16,
                   marginBottom: 4,
                 }}
               >
                 {x.t}
               </div>
-              <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>{x.d}</div>
+              <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>{x.d}</div>
             </div>
           ))}
         </div>
@@ -223,7 +223,7 @@ export default function Slide5({ diag }) {
           >
             <div
               style={{
-                fontSize: 11,
+                fontSize: 13,
                 letterSpacing: '.1em',
                 textTransform: 'uppercase',
                 color: 'var(--muted)',
@@ -233,7 +233,7 @@ export default function Slide5({ diag }) {
             >
               Contexto da Escola
             </div>
-            <div style={{ fontSize: 13, color: 'var(--text)', lineHeight: 1.8 }}>
+            <div style={{ fontSize: 15, color: 'var(--text)', lineHeight: 1.8 }}>
               {diag.obs}
             </div>
           </div>

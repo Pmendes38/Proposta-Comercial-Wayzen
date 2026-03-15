@@ -22,10 +22,10 @@ export default function Slide9() {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(12px, 2vw, 20px)', marginBottom: 'clamp(12px, 2vw, 20px)' }}>
         {blocks.map((b, i) => (
           <div key={i} className="card" style={{ borderRadius: 16 }}>
-            <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 15, marginBottom: 6 }}>
+            <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 17, marginBottom: 6 }}>
               {b.t}
             </div>
-            <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>{b.d}</div>
+            <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>{b.d}</div>
           </div>
         ))}
       </div>
@@ -35,7 +35,7 @@ export default function Slide9() {
           background: 'var(--surface)',
           border: '1px solid var(--divider)',
           borderRadius: 12,
-          fontSize: 12,
+          fontSize: 14,
           color: 'var(--muted)',
           lineHeight: 1.8,
         }}

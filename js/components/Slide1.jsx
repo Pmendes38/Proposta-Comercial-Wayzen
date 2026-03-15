@@ -39,7 +39,7 @@ export default function Slide1({ cliente, diag }) {
           className="au3"
           style={{
             color: 'var(--muted)',
-            fontSize: 16,
+            fontSize: 18,
             lineHeight: 1.7,
             maxWidth: 560,
             marginBottom: 34,
@@ -59,7 +59,7 @@ export default function Slide1({ cliente, diag }) {
               border: '1px solid var(--divider)',
               borderRadius: 12,
               marginBottom: 24,
-              fontSize: 13,
+              fontSize: 15,
               color: 'var(--muted)',
               display: 'flex',
               alignItems: 'center',
@@ -99,7 +99,7 @@ export default function Slide1({ cliente, diag }) {
         >
           <div
             style={{
-              fontSize: 12,
+              fontSize: 14,
               color: 'var(--muted)',
               marginBottom: 6,
               letterSpacing: '.06em',
@@ -119,7 +119,7 @@ export default function Slide1({ cliente, diag }) {
           >
             {cliente?.empresa || 'Sua empresa'}
           </div>
-          <div style={{ fontSize: 13, color: 'var(--muted)' }}>
+          <div style={{ fontSize: 15, color: 'var(--muted)' }}>
             {cliente?.decisor || 'Decisor'}
             {cliente?.cargo ? ` · ${cliente.cargo}` : ''}
             {cliente?.cidade ? ` · ${cliente.cidade}` : ''}
@@ -132,7 +132,7 @@ export default function Slide1({ cliente, diag }) {
                 background: 'rgba(255,255,255,.03)',
                 border: '1px solid var(--divider)',
                 borderRadius: 10,
-                fontSize: 12,
+                fontSize: 14,
               }}
             >
               <span style={{ color: 'var(--accent2)', fontWeight: 700 }}>Foco:</span>{' '}

@@ -76,15 +76,15 @@ export default function Slide4() {
                     {m.icon}
                   </div>
                   <div>
-                    <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 15 }}>{m.nome}</div>
-                    <div style={{ fontSize: 11, color: 'var(--muted)' }}>{m.cargo}</div>
+                    <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 17 }}>{m.nome}</div>
+                    <div style={{ fontSize: 13, color: 'var(--muted)' }}>{m.cargo}</div>
                   </div>
                 </div>
-                <div style={{ fontSize: 12, color: 'var(--muted)', lineHeight: 1.7 }}>{m.bio}</div>
+                <div style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7 }}>{m.bio}</div>
                 <div
                   style={{
                     marginTop: 10,
-                    fontSize: 11,
+                    fontSize: 13,
                     color: isSelected ? 'var(--accent2)' : 'var(--muted)',
                     fontWeight: 600,
                   }}
@@ -115,13 +115,13 @@ export default function Slide4() {
             }}
           >
             <div style={{ textAlign: 'left' }}>
-              <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 22, marginBottom: 6 }}>
+              <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 24, marginBottom: 6 }}>
                 {activeMember.nome}
               </div>
-              <div style={{ fontSize: 12, color: 'var(--accent2)', marginBottom: 12, fontWeight: 700 }}>
+              <div style={{ fontSize: 14, color: 'var(--accent2)', marginBottom: 12, fontWeight: 700 }}>
                 {activeMember.cargo}
               </div>
-              <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.75 }}>
+              <div style={{ fontSize: 15, color: 'var(--muted)', lineHeight: 1.75 }}>
                 {activeMember.expanded}
               </div>
             </div>
@@ -143,7 +143,7 @@ export default function Slide4() {
               ) : (
                 <div style={{ textAlign: 'center', padding: 16 }}>
                   <div style={{ fontSize: 46, marginBottom: 10 }}>{activeMember.icon}</div>
-                  <div style={{ fontSize: 11, color: 'var(--muted)', lineHeight: 1.6 }}>
+                  <div style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.6 }}>
                     Adicione uma foto de {activeMember.nome.split(' ')[0]}
                   </div>
                 </div>
@@ -159,7 +159,7 @@ export default function Slide4() {
           background: 'var(--surface)',
           border: '1px solid var(--divider)',
           borderRadius: 12,
-          fontSize: 12,
+          fontSize: 14,
           color: 'var(--muted)',
           lineHeight: 1.7,
           textAlign: 'left',

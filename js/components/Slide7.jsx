@@ -38,9 +38,9 @@ export default function Slide7() {
                 >
                   <span style={{ fontSize: 16 }}>{d.icon}</span>
                 </div>
-                <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14 }}>{d.titulo}</div>
+                <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 16 }}>{d.titulo}</div>
               </div>
-              <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>{d.desc}</div>
+              <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>{d.desc}</div>
             </div>
           ))}
         </div>

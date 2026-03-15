@@ -25,7 +25,7 @@ export default function Slide8() {
             <div
               style={{
                 marginTop: 10,
-                fontSize: 11,
+                fontSize: 13,
                 color: act === i ? 'var(--text)' : 'var(--muted)',
                 fontWeight: 700,
                 textAlign: 'center',
@@ -39,7 +39,7 @@ export default function Slide8() {
       </div>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'clamp(12px, 2vw, 16px)' }}>
         <div className="card" style={{ borderRadius: 16 }}>
-          <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 18, marginBottom: 8 }}>
+            <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 20, marginBottom: 8 }}>
             {SPRINTS[act].titulo}
           </div>
           <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>
@@ -83,10 +83,10 @@ export default function Slide8() {
             },
           ].map((x, i) => (
             <div key={i} className="card" style={{ borderRadius: 14 }}>
-              <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 4 }}>
+              <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 16, marginBottom: 4 }}>
                 {x.t}
               </div>
-              <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>{x.d}</div>
+              <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>{x.d}</div>
             </div>
           ))}
           <div
@@ -97,10 +97,10 @@ export default function Slide8() {
               background: 'linear-gradient(135deg,rgba(148,0,211,.06),transparent)',
             }}
           >
-            <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 14, marginBottom: 4 }}>
+            <div style={{ fontFamily: 'var(--font-h)', fontWeight: 900, fontSize: 16, marginBottom: 4 }}>
               Governança e transferência
             </div>
-            <div style={{ color: 'var(--muted)', fontSize: 12, lineHeight: 1.7 }}>
+            <div style={{ color: 'var(--muted)', fontSize: 14, lineHeight: 1.7 }}>
               No fim do ciclo, tudo vira playbook: scripts, funil, metas e regras. Você decide se continua com Wayzen ou internaliza com treinamento.
             </div>
           </div>
